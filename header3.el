@@ -16,7 +16,7 @@
 ;; Last-Updated: Sat  2 Jun 2018 02:48:48 IST
 ;;           By: Justine T Kizhakkinedath
 ;;     Update #: 2029
-;; URL: https://www.emacswiki.org/emacs/download/header2.el
+;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x
@@ -407,9 +407,9 @@ header3.el bug: \
 &body=Describe bug here, starting with `emacs -q'.  \
 Don't forget to mention your Emacs and library versions."))
   :link '(url-link :tag "Download"
-          "https://www.emacswiki.org/emacs/download/header3.el")
+          "https://github.com/justinethomas009/header3")
   :link '(url-link :tag "Description"
-          "https://www.emacswiki.org/emacs/AutomaticFileHeaders#header2")
+          "https://www.emacswiki.org/emacs/AutomaticFileHeaders")
   :link '(emacs-commentary-link :tag "Commentary" "header3")
   )
 
