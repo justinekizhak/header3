@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: Sat  2 Jun 2018 02:48:48 IST
+;; Last-Updated: Tue  5 Jun 2018 00:30:58 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2029
+;;     Update #: 2046
 ;; URL: https://www.emacswiki.org/emacs/download/header2.el
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,16 +191,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 5-Jun-2018    Justine T Kizhakkinedath
+;;     Last-Updated: Tue  5 Jun 2018 00:20:59 IST #2045 (Justine T Kizhakkinedath)
+;;     Project name default value can be changed from customize interface.
+;; 4-Jun-2018    Justine T Kizhakkinedath
+;;     Last-Updated: Mon  4 Jun 2018 23:03:27 IST #2043 (Justine T Kizhakkinedath)
+;;     Leading whitespace for license name fixed. Also version number of license
+;;     will be included along with the license name.
 ;; 2-Jun-2018    Justine T Kizhakkinedath
-;;    Last-Updated: Sat  2 Jun 2018 02:33:50 IST #2028 (Justine T Kizhakkinedath)
-;;    Exception handling done for `projectile' and `git-link' packages. So now if
-;;    they are not available then it defaults back.
+;;     Last-Updated: Sat  2 Jun 2018 02:33:50 IST #2028 (Justine T Kizhakkinedath)
+;;     Exception handling done for `projectile' and `git-link' packages. So now if
+;;     they are not available then it defaults back.
 ;; 2-Jun-2018    Justine T Kizhakkinedath
-;;    Last-Updated: Sat  2 Jun 2018 00:35:41 IST #2017 (Justine T Kizhakkinedath)
-;;    Using `git-link' for extracting URL from git projects.
-;;    make-header-hook -> make-package-header-hook. Added new 'make'
-;;    function for creating smaller header than 'package-header'. Function for
-;;    extracting project name using `projectile' package.
+;;     Last-Updated: Sat  2 Jun 2018 00:35:41 IST #2017 (Justine T Kizhakkinedath)
+;;     Using `git-link' for extracting URL from git projects.
+;;     make-header-hook -> make-package-header-hook. Added new 'make'
+;;     function for creating smaller header than 'package-header'. Function for
+;;     extracting project name using `projectile' package.
 ;;
 ;; 2016/08/10 dadams
 ;;     Added: make-box-comment-region, make-box-comment-region-replace-prefix-flag
@@ -546,6 +553,11 @@ file `header3.el' to do this."
   "*Set the default header type \"file-header\" or \"package-header\"."
   :type 'string :group 'Automatic-File-Header)
 
+(defcustom header-default-project-name "<Project name>"
+  "*Set the default project name. This value will be used when projectile
+can't find your project name."
+  :type 'string :group 'Automatic-File-Header)
+
 (defcustom header-free-software
   "This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -654,7 +666,7 @@ Its format is: \"<this-file-name> is part of <project-name>\"
         (buffer-name))
       " is part of ")
   ((lambda () (if (string= (projectile-project-name) "-")
-       (insert "my personal projects")
+       (insert header-default-project-name)
      (insert (projectile-project-name)))))
   (insert "\n"))
 
@@ -675,20 +687,39 @@ format that everybody else use then you are covered.
 For more details on what constites a project check `projectile' docs"
   (if (require 'projectile nil 'noerror)
       (if (string= (projectile-project-name) "-")
-             (insert header-prefix-string "LICENSE file not available\n")
-        (inserting-auto-license))
+          (insert header-prefix-string "Unable to find project root\n")
+        (if (file-readable-p (concat (projectile-project-root) "LICENSE"))
+            (inserting-auto-license)
+          (insert header-prefix-string "LICENSE file not available\n")))
     (message "projectile package not found")))
 
 (defsubst inserting-auto-license ()
   "This is the actual funtion which will be inserting licence info.
 For more information check the docs on `header-auto-licence'"
-  (insert header-prefix-string "Licensed under the terms of ")
-  (insert (car (with-temp-buffer
-                 ;;TODO: doesn't account if the first line is not the name of license
+  (insert header-prefix-string "Licensed under the terms of")
+  (with-temp-buffer
     (insert-file-contents (concat (projectile-project-root) "LICENSE"))
-    (split-string (buffer-string) "\n" t)
-    )) "\n")
+    (setq license-list (split-string (buffer-string) "\n")))
+  (dotimes (i 5)
+    ;; licence-list is the list of all the contents of the LICENSE
+    ;; running check-to-print on 5 lines
+    (check-to-print (string-trim (pop license-list))))
+  (insert "\n")
   (insert header-prefix-string "See LICENSE file in the project root for full license information.\n"))
+
+(defsubst check-to-print (input-string)
+  "This function gets a single line of license text and checks if it includes
+the licence name or its version case-insensitively. It does this by splitting
+each word and string comparing"
+  (let (temp-list execute-flag)
+    (setq temp-list (split-string input-string))
+    (setq execute-flag t)
+    (while (and temp-list execute-flag)
+      (if (or (gnus-string-equal (car temp-list) "Version")
+              (gnus-string-equal (car temp-list) "License"))
+          ( (lambda () (insert " " input-string)
+            (setq execute-flag nil))))
+      (pop temp-list))))
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."

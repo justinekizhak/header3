@@ -20,11 +20,20 @@
    (autoload 'auto-update-file-header "header3")
    (add-hook 'before-save-hook 'auto-update-file-header)
    ```
-* To have Emacs add a file header whenever you create a new file in some mode, put these too
+* To have Emacs add a file header whenever you create a new file in some mode, put these too.
   ```
   (autoload 'auto-make-header "header3")
   (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
   (add-hook 'c-mode-common-hook   'auto-make-header)
   (add-hook 'python-mode-hook 'auto-make-header)
+  ...
   ```
-  so on.
+  
+## For Automatic insertion of license info and git link in the header, these packages are required. 
+* [Git-link](https://github.com/sshaw/git-link) This will extract the git link of the current buffer.
+
+* [Projectile](https://github.com/bbatsov/projectile) This is the one which will check your project directory. 
+Projectile provides us with project name and project path which is used to check if the project root contains any file called "LICENSE". 
+If it does then it checks the first 5 lines for any mention of "License" and "Version" (case-insensitive). 
+ 
+Instructions to install these packages are available at their links.
