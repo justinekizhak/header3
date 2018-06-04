@@ -27,4 +27,3 @@
   (add-hook 'c-mode-common-hook   'auto-make-header)
   (add-hook 'python-mode-hook 'auto-make-header)
   ```
-  so on.

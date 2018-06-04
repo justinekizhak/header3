@@ -13,10 +13,10 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: Sat  2 Jun 2018 02:48:48 IST
+;; Last-Updated: Mon  4 Jun 2018 23:03:27 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2029
-;; URL: https://github.com/justinethomas009/header3
+;;     Update #: 2043
+;; URL: https://www.emacswiki.org/emacs/download/header2.el
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x
@@ -407,9 +407,9 @@ header3.el bug: \
 &body=Describe bug here, starting with `emacs -q'.  \
 Don't forget to mention your Emacs and library versions."))
   :link '(url-link :tag "Download"
-          "https://github.com/justinethomas009/header3")
+          "https://www.emacswiki.org/emacs/download/header3.el")
   :link '(url-link :tag "Description"
-          "https://www.emacswiki.org/emacs/AutomaticFileHeaders")
+          "https://www.emacswiki.org/emacs/AutomaticFileHeaders#header2")
   :link '(emacs-commentary-link :tag "Commentary" "header3")
   )
 
@@ -675,20 +675,39 @@ format that everybody else use then you are covered.
 For more details on what constites a project check `projectile' docs"
   (if (require 'projectile nil 'noerror)
       (if (string= (projectile-project-name) "-")
-             (insert header-prefix-string "LICENSE file not available\n")
-        (inserting-auto-license))
+          (insert header-prefix-string "Unable to find project root\n")
+        (if (file-readable-p (concat (projectile-project-root) "LICENSE"))
+            (inserting-auto-license)
+          (insert header-prefix-string "LICENSE file not available\n")))
     (message "projectile package not found")))
 
 (defsubst inserting-auto-license ()
   "This is the actual funtion which will be inserting licence info.
 For more information check the docs on `header-auto-licence'"
-  (insert header-prefix-string "Licensed under the terms of ")
-  (insert (car (with-temp-buffer
-                 ;;TODO: doesn't account if the first line is not the name of license
+  (insert header-prefix-string "Licensed under the terms of")
+  (with-temp-buffer
     (insert-file-contents (concat (projectile-project-root) "LICENSE"))
-    (split-string (buffer-string) "\n" t)
-    )) "\n")
+    (setq license-list (split-string (buffer-string) "\n")))
+  (dotimes (i 5)
+    ;; licence-list is the list of all the contents of the LICENSE
+    ;; running check-to-print on 5 lines
+    (check-to-print (string-trim (pop license-list))))
+  (insert "\n")
   (insert header-prefix-string "See LICENSE file in the project root for full license information.\n"))
+
+(defsubst check-to-print (input-string)
+  "This function gets a single line of license text and checks if it includes
+the licence name or its version case-insensitively. It does this by splitting
+each word and string comparing"
+  (let (temp-list execute-flag)
+    (setq temp-list (split-string input-string))
+    (setq execute-flag t)
+    (while (and temp-list execute-flag)
+      (if (or (gnus-string-equal (car temp-list) "Version")
+              (gnus-string-equal (car temp-list) "License"))
+          ( (lambda () (insert " " input-string)
+            (setq execute-flag nil))))
+      (pop temp-list))))
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."
