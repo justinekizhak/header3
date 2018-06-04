@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: Mon  4 Jun 2018 23:25:12 IST
+;; Last-Updated: Tue  5 Jun 2018 00:30:58 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2044
+;;     Update #: 2046
 ;; URL: https://www.emacswiki.org/emacs/download/header2.el
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,6 +191,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 5-Jun-2018    Justine T Kizhakkinedath
+;;     Last-Updated: Tue  5 Jun 2018 00:20:59 IST #2045 (Justine T Kizhakkinedath)
+;;     Project name default value can be changed from customize interface.
 ;; 4-Jun-2018    Justine T Kizhakkinedath
 ;;     Last-Updated: Mon  4 Jun 2018 23:03:27 IST #2043 (Justine T Kizhakkinedath)
 ;;     Leading whitespace for license name fixed. Also version number of license
@@ -550,6 +553,11 @@ file `header3.el' to do this."
   "*Set the default header type \"file-header\" or \"package-header\"."
   :type 'string :group 'Automatic-File-Header)
 
+(defcustom header-default-project-name "<Project name>"
+  "*Set the default project name. This value will be used when projectile
+can't find your project name."
+  :type 'string :group 'Automatic-File-Header)
+
 (defcustom header-free-software
   "This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -658,7 +666,7 @@ Its format is: \"<this-file-name> is part of <project-name>\"
         (buffer-name))
       " is part of ")
   ((lambda () (if (string= (projectile-project-name) "-")
-       (insert "my personal projects")
+       (insert header-default-project-name)
      (insert (projectile-project-name)))))
   (insert "\n"))
 
