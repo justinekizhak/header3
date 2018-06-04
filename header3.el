@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: Mon  4 Jun 2018 23:03:27 IST
+;; Last-Updated: Mon  4 Jun 2018 23:25:12 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2043
+;;     Update #: 2044
 ;; URL: https://www.emacswiki.org/emacs/download/header2.el
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,16 +191,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 4-Jun-2018    Justine T Kizhakkinedath
+;;     Last-Updated: Mon  4 Jun 2018 23:03:27 IST #2043 (Justine T Kizhakkinedath)
+;;     Leading whitespace for license name fixed. Also version number of license
+;;     will be included along with the license name.
 ;; 2-Jun-2018    Justine T Kizhakkinedath
-;;    Last-Updated: Sat  2 Jun 2018 02:33:50 IST #2028 (Justine T Kizhakkinedath)
-;;    Exception handling done for `projectile' and `git-link' packages. So now if
-;;    they are not available then it defaults back.
+;;     Last-Updated: Sat  2 Jun 2018 02:33:50 IST #2028 (Justine T Kizhakkinedath)
+;;     Exception handling done for `projectile' and `git-link' packages. So now if
+;;     they are not available then it defaults back.
 ;; 2-Jun-2018    Justine T Kizhakkinedath
-;;    Last-Updated: Sat  2 Jun 2018 00:35:41 IST #2017 (Justine T Kizhakkinedath)
-;;    Using `git-link' for extracting URL from git projects.
-;;    make-header-hook -> make-package-header-hook. Added new 'make'
-;;    function for creating smaller header than 'package-header'. Function for
-;;    extracting project name using `projectile' package.
+;;     Last-Updated: Sat  2 Jun 2018 00:35:41 IST #2017 (Justine T Kizhakkinedath)
+;;     Using `git-link' for extracting URL from git projects.
+;;     make-header-hook -> make-package-header-hook. Added new 'make'
+;;     function for creating smaller header than 'package-header'. Function for
+;;     extracting project name using `projectile' package.
 ;;
 ;; 2016/08/10 dadams
 ;;     Added: make-box-comment-region, make-box-comment-region-replace-prefix-flag
