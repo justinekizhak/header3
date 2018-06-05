@@ -11,12 +11,12 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 0
+;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Tue  5 Jun 2018 00:30:58 IST
+;; Last-Updated: Tue  5 Jun 2018 13:59:19 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2046
-;; URL: https://www.emacswiki.org/emacs/download/header2.el
+;;     Update #: 2051
+;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
 ;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x
@@ -414,7 +414,7 @@ header3.el bug: \
 &body=Describe bug here, starting with `emacs -q'.  \
 Don't forget to mention your Emacs and library versions."))
   :link '(url-link :tag "Download"
-          "https://www.emacswiki.org/emacs/download/header3.el")
+          "https://github.com/justinethomas009/header3")
   :link '(url-link :tag "Description"
           "https://www.emacswiki.org/emacs/AutomaticFileHeaders#header2")
   :link '(emacs-commentary-link :tag "Commentary" "header3")
@@ -570,7 +570,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>."
+along with this program.  If not, see <https://www.gnu.org/licenses/>."
 
   "*Text saying that this is free software"
   :type 'string :group 'Automatic-File-Header)
@@ -621,7 +621,7 @@ the function to call if the string is found near the start of the file.")
 (defsubst header-new-seperator ()
   "Insert a --- divider line"
   (insert header-prefix-string)
-  (insert (make-string 70 ?-) "\n"))
+  (insert (make-string 77 ?-) "\n"))
 
 ;; Major section headings
 
@@ -705,7 +705,7 @@ For more information check the docs on `header-auto-licence'"
     ;; running check-to-print on 5 lines
     (check-to-print (string-trim (pop license-list))))
   (insert "\n")
-  (insert header-prefix-string "See LICENSE file in the project root for full license information.\n"))
+  (insert header-prefix-string "See LICENSE file in the project root for full information.\n"))
 
 (defsubst check-to-print (input-string)
   "This function gets a single line of license text and checks if it includes
@@ -947,9 +947,9 @@ environment variable, the SHELL environment variable, or
   "Insert a divider line."
   (insert (cond ((nonempty-comment-end))
                 ((and comment-start (= 1 (length comment-start)))
-                 (make-string 70 (aref comment-start 0)))
+                 (make-string 80 (aref comment-start 0)))
                 ((nonempty-comment-start))
-                (t (make-string 70 ?\;)))
+                (t (make-string 80 ?\;)))
           "\n"))
 
 
