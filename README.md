@@ -1,4 +1,84 @@
 # header3.el for Emacs
+header3.el is a package for Emacs which will help you to automatically add headers to your source code files when you create a new one in Emacs.
+
+There are two types of headers that are available to use, "file-header" and "package-header".
+
+**file-header** are usefull if you need smaller headers.
+
+```
+;; -----------------------------------------------------------------------------
+;; Created: Tue  5 Jun 2018 13:36:51 IST
+;; Last-Updated: Tue  5 Jun 2018 13:37:23 IST
+;;
+;; example-package.el is part of header3
+;; URL: https://github.com/justinethomas009/header3
+;; Description: Example of "file-header"
+;;
+;; Copyright (c) 2018, Justine T Kizhakkinedath
+;; All rights reserved
+;;
+;; Licensed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+;; See LICENSE file in the project root for full information.
+;; -----------------------------------------------------------------------------
+```
+**package-header** are usefull if you need bigger headers.
+```
+;;; example-package.el ---
+;;
+;; Filename: example-package.el
+;; Description: Example of "package-header"
+;; Author: Justine T Kizhakkinedath
+;; Maintainer:
+;; Copyright (c) 2018, Justine T Kizhakkinedath
+;; All rights reserved
+;; Created: Tue  5 Jun 2018 13:43:54 IST
+;; Version:
+;; Package-Requires: ()
+;; Last-Updated: Tue  5 Jun 2018 13:44:12 IST
+;;           By: Justine T Kizhakkinedath
+;;     Update #: 1
+;; URL: https://github.com/justinethomas009/header3
+;; Doc URL:
+;; Keywords:
+;; Compatibility:
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Change Log:
+;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or (at
+;; your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; example-package.el ends here
+```
+*Both examples are auto generated using the package.*
+
 ## All Features of [header2.el](https://www.emacswiki.org/emacs/download/header2.el) plus
 * Standard header format.
 * Auto timestamp for file creation and file updation.
