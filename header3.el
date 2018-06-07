@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Thu  7 Jun 2018 21:41:28 IST
+;; Last-Updated: Thu  7 Jun 2018 22:06:35 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2064
+;;     Update #: 2066
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -722,21 +722,10 @@ each word and string comparing"
             (setq execute-flag nil))))
       (pop temp-list))))
 
-(defun header-license--search-insert (license-line license-name file-name)
-  (let (temp-list execute-flag)
-    (setq temp-list (split-string license-line))
-    (setq execute-flag t)
-    (while (and temp-list execute-flag)
-      (if (gnus-string-equal (car temp-list) license-name)
-          ( (lambda ()
-              (header-license--insert-file file-name)
-              (setq execute-flag nil))))
-      (pop temp-list))))
-
 (defun header-license--insert-file (file-name)
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
-     (concat "~/My_Projects/header3/license-templates/header_templates/"
+     (concat "license_templates/"
              file-name))
     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list
