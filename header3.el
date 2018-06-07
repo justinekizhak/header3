@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Fri  8 Jun 2018 02:42:24 IST
+;; Last-Updated: Fri  8 Jun 2018 03:07:32 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2079
+;;     Update #: 2082
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -511,17 +511,20 @@ file `header3.el' to do this."
                               header-compatibility
                               header-blank
                               header-lib-requires
-                              header-end-line
+                              ;; header-end-line
+                              header-new-seperator
                               header-commentary
                               header-blank
                               header-blank
                               header-blank
-                              header-end-line
+                              ;; header-end-line
+                              header-new-seperator
                               header-history
                               header-blank
                               header-blank
                               ;; header-rcs-log
-                              header-end-line
+                              ;; header-end-line
+                              header-new-seperator
                               header-free-software
                               header-code
                               header-eof
@@ -846,7 +849,7 @@ Without this, `make-revision' inserts `header-history-label' after the header."
     (insert "\n")
     (unless (nonempty-comment-end)
       (header-blank)
-      (header-end-line))))
+      (header-new-seperator))))
 
 (defsubst header-code ()
   "Insert \"Code: \" line."
@@ -856,7 +859,8 @@ Without this, `make-revision' inserts `header-history-label' after the header."
   "Insert comment indicating end of file."
   (goto-char (point-max))
   (insert "\n")
-  (unless (nonempty-comment-end) (header-end-line))
+  ;; (unless (nonempty-comment-end) (header-end-line))
+  (unless (nonempty-comment-end) (header-new-seperator))
   (insert comment-start
           (concat (and (= 1 (length comment-start)) header-prefix-string)
                   (if (buffer-file-name)
