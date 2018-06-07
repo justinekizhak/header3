@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Thu  7 Jun 2018 23:10:34 IST
+;; Last-Updated: Fri  8 Jun 2018 02:21:37 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2068
+;;     Update #: 2076
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -702,25 +702,18 @@ For more information check the docs on `header-auto-licence'"
     (insert-file-contents (concat (projectile-project-root) "LICENSE"))
     (setq license-list (split-string (buffer-string) "\n")))
   (dotimes (i 5)
-    ;; licence-list is the list of all the contents of the LICENSE
-    ;; running check-to-print on 5 lines
-    (check-to-print (string-trim (pop license-list))))
+    (if (or (cl-search " license" (downcase (car license-list)))
+            (cl-search "version " (downcase (car license-list))))
+        (insert " " (string-trim (pop license-list)))))
   (insert "\n")
   (insert header-prefix-string "See LICENSE file in the project root for full information.\n"))
 
-(defsubst check-to-print (input-string)
-  "This function gets a single line of license text and checks if it includes
-the licence name or its version case-insensitively. It does this by splitting
-each word and string comparing"
-  (let (temp-list execute-flag)
-    (setq temp-list (split-string input-string))
-    (setq execute-flag t)
-    (while (and temp-list execute-flag)
-      (if (or (gnus-string-equal (car temp-list) "Version")
-              (gnus-string-equal (car temp-list) "License"))
-          ( (lambda () (insert " " input-string)
-            (setq execute-flag nil))))
-      (pop temp-list))))
+;; (defsubst check-to-print (input-string)
+;;   "This function gets a single line of license text and checks if it includes
+;; the licence name or its version case-insensitively"
+;;   (if (or (cl-search "license" (downcase (input-string)))
+;;           (cl-search "version" (downcase (input-string))))
+;;       (insert " " input-string)))
 
 (defun header-license--insert-file (file-name)
   (let (temp-list) (with-temp-buffer
@@ -746,7 +739,11 @@ each word and string comparing"
     (header-license--insert-file  "mpl-header.txt"))
    ((cl-search "gnu affero" (downcase (car license-name)))
     (header-license--insert-file "agpl3-header.txt"))
-   ((cl-search "general public license version 3" (downcase (car license-name)))
+   ((cl-search "gnu lesser general public license" (downcase (car license-name)))
+    (header-license--insert-file "lgpl-header.txt"))
+   ((cl-search "gnu general public license version 2" (downcase (car license-name)))
+    (header-license--insert-file "gpl2-header.txt"))
+   ((cl-search "gnu general public license version 3" (downcase (car license-name)))
     (header-license--insert-file "gpl3-header.txt"))
    ))
 
