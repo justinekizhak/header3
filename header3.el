@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Fri  8 Jun 2018 02:21:37 IST
+;; Last-Updated: Fri  8 Jun 2018 02:42:24 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2076
+;;     Update #: 2079
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -734,17 +734,17 @@ For more information check the docs on `header-auto-licence'"
    ((cl-search "mit" (downcase (car license-name)))
     (header-license--insert-file "mit.txt"))
    ((cl-search "apache" (downcase (car license-name)))
-    (header-license--insert-file "apache-header.txt"))
+    (header-license--insert-file "apache.txt"))
    ((cl-search "mozilla" (downcase (car license-name)))
-    (header-license--insert-file  "mpl-header.txt"))
+    (header-license--insert-file  "mpl.txt"))
    ((cl-search "gnu affero" (downcase (car license-name)))
-    (header-license--insert-file "agpl3-header.txt"))
+    (header-license--insert-file "agpl3.txt"))
    ((cl-search "gnu lesser general public license" (downcase (car license-name)))
-    (header-license--insert-file "lgpl-header.txt"))
+    (header-license--insert-file "lgpl.txt"))
    ((cl-search "gnu general public license version 2" (downcase (car license-name)))
-    (header-license--insert-file "gpl2-header.txt"))
+    (header-license--insert-file "gpl2.txt"))
    ((cl-search "gnu general public license version 3" (downcase (car license-name)))
-    (header-license--insert-file "gpl3-header.txt"))
+    (header-license--insert-file "gpl3.txt"))
    ))
 
 (defsubst header-custom-copyright ()
