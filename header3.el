@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Thu  7 Jun 2018 22:06:35 IST
+;; Last-Updated: Thu  7 Jun 2018 23:10:34 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2066
+;;     Update #: 2068
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -738,15 +738,15 @@ each word and string comparing"
   (dotimes (i 11)
     (pop license-name))
   (cond
-   ((cl-search "MIT" (car license-name))
+   ((cl-search "mit" (downcase (car license-name)))
     (header-license--insert-file "mit.txt"))
-   ((cl-search "Apache" (car license-name))
+   ((cl-search "apache" (downcase (car license-name)))
     (header-license--insert-file "apache-header.txt"))
-   ((cl-search "Mozilla" (car license-name))
+   ((cl-search "mozilla" (downcase (car license-name)))
     (header-license--insert-file  "mpl-header.txt"))
-   ((cl-search "GNU AFFERO" (car license-name))
+   ((cl-search "gnu affero" (downcase (car license-name)))
     (header-license--insert-file "agpl3-header.txt"))
-   ((cl-search "GENERAL PUBLIC LICENSE Version 3" (car license-name))
+   ((cl-search "general public license version 3" (downcase (car license-name)))
     (header-license--insert-file "gpl3-header.txt"))
    ))
 
