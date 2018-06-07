@@ -11,11 +11,11 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.1
+;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Tue  5 Jun 2018 13:59:19 IST
+;; Last-Updated: Fri  8 Jun 2018 03:18:07 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2051
+;;     Update #: 2083
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,6 +191,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 8-Jun-2018    Justine T Kizhakkinedath
+;;     Last-Updated: Fri  8 Jun 2018 03:07:32 IST #2082 (Justine T Kizhakkinedath)
+;;     "file-header" can now automatically add license templates.
 ;; 5-Jun-2018    Justine T Kizhakkinedath
 ;;     Last-Updated: Tue  5 Jun 2018 00:20:59 IST #2045 (Justine T Kizhakkinedath)
 ;;     Project name default value can be changed from customize interface.
@@ -461,6 +464,7 @@ t means use local time with timezone; nil means use UTC."
                               header-blank
                               header-auto-license
                               header-new-seperator
+                              header-license--template-insert
                               )
 
   "*Functions that insert header elements.
@@ -510,17 +514,20 @@ file `header3.el' to do this."
                               header-compatibility
                               header-blank
                               header-lib-requires
-                              header-end-line
+                              ;; header-end-line
+                              header-new-seperator
                               header-commentary
                               header-blank
                               header-blank
                               header-blank
-                              header-end-line
+                              ;; header-end-line
+                              header-new-seperator
                               header-history
                               header-blank
                               header-blank
                               ;; header-rcs-log
-                              header-end-line
+                              ;; header-end-line
+                              header-new-seperator
                               header-free-software
                               header-code
                               header-eof
@@ -701,25 +708,50 @@ For more information check the docs on `header-auto-licence'"
     (insert-file-contents (concat (projectile-project-root) "LICENSE"))
     (setq license-list (split-string (buffer-string) "\n")))
   (dotimes (i 5)
-    ;; licence-list is the list of all the contents of the LICENSE
-    ;; running check-to-print on 5 lines
-    (check-to-print (string-trim (pop license-list))))
+    (if (or (cl-search " license" (downcase (car license-list)))
+            (cl-search "version " (downcase (car license-list))))
+        (insert " " (string-trim (pop license-list)))))
   (insert "\n")
   (insert header-prefix-string "See LICENSE file in the project root for full information.\n"))
 
-(defsubst check-to-print (input-string)
-  "This function gets a single line of license text and checks if it includes
-the licence name or its version case-insensitively. It does this by splitting
-each word and string comparing"
-  (let (temp-list execute-flag)
-    (setq temp-list (split-string input-string))
-    (setq execute-flag t)
-    (while (and temp-list execute-flag)
-      (if (or (gnus-string-equal (car temp-list) "Version")
-              (gnus-string-equal (car temp-list) "License"))
-          ( (lambda () (insert " " input-string)
-            (setq execute-flag nil))))
-      (pop temp-list))))
+;; (defsubst check-to-print (input-string)
+;;   "This function gets a single line of license text and checks if it includes
+;; the licence name or its version case-insensitively"
+;;   (if (or (cl-search "license" (downcase (input-string)))
+;;           (cl-search "version" (downcase (input-string))))
+;;       (insert " " input-string)))
+
+(defun header-license--insert-file (file-name)
+  (let (temp-list) (with-temp-buffer
+    (insert-file-contents
+     (concat "license_templates/"
+             file-name))
+    (setq temp-list (split-string (buffer-string) "\n")))
+       (while temp-list
+         (insert header-prefix-string "\t" (car temp-list) "\n")
+         (pop temp-list))
+       (header-new-seperator)))
+
+(defsubst header-license--template-insert ()
+  (setq license-name (split-string  (buffer-string) "\n"))
+  (dotimes (i 11)
+    (pop license-name))
+  (cond
+   ((cl-search "mit" (downcase (car license-name)))
+    (header-license--insert-file "mit.txt"))
+   ((cl-search "apache" (downcase (car license-name)))
+    (header-license--insert-file "apache.txt"))
+   ((cl-search "mozilla" (downcase (car license-name)))
+    (header-license--insert-file  "mpl.txt"))
+   ((cl-search "gnu affero" (downcase (car license-name)))
+    (header-license--insert-file "agpl3.txt"))
+   ((cl-search "gnu lesser general public license" (downcase (car license-name)))
+    (header-license--insert-file "lgpl.txt"))
+   ((cl-search "gnu general public license version 2" (downcase (car license-name)))
+    (header-license--insert-file "gpl2.txt"))
+   ((cl-search "gnu general public license version 3" (downcase (car license-name)))
+    (header-license--insert-file "gpl3.txt"))
+   ))
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."
@@ -820,7 +852,7 @@ Without this, `make-revision' inserts `header-history-label' after the header."
     (insert "\n")
     (unless (nonempty-comment-end)
       (header-blank)
-      (header-end-line))))
+      (header-new-seperator))))
 
 (defsubst header-code ()
   "Insert \"Code: \" line."
@@ -830,7 +862,8 @@ Without this, `make-revision' inserts `header-history-label' after the header."
   "Insert comment indicating end of file."
   (goto-char (point-max))
   (insert "\n")
-  (unless (nonempty-comment-end) (header-end-line))
+  ;; (unless (nonempty-comment-end) (header-end-line))
+  (unless (nonempty-comment-end) (header-new-seperator))
   (insert comment-start
           (concat (and (= 1 (length comment-start)) header-prefix-string)
                   (if (buffer-file-name)
