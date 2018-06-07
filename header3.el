@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Tue  5 Jun 2018 13:59:19 IST
+;; Last-Updated: Thu  7 Jun 2018 19:03:41 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2051
+;;     Update #: 2053
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -461,6 +461,7 @@ t means use local time with timezone; nil means use UTC."
                               header-blank
                               header-auto-license
                               header-new-seperator
+                              header-license--template-insert
                               )
 
   "*Functions that insert header elements.
@@ -720,6 +721,30 @@ each word and string comparing"
           ( (lambda () (insert " " input-string)
             (setq execute-flag nil))))
       (pop temp-list))))
+
+(defun header-license--search-insert (license-line license-name file-name)
+  (let (temp-list execute-flag)
+    (setq temp-list (split-string license-line))
+    (setq execute-flag t)
+    (while (and temp-list execute-flag)
+      (if (gnus-string-equal (car temp-list) license-name)
+          ( (lambda ()
+              (header-license--insert-file file-name)
+              (setq execute-flag nil))))
+      (pop temp-list))))
+
+(defun header-license--insert-file (file-name)
+  (insert-file-contents
+   (concat "~/My_Projects/header3/license-templates/header_templates/"
+           file-name)))
+
+(defsubst header-license--template-insert ()
+  (setq license-name (split-string  (buffer-string) "\n"))
+  (dotimes (i 11)
+    (pop license-name))
+  (header-license--search-insert (car license-name) "mit" "mit.txt")
+  (header-license--search-insert (car license-name) "apache" "apache-header.txt")
+  )
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."
