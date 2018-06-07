@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Thu  7 Jun 2018 19:03:41 IST
+;; Last-Updated: Thu  7 Jun 2018 21:41:28 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2053
+;;     Update #: 2064
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -734,17 +734,32 @@ each word and string comparing"
       (pop temp-list))))
 
 (defun header-license--insert-file (file-name)
-  (insert-file-contents
-   (concat "~/My_Projects/header3/license-templates/header_templates/"
-           file-name)))
+  (let (temp-list) (with-temp-buffer
+    (insert-file-contents
+     (concat "~/My_Projects/header3/license-templates/header_templates/"
+             file-name))
+    (setq temp-list (split-string (buffer-string) "\n")))
+       (while temp-list
+         (insert header-prefix-string "\t" (car temp-list) "\n")
+         (pop temp-list))
+       (header-new-seperator)))
 
 (defsubst header-license--template-insert ()
   (setq license-name (split-string  (buffer-string) "\n"))
   (dotimes (i 11)
     (pop license-name))
-  (header-license--search-insert (car license-name) "mit" "mit.txt")
-  (header-license--search-insert (car license-name) "apache" "apache-header.txt")
-  )
+  (cond
+   ((cl-search "MIT" (car license-name))
+    (header-license--insert-file "mit.txt"))
+   ((cl-search "Apache" (car license-name))
+    (header-license--insert-file "apache-header.txt"))
+   ((cl-search "Mozilla" (car license-name))
+    (header-license--insert-file  "mpl-header.txt"))
+   ((cl-search "GNU AFFERO" (car license-name))
+    (header-license--insert-file "agpl3-header.txt"))
+   ((cl-search "GENERAL PUBLIC LICENSE Version 3" (car license-name))
+    (header-license--insert-file "gpl3-header.txt"))
+   ))
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."
