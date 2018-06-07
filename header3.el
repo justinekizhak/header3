@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.1
 ;; Package-Requires: ()
-;; Last-Updated: Tue  5 Jun 2018 13:59:19 IST
+;; Last-Updated: Thu  7 Jun 2018 23:10:34 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2051
+;;     Update #: 2068
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -461,6 +461,7 @@ t means use local time with timezone; nil means use UTC."
                               header-blank
                               header-auto-license
                               header-new-seperator
+                              header-license--template-insert
                               )
 
   "*Functions that insert header elements.
@@ -720,6 +721,34 @@ each word and string comparing"
           ( (lambda () (insert " " input-string)
             (setq execute-flag nil))))
       (pop temp-list))))
+
+(defun header-license--insert-file (file-name)
+  (let (temp-list) (with-temp-buffer
+    (insert-file-contents
+     (concat "license_templates/"
+             file-name))
+    (setq temp-list (split-string (buffer-string) "\n")))
+       (while temp-list
+         (insert header-prefix-string "\t" (car temp-list) "\n")
+         (pop temp-list))
+       (header-new-seperator)))
+
+(defsubst header-license--template-insert ()
+  (setq license-name (split-string  (buffer-string) "\n"))
+  (dotimes (i 11)
+    (pop license-name))
+  (cond
+   ((cl-search "mit" (downcase (car license-name)))
+    (header-license--insert-file "mit.txt"))
+   ((cl-search "apache" (downcase (car license-name)))
+    (header-license--insert-file "apache-header.txt"))
+   ((cl-search "mozilla" (downcase (car license-name)))
+    (header-license--insert-file  "mpl-header.txt"))
+   ((cl-search "gnu affero" (downcase (car license-name)))
+    (header-license--insert-file "agpl3-header.txt"))
+   ((cl-search "general public license version 3" (downcase (car license-name)))
+    (header-license--insert-file "gpl3-header.txt"))
+   ))
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."
