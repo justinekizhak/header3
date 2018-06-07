@@ -49,7 +49,7 @@ There are two types of headers available, **file-header** and **package-header**
 ;;; example-package.el ---
 ;;
 ;; Filename: example-package.el
-;; Description;; Description: Example of "package-header"
+;; Description: Example of "package-header"
 ;; Author: Justine T Kizhakkinedath
 ;; Maintainer:
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
