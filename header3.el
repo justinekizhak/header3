@@ -11,11 +11,11 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.1
+;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Fri  8 Jun 2018 03:07:32 IST
+;; Last-Updated: Fri  8 Jun 2018 03:18:07 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2082
+;;     Update #: 2083
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,6 +191,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 8-Jun-2018    Justine T Kizhakkinedath
+;;     Last-Updated: Fri  8 Jun 2018 03:07:32 IST #2082 (Justine T Kizhakkinedath)
+;;     "file-header" can now automatically add license templates.
 ;; 5-Jun-2018    Justine T Kizhakkinedath
 ;;     Last-Updated: Tue  5 Jun 2018 00:20:59 IST #2045 (Justine T Kizhakkinedath)
 ;;     Project name default value can be changed from customize interface.
