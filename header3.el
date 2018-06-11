@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Fri  8 Jun 2018 03:18:07 IST
+;; Last-Updated: Mon 11 Jun 2018 19:44:27 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2083
+;;     Update #: 2084
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -724,7 +724,7 @@ For more information check the docs on `header-auto-licence'"
 (defun header-license--insert-file (file-name)
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
-     (concat "license_templates/"
+     (concat "~/.emacs.d/lisp/header3/license_templates/"
              file-name))
     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list

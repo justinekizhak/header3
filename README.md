@@ -15,7 +15,7 @@ There are two types of headers available, **file-header** and **package-header**
 ```
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri  8 Jun 2018 03:20:29 IST
-;; Last-Updated: Fri  8 Jun 2018 03:32:49 IST
+;; Last-Updated: Mon 11 Jun 2018 19:49:29 IST
 ;;
 ;; example-package.el is part of header3
 ;; URL: https://github.com/justinethomas009/header3
@@ -59,7 +59,7 @@ There are two types of headers available, **file-header** and **package-header**
 ;; Package-Requires: ()
 ;; Last-Updated: Fri  8 Jun 2018 03:21:26 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 3
+;;     Update #: 4
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL:
 ;; Keywords:
@@ -112,10 +112,10 @@ There are two types of headers available, **file-header** and **package-header**
 ### Automatic addition of license into the header by extracting info from project "LICENSE" file
 
 ## To install
-* `git clone https://github.com/justinethomas009/header3 ~/.emacs.d/site-lisp`
+* `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
 * Add these lines to your `.emacs` or your init file.
   ```
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/")
+  (add-to-list 'load-path "~/.emacs.d/lisp/header3")
   (load "header3")
   ```
 *  Add these lines if you want to auto update your header on file save(which you probably do)
