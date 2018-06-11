@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Mon 11 Jun 2018 19:44:27 IST
+;; Last-Updated: Tue 12 Jun 2018 01:21:23 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2084
+;;     Update #: 2086
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -565,6 +565,12 @@ file `header3.el' to do this."
 can't find your project name."
   :type 'string :group 'Automatic-File-Header)
 
+(defcustom header-license-template-location "~/.emacs.d/lisp/header3/license_templates/"
+  "*Set the location of license templates. This value is where your 'license_templates'
+folder is located. It is inside the header3 folder, but you can take out this folder
+and place it different location. Default value '~/.emacs.d/lisp/header3/license_templates/'"
+  :type 'string :group 'Automatic-File-Header)
+
 (defcustom header-free-software
   "This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -724,11 +730,11 @@ For more information check the docs on `header-auto-licence'"
 (defun header-license--insert-file (file-name)
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
-     (concat "~/.emacs.d/lisp/header3/license_templates/"
+     (concat header-license-template-location
              file-name))
     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list
-         (insert header-prefix-string "\t" (car temp-list) "\n")
+         (insert header-prefix-string (car temp-list) "\n")
          (pop temp-list))
        (header-new-seperator)))
 
