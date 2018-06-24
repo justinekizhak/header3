@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Mon 25 Jun 2018 01:59:52 IST
+;; Last-Updated: Mon 25 Jun 2018 02:53:22 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2102
+;;     Update #: 2106
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -528,7 +528,7 @@ file `header3.el' to do this."
                               ;; header-rcs-log
                               ;; header-end-line
                               header-new-seperator
-                              header-free-software
+                              header-new-free-software
                               header-code
                               header-eof
                               )
@@ -698,25 +698,39 @@ also assumes that the first line in your \"LICENCE\" is the name of the licence.
 In short if you are working on a git or mercurial project and use the \"LICENCE\"
 format that everybody else use then you are covered.
 For more details on what constites a project check `projectile' docs"
-  (if (require 'projectile nil 'noerror)
-      (if (string= (projectile-project-name) "-")
-          (insert header-prefix-string "Unable to find project root\n")
-        (cond
-         ((file-readable-p (concat (projectile-project-root) "LICENSE"))
-          (inserting-auto-license "LICENSE"))
-         ((file-readable-p (concat (projectile-project-root) "License"))
-          (inserting-auto-license "License"))
-         ((file-readable-p (concat (projectile-project-root) "LICENSE.md"))
-          (inserting-auto-license "LICENSE.md"))
-         ((file-readable-p (concat (projectile-project-root) "License.md"))
-          (inserting-auto-license "License.md"))
-         ((file-readable-p (concat (projectile-project-root) "LICENSE.txt"))
-          (inserting-auto-license "LICENSE.txt"))
-         ((file-readable-p (concat (projectile-project-root) "License.txt"))
-          (inserting-auto-license "License.txt"))
+  ( header-license--get-file-name)
+  (if (string= "" license-name)
+      (insert header-prefix-string "Unable to find license name from the file\n")
+    (progn
+      (insert header-prefix-string "Licensed under the terms of ")
+      (insert license-name)
+      (insert "\n")
+      (insert header-prefix-string "See LICENSE file in the project root for full information.\n")
+      )
+      )
+  )
+
+(defun header-license--get-file-name ()
+ (if (require 'projectile nil 'noerror)
+     (if (string= (projectile-project-name) "-")
+         (insert header-prefix-string "Unable to find project root\n")
+       (cond
+        ((file-readable-p (concat (projectile-project-root) "LICENSE"))
+         (inserting-auto-license "LICENSE"))
+        ((file-readable-p (concat (projectile-project-root) "License"))
+         (inserting-auto-license "License"))
+        ((file-readable-p (concat (projectile-project-root) "LICENSE.md"))
+         (inserting-auto-license "LICENSE.md"))
+        ((file-readable-p (concat (projectile-project-root) "License.md"))
+         (inserting-auto-license "License.md"))
+        ((file-readable-p (concat (projectile-project-root) "LICENSE.txt"))
+         (inserting-auto-license "LICENSE.txt"))
+        ((file-readable-p (concat (projectile-project-root) "License.txt"))
+         (inserting-auto-license "License.txt"))
         (t (insert header-prefix-string "LICENSE file not available\n")))
-        )
-    (message "projectile package not found")))
+       )
+   (message "projectile package not found"))
+ )
 
 (defvar license-name )
 
@@ -724,7 +738,6 @@ For more details on what constites a project check `projectile' docs"
   "This is the actual funtion which will be inserting licence info.
 For more information check the docs on `header-auto-licence'"
   (setq temp-list '())
-  (insert header-prefix-string "Licensed under the terms of ")
   (with-temp-buffer
     (insert-file-contents (concat (projectile-project-root) license-file-name))
     (setq license-list (split-string (buffer-string) "\n")))
@@ -733,9 +746,7 @@ For more information check the docs on `header-auto-licence'"
             (cl-search "version " (downcase (car license-list))))
         (add-to-list 'temp-list (string-trim (pop license-list)) t)))
   (setq license-name (string-join temp-list " "))
-  (insert license-name)
-  (insert "\n")
-  (insert header-prefix-string "See LICENSE file in the project root for full information.\n"))
+  )
 
 (defconst header-license-templates-base (file-name-directory load-file-name))
 
@@ -844,6 +855,15 @@ Without this, `make-revision' inserts `header-history-label' after the header."
   "Insert text saying that this is free software."
   (let ((header-multiline  header-free-software))
     (header-multiline)))
+
+(defun header-new-free-software ()
+  "Insert text saying that this is free software."
+
+  (header-license--get-file-name)
+  (header-license--template-insert)
+
+
+  )
 
 (defun header-multiline ()
   "Insert multiline comment.  The comment text is in `header-multiline'."
