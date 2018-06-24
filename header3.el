@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Tue 12 Jun 2018 01:21:23 IST
+;; Last-Updated: Mon 25 Jun 2018 00:10:13 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2086
+;;     Update #: 2092
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -565,11 +565,11 @@ file `header3.el' to do this."
 can't find your project name."
   :type 'string :group 'Automatic-File-Header)
 
-(defcustom header-license-template-location "~/.emacs.d/lisp/header3/license_templates/"
-  "*Set the location of license templates. This value is where your 'license_templates'
-folder is located. It is inside the header3 folder, but you can take out this folder
-and place it different location. Default value '~/.emacs.d/lisp/header3/license_templates/'"
-  :type 'string :group 'Automatic-File-Header)
+;; (defcustom header-license-template-location "license_templates/"
+;;   "*Set the location of license templates. This value is where your 'license_templates'
+;; folder is located. It is inside the header3 folder, but you can take out this folder
+;; and place it different location. Default value '~/.emacs.d/lisp/header3/license_templates/'"
+;;   :type 'string :group 'Automatic-File-Header)
 
 (defcustom header-free-software
   "This program is free software: you can redistribute it and/or modify
@@ -727,10 +727,15 @@ For more information check the docs on `header-auto-licence'"
 ;;           (cl-search "version" (downcase (input-string))))
 ;;       (insert " " input-string)))
 
+(defconst header-license-templates-base (file-name-directory load-file-name))
+
+(defun header-fetch-resource-path (file)
+  (expand-file-name file header-license-templates-base))
+
 (defun header-license--insert-file (file-name)
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
-     (concat header-license-template-location
+     (concat (header-fetch-resource-path "license_templates/")
              file-name))
     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list
