@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Mon 25 Jun 2018 01:38:02 IST
+;; Last-Updated: Mon 25 Jun 2018 01:59:52 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2100
+;;     Update #: 2102
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -701,30 +701,39 @@ For more details on what constites a project check `projectile' docs"
   (if (require 'projectile nil 'noerror)
       (if (string= (projectile-project-name) "-")
           (insert header-prefix-string "Unable to find project root\n")
-        (if (file-readable-p (concat (projectile-project-root) "LICENSE"))
-            (inserting-auto-license)
-          (insert header-prefix-string "LICENSE file not available\n")))
+        (cond
+         ((file-readable-p (concat (projectile-project-root) "LICENSE"))
+          (inserting-auto-license "LICENSE"))
+         ((file-readable-p (concat (projectile-project-root) "License"))
+          (inserting-auto-license "License"))
+         ((file-readable-p (concat (projectile-project-root) "LICENSE.md"))
+          (inserting-auto-license "LICENSE.md"))
+         ((file-readable-p (concat (projectile-project-root) "License.md"))
+          (inserting-auto-license "License.md"))
+         ((file-readable-p (concat (projectile-project-root) "LICENSE.txt"))
+          (inserting-auto-license "LICENSE.txt"))
+         ((file-readable-p (concat (projectile-project-root) "License.txt"))
+          (inserting-auto-license "License.txt"))
+        (t (insert header-prefix-string "LICENSE file not available\n")))
+        )
     (message "projectile package not found")))
 
 (defvar license-name )
 
-(defsubst inserting-auto-license ()
+(defsubst inserting-auto-license (license-file-name)
   "This is the actual funtion which will be inserting licence info.
 For more information check the docs on `header-auto-licence'"
   (setq temp-list '())
   (insert header-prefix-string "Licensed under the terms of ")
   (with-temp-buffer
-    (insert-file-contents (concat (projectile-project-root) "LICENSE"))
+    (insert-file-contents (concat (projectile-project-root) license-file-name))
     (setq license-list (split-string (buffer-string) "\n")))
   (dotimes (i 5)
     (if (or (cl-search " license" (downcase (car license-list)))
             (cl-search "version " (downcase (car license-list))))
         (add-to-list 'temp-list (string-trim (pop license-list)) t)))
-  ;; (insert (car temp-lic-name))
   (setq license-name (string-join temp-list " "))
   (insert license-name)
-  ;; (while temp-lic-name
-  ;;   (insert " " (pop temp-lic-name)))
   (insert "\n")
   (insert header-prefix-string "See LICENSE file in the project root for full information.\n"))
 
