@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Mon 25 Jun 2018 02:53:22 IST
+;; Last-Updated: Wed 27 Jun 2018 23:53:07 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2106
+;;     Update #: 2111
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -399,6 +399,8 @@
 
 (provide 'header3)
 (require 'header3)                      ; Ensure loaded before compile.
+(require 'projectile)
+(require 'git-link)
 
 
 ;; Quiet byte-compiler.
@@ -571,22 +573,22 @@ can't find your project name."
 ;; and place it different location. Default value '~/.emacs.d/lisp/header3/license_templates/'"
 ;;   :type 'string :group 'Automatic-File-Header)
 
-(defcustom header-free-software
-  "This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or (at
-your option) any later version.
+;; (defcustom header-free-software
+;;   "This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or (at
+;; your option) any later version.
 
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>."
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>."
 
-  "*Text saying that this is free software"
-  :type 'string :group 'Automatic-File-Header)
+;;   "*Text saying that this is free software"
+;;   :type 'string :group 'Automatic-File-Header)
 
 (defcustom make-box-comment-region-replace-prefix-flag nil
   "Non-nil means remove any comment prefix from lines, before boxing."
@@ -698,6 +700,7 @@ also assumes that the first line in your \"LICENCE\" is the name of the licence.
 In short if you are working on a git or mercurial project and use the \"LICENCE\"
 format that everybody else use then you are covered.
 For more details on what constites a project check `projectile' docs"
+  (setq license-name "")
   ( header-license--get-file-name)
   (if (string= "" license-name)
       (insert header-prefix-string "Unable to find license name from the file\n")
@@ -780,7 +783,9 @@ For more information check the docs on `header-auto-licence'"
     (header-license--insert-file "gpl2.txt"))
    ((cl-search "gnu general public license version 3" (downcase license-name))
     (header-license--insert-file "gpl3.txt"))
-   ))
+   )
+  (insert "\n")
+  )
 
 (defsubst header-custom-copyright ()
   "Insert copyright line."
