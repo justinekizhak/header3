@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Wed 27 Jun 2018 23:53:07 IST
+;; Last-Updated: Thu 28 Jun 2018 21:38:00 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2111
+;;     Update #: 2115
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -454,19 +454,17 @@ t means use local time with timezone; nil means use UTC."
 ;; default value corresponds to what the Elisp manual recommends for Emacs Lisp.
 
 (defcustom make-file-header-hook '(
-                              header-new-seperator
+                              header-seperator
                               header-creation-date
                               header-modification-date
                               header-blank
-                              header-filename-with-projectname
+                              header3-filename
                               header-url
                               header-description
                               header-blank
-                              header-custom-copyright
+                              header3-copyright
                               header-blank
-                              header-auto-license
-                              header-new-seperator
-                              header-license--template-insert
+                              header3-file-license
                               )
 
   "*Functions that insert header elements.
@@ -501,7 +499,7 @@ file `header3.el' to do this."
                               ;;header-status
                               header-author
                               header-maintainer
-                              header-custom-copyright
+                              header3-copyright
                               header-creation-date
                               ;;header-rcs-id
                               header-version
@@ -517,20 +515,20 @@ file `header3.el' to do this."
                               header-blank
                               header-lib-requires
                               ;; header-end-line
-                              header-new-seperator
+                              header-seperator
                               header-commentary
                               header-blank
                               header-blank
                               header-blank
                               ;; header-end-line
-                              header-new-seperator
+                              header-seperator
                               header-history
                               header-blank
                               header-blank
                               ;; header-rcs-log
                               ;; header-end-line
-                              header-new-seperator
-                              header-new-free-software
+                              header-seperator
+                              header3-package-license
                               header-code
                               header-eof
                               )
@@ -619,6 +617,9 @@ the function to call if the string is found near the start of the file.")
 (defvar header-prefix-string ""
   "Mode-specific comment prefix string for use in headers.")
 
+(defvar license-name ""
+  "Contains the name of license")
+
 ;;; Functions ----------------------------------------------
 
 (defsubst nonempty-comment-start ()
@@ -633,7 +634,7 @@ the function to call if the string is found near the start of the file.")
   "Insert an empty comment to file header (after `header-prefix-string')."
   (insert header-prefix-string  "\n"))
 
-(defsubst header-new-seperator ()
+(defsubst header-seperator ()
   "Insert a --- divider line"
   (insert header-prefix-string)
   (insert (make-string 77 ?-) "\n"))
@@ -664,16 +665,16 @@ packages."
               (file-name-nondirectory (buffer-file-name))
             (buffer-name)) "\n"))
 
-(defsubst header-filename-with-projectname ()
-  "Checks if 'projectile' package is installed or not and
-if installed then inserts the project name"
-  (if (require 'projectile nil 'noerror )
-      (header-inserting-filename-with-projectname)
-    (header-file-name)))
+;; (defsubst header3-filename ()
+;;   "Checks if 'projectile' package is installed or not and
+;; if installed then inserts the project name"
+;;   (if (require 'projectile nil 'noerror )
+;;       (header-inserting-filename-with-projectname)
+;;     (header-file-name)))
 
-(defsubst header-inserting-filename-with-projectname ()
+(defsubst header3-filename ()
   "Insert the name of file and its association with a project.
-Its format is: \"<this-file-name> is part of <project-name>\"
+Format is: \"<this-file-name> is part of <project-name>\"
 <project-name> is received from `projectile' package"
   (insert header-prefix-string
       (if (buffer-file-name)
@@ -689,57 +690,48 @@ Its format is: \"<this-file-name> is part of <project-name>\"
   "Insert \"Description: \" line."
   (insert header-prefix-string "Description:\n"))
 
-(defsubst header-auto-license ()
+(defsubst header3-file-license ()
   "Insert License info from the \"LICENCE\" file inside a project.
 If you are working inside a project and you already have a \"LICENSE\", then this
-will try to extract info from the file, thereby making it more flexible to use
-any licence you want and be assured that all the new headers you are inserting
-conforms with that licence. The way this determines if you are in a project is
-by using `projectile-project-name' function from `projectile' package. This
-also assumes that the first line in your \"LICENCE\" is the name of the licence.
-In short if you are working on a git or mercurial project and use the \"LICENCE\"
-format that everybody else use then you are covered.
+will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
-  (setq license-name "")
-  ( header-license--get-file-name)
+  (header3-license--get-file-name)
   (if (string= "" license-name)
       (insert header-prefix-string "Unable to find license name from the file\n")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
       (insert "\n")
-      (insert header-prefix-string "See LICENSE file in the project root for full information.\n")
-      )
-      )
+      (insert header-prefix-string "See LICENSE file in the project root for full information.\n")))
+  (header-seperator)
+  (header3-license--insert)
   )
 
-(defun header-license--get-file-name ()
- (if (require 'projectile nil 'noerror)
-     (if (string= (projectile-project-name) "-")
-         (insert header-prefix-string "Unable to find project root\n")
-       (cond
-        ((file-readable-p (concat (projectile-project-root) "LICENSE"))
-         (inserting-auto-license "LICENSE"))
-        ((file-readable-p (concat (projectile-project-root) "License"))
-         (inserting-auto-license "License"))
-        ((file-readable-p (concat (projectile-project-root) "LICENSE.md"))
-         (inserting-auto-license "LICENSE.md"))
-        ((file-readable-p (concat (projectile-project-root) "License.md"))
-         (inserting-auto-license "License.md"))
-        ((file-readable-p (concat (projectile-project-root) "LICENSE.txt"))
-         (inserting-auto-license "LICENSE.txt"))
-        ((file-readable-p (concat (projectile-project-root) "License.txt"))
-         (inserting-auto-license "License.txt"))
-        (t (insert header-prefix-string "LICENSE file not available\n")))
-       )
-   (message "projectile package not found"))
+(defsubst header3-license--get-file-name ()
+  "INTERNAL FUNCTION. Get license file name"
+  (setq license-name "")
+  (if (string= (projectile-project-name) "-")
+      (insert header-prefix-string "Unable to find project root\n")
+    (cond
+     ((file-readable-p (concat (projectile-project-root) "LICENSE"))
+      (header3-license--get-license-name "LICENSE"))
+     ((file-readable-p (concat (projectile-project-root) "License"))
+      (header3-license--get-license-name "License"))
+     ((file-readable-p (concat (projectile-project-root) "LICENSE.md"))
+      (header3-license--get-license-name "LICENSE.md"))
+     ((file-readable-p (concat (projectile-project-root) "License.md"))
+      (header3-license--get-license-name "License.md"))
+     ((file-readable-p (concat (projectile-project-root) "LICENSE.txt"))
+      (header3-license--get-license-name "LICENSE.txt"))
+     ((file-readable-p (concat (projectile-project-root) "License.txt"))
+      (header3-license--get-license-name "License.txt"))
+     (t (insert header-prefix-string "LICENSE file not available\n")))
+    )
  )
 
-(defvar license-name )
-
-(defsubst inserting-auto-license (license-file-name)
-  "This is the actual funtion which will be inserting licence info.
-For more information check the docs on `header-auto-licence'"
+(defsubst header3-license--get-license-name (license-file-name)
+  "INTERNAL FUNCTION. Get the name of license from the file,
+after getting the license file name"
   (setq temp-list '())
   (with-temp-buffer
     (insert-file-contents (concat (projectile-project-root) license-file-name))
@@ -753,10 +745,12 @@ For more information check the docs on `header-auto-licence'"
 
 (defconst header-license-templates-base (file-name-directory load-file-name))
 
-(defun header-fetch-resource-path (file)
+(defsubst header-fetch-resource-path (file)
+  "INTERNAL FUNCTION. Get the path to the resource files"
   (expand-file-name file header-license-templates-base))
 
-(defun header-license--insert-file (file-name)
+(defsubst header3-license--insert-file (file-name)
+  "INTERNAL FUNCTION. Inserts the contents of license from the resource"
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
      (concat (header-fetch-resource-path "license_templates/")
@@ -765,29 +759,31 @@ For more information check the docs on `header-auto-licence'"
        (while temp-list
          (insert header-prefix-string (car temp-list) "\n")
          (pop temp-list))
-       (header-new-seperator)))
+       (header-seperator)))
 
-(defsubst header-license--template-insert ()
+(defsubst header3-license--insert ()
+  "INTERNAL FUNCTION. Launches the \"insert-file\" function after comparing
+with the license name"
   (cond
    ((cl-search "mit" (downcase license-name))
-    (header-license--insert-file "mit.txt"))
+    (header3-license--insert-file "mit.txt"))
    ((cl-search "apache" (downcase license-name))
-    (header-license--insert-file "apache.txt"))
+    (header3-license--insert-file "apache.txt"))
    ((cl-search "mozilla" (downcase license-name))
-    (header-license--insert-file  "mpl.txt"))
+    (header3-license--insert-file  "mpl.txt"))
    ((cl-search "gnu affero" (downcase license-name))
-    (header-license--insert-file "agpl3.txt"))
+    (header3-license--insert-file "agpl3.txt"))
    ((cl-search "gnu lesser general public license" (downcase license-name))
-    (header-license--insert-file "lgpl.txt"))
+    (header3-license--insert-file "lgpl.txt"))
    ((cl-search "gnu general public license version 2" (downcase license-name))
-    (header-license--insert-file "gpl2.txt"))
+    (header3-license--insert-file "gpl2.txt"))
    ((cl-search "gnu general public license version 3" (downcase license-name))
-    (header-license--insert-file "gpl3.txt"))
+    (header3-license--insert-file "gpl3.txt"))
    )
   (insert "\n")
   )
 
-(defsubst header-custom-copyright ()
+(defsubst header3-copyright ()
   "Insert copyright line."
   (insert header-prefix-string "Copyright (c) ")
   (insert (format-time-string "%Y, "))
@@ -861,13 +857,13 @@ Without this, `make-revision' inserts `header-history-label' after the header."
   (let ((header-multiline  header-free-software))
     (header-multiline)))
 
-(defun header-new-free-software ()
-  "Insert text saying that this is free software."
-
-  (header-license--get-file-name)
-  (header-license--template-insert)
-
-
+(defun header3-package-license ()
+  "Insert package license"
+  (header3-license--get-file-name)
+  (if (string= "" license-name)
+      (insert header-prefix-string "Unable to find license name from the file\n"))
+  (header-seperator)
+  (header3-license--insert)
   )
 
 (defun header-multiline ()
@@ -895,7 +891,7 @@ Without this, `make-revision' inserts `header-history-label' after the header."
     (insert "\n")
     (unless (nonempty-comment-end)
       (header-blank)
-      (header-new-seperator))))
+      (header-seperator))))
 
 (defsubst header-code ()
   "Insert \"Code: \" line."
@@ -906,7 +902,7 @@ Without this, `make-revision' inserts `header-history-label' after the header."
   (goto-char (point-max))
   (insert "\n")
   ;; (unless (nonempty-comment-end) (header-end-line))
-  (unless (nonempty-comment-end) (header-new-seperator))
+  (unless (nonempty-comment-end) (header-seperator))
   (insert comment-start
           (concat (and (= 1 (length comment-start)) header-prefix-string)
                   (if (buffer-file-name)
