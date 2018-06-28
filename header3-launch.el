@@ -1,6 +1,6 @@
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Last-Updated: Fri 29 Jun 2018 00:06:34 IST
+;; Last-Updated: Fri 29 Jun 2018 00:23:51 IST
 ;;
 ;; header3-launch.el is part of header3
 ;; URL: https://github.com/justinethomas/header3
@@ -29,7 +29,13 @@
 ;; -----------------------------------------------------------------------------
 
 
-(add-to-list 'load-path "~/.emacs.d/private/header3/")
+(defconst header-root-folder (file-name-directory load-file-name))
+
+(defsubst header-fetch-resource-path (file)
+  "INTERNAL FUNCTION. Get the path to the resource files"
+  (expand-file-name file header-root-folder))
+
+(add-to-list 'load-path (header-fetch-resource-path ""))
 (load "header3")
 
 (autoload 'auto-update-file-header "header3")
@@ -40,3 +46,5 @@
 (add-hook 'c-mode-common-hook   'auto-make-header)
 (add-hook 'python-mode-hook 'auto-make-header)
 (add-hook 'sh-mode-hook 'auto-make-mini-header)
+
+(header-fetch-resource-path "header3.el")

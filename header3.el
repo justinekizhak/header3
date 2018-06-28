@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Thu 28 Jun 2018 23:52:36 IST
+;; Last-Updated: Fri 29 Jun 2018 00:13:10 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2118
+;;     Update #: 2119
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -773,12 +773,6 @@ after getting the license file name"
         (add-to-list 'temp-list (string-trim (pop license-list)) t)))
   (setq license-name (string-join temp-list " "))
   )
-
-(defconst header-license-templates-base (file-name-directory load-file-name))
-
-(defsubst header-fetch-resource-path (file)
-  "INTERNAL FUNCTION. Get the path to the resource files"
-  (expand-file-name file header-license-templates-base))
 
 (defsubst header3-license--insert-file (file-name)
   "INTERNAL FUNCTION. Inserts the contents of license from the resource"
