@@ -11,11 +11,11 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.2
-;; Package-Requires: ()
-;; Last-Updated: Fri 29 Jun 2018 01:10:36 IST
+;; Version: 3.3
+;; Package-Requires: (projectile git-link)
+;; Last-Updated: Fri 29 Jun 2018 03:32:45 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2120
+;;     Update #: 2121
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,29 +191,33 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 29-Jun-2018    Justine T Kizhakkinedath
+;;    Last-Updated: Fri 29 Jun 2018 01:10:36 IST #2120 (Justine T Kizhakkinedath)
+;;    Add `header-launcher.el' for holding the default values. Make the installation
+;;    easier.
 ;; 28-Jun-2018    Justine T Kizhakkinedath
 ;;    Last-Updated: Thu 28 Jun 2018 21:38:00 IST #2115 (Justine T Kizhakkinedath)
 ;;    Automatically insert the respective license for package headers.
 ;; 8-Jun-2018    Justine T Kizhakkinedath
-;;     Last-Updated: Fri  8 Jun 2018 03:07:32 IST #2082 (Justine T Kizhakkinedath)
-;;     "file-header" can now automatically add license templates.
+;;    Last-Updated: Fri  8 Jun 2018 03:07:32 IST #2082 (Justine T Kizhakkinedath)
+;;    "file-header" can now automatically add license templates.
 ;; 5-Jun-2018    Justine T Kizhakkinedath
-;;     Last-Updated: Tue  5 Jun 2018 00:20:59 IST #2045 (Justine T Kizhakkinedath)
-;;     Project name default value can be changed from customize interface.
+;;    Last-Updated: Tue  5 Jun 2018 00:20:59 IST #2045 (Justine T Kizhakkinedath)
+;;    Project name default value can be changed from customize interface.
 ;; 4-Jun-2018    Justine T Kizhakkinedath
-;;     Last-Updated: Mon  4 Jun 2018 23:03:27 IST #2043 (Justine T Kizhakkinedath)
-;;     Leading whitespace for license name fixed. Also version number of license
-;;     will be included along with the license name.
+;;    Last-Updated: Mon  4 Jun 2018 23:03:27 IST #2043 (Justine T Kizhakkinedath)
+;;    Leading whitespace for license name fixed. Also version number of license
+;;    will be included along with the license name.
 ;; 2-Jun-2018    Justine T Kizhakkinedath
-;;     Last-Updated: Sat  2 Jun 2018 02:33:50 IST #2028 (Justine T Kizhakkinedath)
-;;     Exception handling done for `projectile' and `git-link' packages. So now if
-;;     they are not available then it defaults back.
+;;    Last-Updated: Sat  2 Jun 2018 02:33:50 IST #2028 (Justine T Kizhakkinedath)
+;;    Exception handling done for `projectile' and `git-link' packages. So now if
+;;    they are not available then it defaults back.
 ;; 2-Jun-2018    Justine T Kizhakkinedath
-;;     Last-Updated: Sat  2 Jun 2018 00:35:41 IST #2017 (Justine T Kizhakkinedath)
-;;     Using `git-link' for extracting URL from git projects.
-;;     make-header-hook -> make-package-header-hook. Added new 'make'
-;;     function for creating smaller header than 'package-header'. Function for
-;;     extracting project name using `projectile' package.
+;;    Last-Updated: Sat  2 Jun 2018 00:35:41 IST #2017 (Justine T Kizhakkinedath)
+;;    Using `git-link' for extracting URL from git projects.
+;;    make-header-hook -> make-package-header-hook. Added new 'make'
+;;    function for creating smaller header than 'package-header'. Function for
+;;    extracting project name using `projectile' package.
 ;;
 ;; 2016/08/10 dadams
 ;;     Added: make-box-comment-region, make-box-comment-region-replace-prefix-flag
