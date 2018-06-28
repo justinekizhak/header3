@@ -12,3 +12,5 @@
 
 # Emacs backup files
 .#*
+
+temp.el

@@ -1,24 +1,52 @@
 <a name="top"></a>
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <a href="http://www.twitter.com/justinethomask"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
 <a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
 - - -
 
-# header3.el for Emacs
-header3.el is a package for Emacs which will help you to automatically add headers to your source code files when you create a new one in Emacs.
+# Header3 for Emacs
+Header3 is a package for Emacs which will help you to automatically add headers
+to your source code files when you create a new one in Emacs.  
+Header3 is built upon [header2.el](https://www.emacswiki.org/emacs/download/header2.el)
+and adds more features to it, but I have made efforts to be compatible with header2.
 
-There are two types of headers available, **file-header** and **package-header**.
+## Table of contents
 
-* **file-header** is useful if you need smaller headers.
+  * [Types of headers](#types-of-headers)
+     * [mini-header](#mini-header)
+     * [file-header](#file-header)
+     * [package-header](#package-header)
+  * [Features](#features)
+  * [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Working](#working)
+
+## Types of headers
+
+### mini-header
+is useful if you need the smallest header.
+
+```
+# -----------------------------------------------------------------------------
+# Copyright (c) 2018, Justine T Kizhakkinedath
+# All rights reserved
+#
+# Licensed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+# See LICENSE file in the project root for full information.
+# -----------------------------------------------------------------------------
+```
+### file-header
+is useful if you need a little bigger headers.
 
 ```
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri  8 Jun 2018 03:20:29 IST
-;; Last-Updated: Mon 11 Jun 2018 19:49:29 IST
+;; Last-Updated: Fri 29 Jun 2018 01:33:00 IST
 ;;
 ;; example-package.el is part of header3
-;; URL: https://github.com/justinethomas009/header3
+;; URL: https://github.com/justinethomas/header3
 ;; Description: Example of "file-header"
 ;;
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
@@ -43,7 +71,10 @@ There are two types of headers available, **file-header** and **package-header**
 ;;
 ;; -----------------------------------------------------------------------------
 ```
-* **package-header** is useful if you need bigger headers.
+### package-header
+is the biggest and the original one from `header2`.   
+But this one can change the contents of the License inserted automatically when
+it is inside a project and also insert the URL of project.
 
 ```
 ;;; example-package.el ---
@@ -59,8 +90,8 @@ There are two types of headers available, **file-header** and **package-header**
 ;; Package-Requires: ()
 ;; Last-Updated: Fri  8 Jun 2018 03:21:26 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 4
-;; URL: https://github.com/justinethomas009/header3
+;;     Update #: 1
+;; URL: https://github.com/justinethomas/header3
 ;; Doc URL:
 ;; Keywords:
 ;; Compatibility:
@@ -100,43 +131,73 @@ There are two types of headers available, **file-header** and **package-header**
 ;; -----------------------------------------------------------------------------
 ;;; example-package.el ends here
 ```
-*Both examples are generated using header3.el.*
+*All examples are generated using Header3.*
 
-## All Features of [header2.el](https://www.emacswiki.org/emacs/download/header2.el) plus
-* Standard header format.
-* Auto timestamp for file creation and file updating.
-* Automatic entry of the user name of last update and keeping track of update number.
-* Easy Customization Interface available. Send bug reports within the interface.
-* Keep Commentary and Change Log inside the file.
-### Automatically adding GitHub project link into the header
-### Automatic addition of license into the header by extracting info from project "LICENSE" file
+## Features
+* All Features of [header2.el](https://www.emacswiki.org/emacs/download/header2.el) plus
+  * Standard header format.
+  * Auto timestamp for file creation and file updating.
+  * Automatic entry of the user name of last update and keeping track of update number.
+  * Easy Customisation Interface available. Send bug reports within the interface.
+  * Keep Commentary and Change Log inside the file.
+* Automatically add git project link into the header
+* Automatically add License to the files.
 
-## To install
+## Installation
 * `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
 * Add these lines to your `.emacs` or your init file.
   ```
   (add-to-list 'load-path "~/.emacs.d/lisp/header3")
-  (load "header3")
-  ```
-*  Add these lines if you want to auto update your header on file save(which you probably do)
-   ```
-   (autoload 'auto-update-file-header "header3")
-   (add-hook 'before-save-hook 'auto-update-file-header)
-   ```
-* To have Emacs add a file header whenever you create a new file in some mode, put these too.
-  ```
-  (autoload 'auto-make-header "header3")
-  (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-  (add-hook 'c-mode-common-hook   'auto-make-header)
-  (add-hook 'python-mode-hook 'auto-make-header)
-  ...
+  (load "header3-launcher")
   ```
 
-## For Automatic insertion of license info and git link in the header, these packages are required.
-* [Git-link](https://github.com/sshaw/git-link) This will extract the git link of the current buffer.
+## Requirements
+* [Git-link](https://github.com/sshaw/git-link) This package is used to extract
+the git link of the current buffer.
 
-* [Projectile](https://github.com/bbatsov/projectile) This is the one which will check your project directory.
-Projectile provides us with project name and project path which is used to check if the project root contains any file called "LICENSE".
-If it does then it checks the first 5 lines for any mention of "License" and "Version" (case-insensitive).
+* [Projectile](https://github.com/bbatsov/projectile) This package is the one
+which will check your project directory and get its root path.  
+Projectile provides us with project name and project path which is used to check
+if the project root contains any License file.  
+If it does then it checks the first 5 lines for any mention of "License" and
+"Version" (case-insensitive).
 
 Instructions to install these packages are available at their links.
+
+## Working
+* Files that are recognised as License files are
+  - LICENSE
+  - License
+  - LICENSE.md
+  - License.md
+  - LICENSE.txt
+  - License.txt
+* License templates included with the package
+  - MIT
+  - Apache License Version 2
+  - Mozzila Public License
+  - GNU AFFERO GENERAL PUBLIC LICENSE
+  - GNU LESSER GENERAL PUBLIC LICENSE
+  - GNU GENERAL PUBLIC LICENSE VERSION 2
+  - GNU GENERAL PUBLIC LICENSE VERSION 3
+* Default settings:
+  - `file-header` is the default header for
+    - C/C++
+    - Clojure
+    - Coffee script
+    - Emacs lisp
+    - Erlang
+    - Haskell
+    - Java
+    - Kotlin
+    - Python
+    - Ruby
+    - Rust
+    - Scala
+    - Scheme
+    - Swift
+  - `mini-header` for
+    - PHP
+    - Shell scripts
+    - SQL
+* Default settings are stored in `header3-launcher.el` file.
