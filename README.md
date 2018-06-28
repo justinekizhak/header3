@@ -15,7 +15,7 @@ There are two types of headers available, **file-header** and **package-header**
 ```
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri  8 Jun 2018 03:20:29 IST
-;; Last-Updated: Thu 28 Jun 2018 23:11:33 IST
+;; Last-Updated: Fri 29 Jun 2018 01:01:37 IST
 ;;
 ;; example-package.el is part of header3
 ;; URL: https://github.com/justinethomas/header3
@@ -59,7 +59,7 @@ There are two types of headers available, **file-header** and **package-header**
 ;; Package-Requires: ()
 ;; Last-Updated: Fri  8 Jun 2018 03:21:26 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 10
+;;     Update #: 11
 ;; URL: https://github.com/justinethomas/header3
 ;; Doc URL:
 ;; Keywords:
@@ -116,21 +116,21 @@ There are two types of headers available, **file-header** and **package-header**
 * Add these lines to your `.emacs` or your init file.
   ```
   (add-to-list 'load-path "~/.emacs.d/lisp/header3")
-  (load "header3")
+  (load "header3-launcher")
   ```
-*  Add these lines if you want to auto update your header on file save(which you probably do)
-   ```
-   (autoload 'auto-update-file-header "header3")
-   (add-hook 'before-save-hook 'auto-update-file-header)
-   ```
-* To have Emacs add a file header whenever you create a new file in some mode, put these too.
-  ```
-  (autoload 'auto-make-header "header3")
-  (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-  (add-hook 'c-mode-common-hook   'auto-make-header)
-  (add-hook 'python-mode-hook 'auto-make-header)
-  ...
-  ```
+<!-- *  Add these lines if you want to auto update your header on file save(which you probably do) -->
+<!--    ``` -->
+<!--    (autoload 'auto-update-file-header "header3") -->
+<!--    (add-hook 'before-save-hook 'auto-update-file-header) -->
+<!--    ``` -->
+<!-- * To have Emacs add a file header whenever you create a new file in some mode, put these too. -->
+<!--   ``` -->
+<!--   (autoload 'auto-make-header "header3") -->
+<!--   (add-hook 'emacs-lisp-mode-hook 'auto-make-header) -->
+<!--   (add-hook 'c-mode-common-hook   'auto-make-header) -->
+<!--   (add-hook 'python-mode-hook 'auto-make-header) -->
+<!--   ... -->
+<!--   ``` -->
 
 ## Requirements
 * [Git-link](https://github.com/sshaw/git-link) This will extract the git link of the current buffer.
