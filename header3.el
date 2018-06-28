@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Fri 29 Jun 2018 00:13:10 IST
+;; Last-Updated: Fri 29 Jun 2018 01:10:36 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2119
+;;     Update #: 2120
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -463,8 +463,7 @@ t means use local time with timezone; nil means use UTC."
                               header3-mini-license
                               )
 
-  "*Functions that insert header elements.
-`mini-header' is for making small headers for individual files"
+  "*Functions that insert header elements for `mini-header'"
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-file-header-hook '(
@@ -481,27 +480,7 @@ t means use local time with timezone; nil means use UTC."
                               header3-file-license
                               )
 
-  "*Functions that insert header elements.
-There are two types of header available for this package they are `file-header'
-and `package-header'. `file-header' is for making headers for individual files,
-whereas `package-header' is for inserting headers for new packages or at least
-for the main file of the package.
-Each function is started on a new line and is expected to end in a new line.
-Each function may insert any number of lines, but each line, including the
-first, must be started with the value of `header-prefix-string'.
-\(This variable holds the same value as would be returned by calling
-`header-prefix-string' but is faster to access.)  Each function may set the
-following global variables:
-
-  `header-prefix-string' -- mode-specific comment sequence
-  `return-to' -- character position to which point will be moved after header
-                 functions are processed.  Any header function may set this,
-                 but only the last setting will take effect.
-
-It is reasonable to locally set these hooks according to certain modes.
-For example, a table of contents might only apply to code development modes
-and `header-shell' might only apply to shell scripts.  See instructions in
-file `header3.el' to do this."
+  "*Functions that insert header elements for `file-header'"
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-package-header-hook '(
