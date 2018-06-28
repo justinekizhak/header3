@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.2
 ;; Package-Requires: ()
-;; Last-Updated: Thu 28 Jun 2018 21:38:00 IST
+;; Last-Updated: Thu 28 Jun 2018 23:52:36 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2115
+;;     Update #: 2118
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -191,6 +191,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 28-Jun-2018    Justine T Kizhakkinedath
+;;    Last-Updated: Thu 28 Jun 2018 21:38:00 IST #2115 (Justine T Kizhakkinedath)
+;;    Automatically insert the respective license for package headers.
 ;; 8-Jun-2018    Justine T Kizhakkinedath
 ;;     Last-Updated: Fri  8 Jun 2018 03:07:32 IST #2082 (Justine T Kizhakkinedath)
 ;;     "file-header" can now automatically add license templates.
@@ -453,6 +456,17 @@ t means use local time with timezone; nil means use UTC."
 ;; copyright is not the first information people are looking for.  Otherwise, this
 ;; default value corresponds to what the Elisp manual recommends for Emacs Lisp.
 
+(defcustom make-mini-header-hook '(
+                              header-seperator
+                              header3-copyright
+                              header-blank
+                              header3-mini-license
+                              )
+
+  "*Functions that insert header elements.
+`mini-header' is for making small headers for individual files"
+  :type 'hook :group 'Automatic-File-Header)
+
 (defcustom make-file-header-hook '(
                               header-seperator
                               header-creation-date
@@ -705,6 +719,23 @@ For more details on what constites a project check `projectile' docs"
       (insert header-prefix-string "See LICENSE file in the project root for full information.\n")))
   (header-seperator)
   (header3-license--insert)
+  )
+
+(defsubst header3-mini-license ()
+  "Insert License info from the \"LICENCE\" file inside a project.
+If you are working inside a project and you already have a \"LICENSE\", then this
+will try to extract info from the file.
+For more details on what constites a project check `projectile' docs"
+  (header3-license--get-file-name)
+  (if (string= "" license-name)
+      (insert header-prefix-string "Unable to find license name from the file\n")
+    (progn
+      (insert header-prefix-string "Licensed under the terms of ")
+      (insert license-name)
+      (insert "\n")
+      (insert header-prefix-string "See LICENSE file in the project root for full information.\n")))
+  (header-seperator)
+  (insert "\n")
   )
 
 (defsubst header3-license--get-file-name ()
@@ -1103,9 +1134,24 @@ It is sensitive to language-dependent comment conventions."
            (make-file-header)
          (make-package-header))))
 
+(defun auto-make-mini-header ()
+  "Call `make-mini-header' if current buffer is empty and is a file buffer."
+  (and (zerop (buffer-size)) (not buffer-read-only) (buffer-file-name)
+       (make-mini-header)))
+
+;;;###autoload
+(defun make-mini-header ()
+  "Insert mini (mode-dependent) header comment at beginning of file."
+  (interactive)
+  (goto-char (point-min))                 ; Leave mark at old location.
+  (let* ((return-to             nil)    ; To be set by `make-mini-header-hook'.
+         (header-prefix-string  (header-prefix-string))) ; Cache result.
+    (mapc #'funcall make-mini-header-hook)
+    (when return-to (goto-char return-to))))
+
 ;;;###autoload
 (defun make-file-header ()
-  "Insert smaller (mode-dependent) header comment at beginning of file.
+  "Insert (mode-dependent) file header comment at beginning of file.
 Use this if you don't want a full blown header with Commentary, change log
 and stuffs else use `make-package-header'.
 A header is composed of a mode line, a body, and an end line.  The body is

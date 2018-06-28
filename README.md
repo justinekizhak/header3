@@ -15,10 +15,10 @@ There are two types of headers available, **file-header** and **package-header**
 ```
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri  8 Jun 2018 03:20:29 IST
-;; Last-Updated: Mon 11 Jun 2018 19:49:29 IST
+;; Last-Updated: Thu 28 Jun 2018 23:11:33 IST
 ;;
 ;; example-package.el is part of header3
-;; URL: https://github.com/justinethomas009/header3
+;; URL: https://github.com/justinethomas/header3
 ;; Description: Example of "file-header"
 ;;
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
@@ -59,8 +59,8 @@ There are two types of headers available, **file-header** and **package-header**
 ;; Package-Requires: ()
 ;; Last-Updated: Fri  8 Jun 2018 03:21:26 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 4
-;; URL: https://github.com/justinethomas009/header3
+;;     Update #: 10
+;; URL: https://github.com/justinethomas/header3
 ;; Doc URL:
 ;; Keywords:
 ;; Compatibility:
@@ -109,7 +109,7 @@ There are two types of headers available, **file-header** and **package-header**
 * Easy Customization Interface available. Send bug reports within the interface.
 * Keep Commentary and Change Log inside the file.
 ### Automatically adding GitHub project link into the header
-### Automatic addition of license into the header by extracting info from project "LICENSE" file
+### Automatic addition of license into the header by extracting info from project License file
 
 ## To install
 * `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
@@ -132,11 +132,28 @@ There are two types of headers available, **file-header** and **package-header**
   ...
   ```
 
-## For Automatic insertion of license info and git link in the header, these packages are required.
+## Requirements
 * [Git-link](https://github.com/sshaw/git-link) This will extract the git link of the current buffer.
 
 * [Projectile](https://github.com/bbatsov/projectile) This is the one which will check your project directory.
-Projectile provides us with project name and project path which is used to check if the project root contains any file called "LICENSE".
+Projectile provides us with project name and project path which is used to check if the project root contains any License file.
 If it does then it checks the first 5 lines for any mention of "License" and "Version" (case-insensitive).
 
 Instructions to install these packages are available at their links.
+
+## Working
+* Files that are recognized as License files are
+  - LICENSE
+  - License
+  - LICENSE.md
+  - License.md
+  - LICENSE.txt
+  - License.txt
+* License templates included with the package
+  - MIT
+  - Apache License Version 2
+  - Mozzila Public License
+  - GNU AFFERO GENERAL PUBLIC LICENSE
+  - GNU LESSER GENERAL PUBLIC LICENSE
+  - GNU GENERAL PUBLIC LICENSE VERSION 2
+  - GNU GENERAL PUBLIC LICENSE VERSION 3
