@@ -1,10 +1,10 @@
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Last-Updated: Fri 29 Jun 2018 00:23:51 IST
+;; Last-Updated: Fri 29 Jun 2018 02:22:03 IST
 ;;
 ;; header3-launch.el is part of header3
 ;; URL: https://github.com/justinethomas/header3
-;; Description: Launch script for header3
+;; Description: Launches header3 package and sets the default values
 ;;
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
 ;; All rights reserved
@@ -38,13 +38,29 @@
 (add-to-list 'load-path (header-fetch-resource-path ""))
 (load "header3")
 
+;; Launch auto-update before saving the file
 (autoload 'auto-update-file-header "header3")
 (add-hook 'before-save-hook 'auto-update-file-header)
 
 (autoload 'auto-make-header "header3")
-(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-(add-hook 'c-mode-common-hook   'auto-make-header)
-(add-hook 'python-mode-hook 'auto-make-header)
-(add-hook 'sh-mode-hook 'auto-make-mini-header)
 
-(header-fetch-resource-path "header3.el")
+;; auto-make-header uses file-header as default header. To change that check docs.
+(add-hook 'c-mode-common-hook   'auto-make-header)
+(add-hook 'clojure-mode         'auto-make-header)
+(add-hook 'coffee-mode          'auto-make-header)
+(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+(add-hook 'erlang-mode          'auto-make-header)
+(add-hook 'haskell-mode         'auto-make-header)
+(add-hook 'java-mode            'auto-make-header)
+(add-hook 'kotlin-mode          'auto-make-header)
+(add-hook 'python-mode-hook     'auto-make-header)
+(add-hook 'ruby-mode            'auto-make-header)
+(add-hook 'rust-mode            'auto-make-header)
+(add-hook 'scala-mode           'auto-make-header)
+(add-hook 'scheme-mode          'auto-make-header)
+(add-hook 'swift-mode           'auto-make-header)
+
+;; auto-make-mini-header to create mini headers
+(add-hook 'php-mode             'auto-make-mini-header)
+(add-hook 'sh-mode-hook         'auto-make-mini-header)
+(add-hook 'sql-mode             'auto-make-mini-header)
