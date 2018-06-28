@@ -1,5 +1,6 @@
 <a name="top"></a>
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <a href="http://www.twitter.com/justinethomask"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
 <a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
@@ -11,10 +12,21 @@ to your source code files when you create a new one in Emacs.
 Header3 is built upon [header2.el](https://www.emacswiki.org/emacs/download/header2.el)
 and adds more features to it, but I have made efforts to be compatible with header2.
 
-There are three types of headers available, **mini-header**, **file-header** and
-**package-header**.
+## Table of contents
 
-* **mini-header** is useful if you need the smallest header.
+  * [Types of headers](#types-of-headers)
+     * [mini-header](#mini-header)
+     * [file-header](#file-header)
+     * [package-header](#package-header)
+  * [Features](#features)
+  * [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Working](#working)
+
+## Types of headers
+
+### mini-header
+is useful if you need the smallest header.
 
 ```
 # -----------------------------------------------------------------------------
@@ -25,7 +37,8 @@ There are three types of headers available, **mini-header**, **file-header** and
 # See LICENSE file in the project root for full information.
 # -----------------------------------------------------------------------------
 ```
-* **file-header** is useful if you need a little bigger headers.
+### file-header
+is useful if you need a little bigger headers.
 
 ```
 ;; -----------------------------------------------------------------------------
@@ -58,7 +71,8 @@ There are three types of headers available, **mini-header**, **file-header** and
 ;;
 ;; -----------------------------------------------------------------------------
 ```
-* **package-header** is the biggest and the original one from `header2`.   
+### package-header
+is the biggest and the original one from `header2`.   
 But this one can change the contents of the License inserted automatically when
 it is inside a project and also insert the URL of project.
 
@@ -119,16 +133,17 @@ it is inside a project and also insert the URL of project.
 ```
 *All examples are generated using Header3.*
 
-## All Features of [header2.el](https://www.emacswiki.org/emacs/download/header2.el) plus
-* Standard header format.
-* Auto timestamp for file creation and file updating.
-* Automatic entry of the user name of last update and keeping track of update number.
-* Easy Customisation Interface available. Send bug reports within the interface.
-* Keep Commentary and Change Log inside the file.
-### Automatically add git project link into the header
-### Automatically add License to the files.
+## Features
+* All Features of [header2.el](https://www.emacswiki.org/emacs/download/header2.el) plus
+  * Standard header format.
+  * Auto timestamp for file creation and file updating.
+  * Automatic entry of the user name of last update and keeping track of update number.
+  * Easy Customisation Interface available. Send bug reports within the interface.
+  * Keep Commentary and Change Log inside the file.
+* Automatically add git project link into the header
+* Automatically add License to the files.
 
-## To install
+## Installation
 * `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
 * Add these lines to your `.emacs` or your init file.
   ```
