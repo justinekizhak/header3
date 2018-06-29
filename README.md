@@ -194,7 +194,7 @@ will add the header.
   - [GNU General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 * Default settings:
   - `file-header` is the default header for
-    - C/C++
+    - C++
     - Clojure
     - Coffee script
     - Emacs lisp
@@ -211,5 +211,4 @@ will add the header.
   - `mini-header` for
     - PHP
     - Shell scripts
-    - SQL
 * Default settings are stored in `header3-launcher.el` file.
