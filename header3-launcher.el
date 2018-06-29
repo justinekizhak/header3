@@ -1,6 +1,6 @@
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Last-Updated: Fri 29 Jun 2018 02:22:03 IST
+;; Last-Updated: Fri 29 Jun 2018 17:46:27 IST
 ;;
 ;; header3-launch.el is part of header3
 ;; URL: https://github.com/justinethomas/header3
@@ -44,23 +44,26 @@
 
 (autoload 'auto-make-header "header3")
 
-;; auto-make-header uses file-header as default header. To change that check docs.
-(add-hook 'c-mode-common-hook   'auto-make-header)
-(add-hook 'clojure-mode         'auto-make-header)
-(add-hook 'coffee-mode          'auto-make-header)
-(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-(add-hook 'erlang-mode          'auto-make-header)
-(add-hook 'haskell-mode         'auto-make-header)
-(add-hook 'java-mode            'auto-make-header)
-(add-hook 'kotlin-mode          'auto-make-header)
-(add-hook 'python-mode-hook     'auto-make-header)
-(add-hook 'ruby-mode            'auto-make-header)
-(add-hook 'rust-mode            'auto-make-header)
-(add-hook 'scala-mode           'auto-make-header)
-(add-hook 'scheme-mode          'auto-make-header)
-(add-hook 'swift-mode           'auto-make-header)
+;; auto-make-header can take
+;; - "mini-header"
+;; - "file-header"
+;; - "package-header" as parameters
+(add-hook 'c++-mode-hook        (lambda () (auto-make-header "file-header")))
+(add-hook 'c-mode-common-hook   (lambda () (auto-make-header "file-header")))
+(add-hook 'clojure-mode         (lambda () (auto-make-header "file-header")))
+(add-hook 'coffee-mode          (lambda () (auto-make-header "file-header")))
+(add-hook 'emacs-lisp-mode-hook (lambda () (auto-make-header "file-header")))
+(add-hook 'erlang-mode          (lambda () (auto-make-header "file-header")))
+(add-hook 'haskell-mode         (lambda () (auto-make-header "file-header")))
+(add-hook 'java-mode            (lambda () (auto-make-header "file-header")))
+(add-hook 'kotlin-mode          (lambda () (auto-make-header "file-header")))
+(add-hook 'python-mode-hook     (lambda () (auto-make-header "file-header")))
+(add-hook 'python-mode-hook     (lambda () (auto-make-header "file-header")))
+(add-hook 'ruby-mode            (lambda () (auto-make-header "file-header")))
+(add-hook 'rust-mode            (lambda () (auto-make-header "file-header")))
+(add-hook 'scala-mode           (lambda () (auto-make-header "file-header")))
+(add-hook 'scheme-mode          (lambda () (auto-make-header "file-header")))
+(add-hook 'swift-mode           (lambda () (auto-make-header "file-header")))
 
-;; auto-make-mini-header to create mini headers
-(add-hook 'php-mode             'auto-make-mini-header)
-(add-hook 'sh-mode-hook         'auto-make-mini-header)
-(add-hook 'sql-mode             'auto-make-mini-header)
+(add-hook 'php-mode             (lambda () (auto-make-header "mini-header")))
+(add-hook 'sh-mode-hook         (lambda () (auto-make-header "mini-header")))

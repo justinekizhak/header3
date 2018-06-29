@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.3
 ;; Package-Requires: (projectile git-link)
-;; Last-Updated: Fri 29 Jun 2018 03:32:45 IST
+;; Last-Updated: Fri 29 Jun 2018 17:35:01 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2121
+;;     Update #: 2127
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -553,9 +553,9 @@ file `header3.el' to do this."
   "*Label introducing change log history."
   :type 'string :group 'Automatic-File-Header)
 
-(defcustom header-default-format "file-header"
-  "*Set the default header type \"file-header\" or \"package-header\"."
-  :type 'string :group 'Automatic-File-Header)
+;; (defcustom header-default-format "file-header"
+;;   "*Set the default header type \"file-header\" or \"package-header\"."
+;;   :type 'string :group 'Automatic-File-Header)
 
 (defcustom header-default-project-name "<Project name>"
   "*Set the default project name. This value will be used when projectile
@@ -1104,17 +1104,22 @@ It is sensitive to language-dependent comment conventions."
     (t ";; ")))       ; Use Lisp as default.
 
 ;; Usable as a programming language mode hook.
-(defun auto-make-header ()
+(defun auto-make-header (header-type)
   "Call `make-file-header' if current buffer is empty and is a file buffer."
   (and (zerop (buffer-size)) (not buffer-read-only) (buffer-file-name)
-       (if (string-equal header-default-format "file-header")
-           (make-file-header)
-         (make-package-header))))
-
-(defun auto-make-mini-header ()
-  "Call `make-mini-header' if current buffer is empty and is a file buffer."
-  (and (zerop (buffer-size)) (not buffer-read-only) (buffer-file-name)
-       (make-mini-header)))
+       ;; (if (string-equal header-default-format "file-header")
+       ;;     (make-file-header)
+       ;;   (make-package-header)))
+       (cond
+        ((string-equal header-type "mini-header")
+         (make-mini-header))
+        ((string-equal header-type "file-header")
+         (make-file-header))
+        ((string-equal header-type "package-header")
+         (make-package-header))
+        )
+       )
+  )
 
 ;;;###autoload
 (defun make-mini-header ()
