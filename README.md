@@ -7,7 +7,7 @@
 - - -
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/justinethomas/header3.svg?columns=all)](https://waffle.io/justinethomas/header3)
+[![Waffle.io](https://badge.waffle.io/justinethomas/header3.svg)](https://waffle.io/justinethomas/header3)
 
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
