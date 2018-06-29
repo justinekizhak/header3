@@ -1,11 +1,13 @@
 <a name="top"></a>
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<a href="https://www.instagram.com/justinekizhakkinedath"><img src="https://i.imgur.com/G9YJUZI.png" alt="Instagram" align="right"></a>
 <a href="http://www.twitter.com/justinethomask"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
 <a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
 - - -
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/justinethomas/header3.svg?columns=all)](https://waffle.io/justinethomas/header3)
 
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
