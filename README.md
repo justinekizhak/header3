@@ -5,6 +5,7 @@
 <a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
 - - -
+[![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
 
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
@@ -14,14 +15,15 @@ and adds more features to it, but I have made efforts to be compatible with head
 
 ## Table of contents
 
-  * [Types of headers](#types-of-headers)
-     * [mini-header](#mini-header)
-     * [file-header](#file-header)
-     * [package-header](#package-header)
-  * [Features](#features)
-  * [Installation](#installation)
-  * [Requirements](#requirements)
-  * [Working](#working)
+* [Types of headers](#types-of-headers)
+   * [mini-header](#mini-header)
+   * [file-header](#file-header)
+   * [package-header](#package-header)
+* [Features](#features)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [How to use?](#how-to-use)
+* [Working](#working)
 
 ## Types of headers
 
@@ -143,14 +145,6 @@ it is inside a project and also insert the URL of project.
 * Automatically add git project link into the header
 * Automatically add License to the files.
 
-## Installation
-* `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
-* Add these lines to your `.emacs` or your init file.
-  ```
-  (add-to-list 'load-path "~/.emacs.d/lisp/header3")
-  (load "header3-launcher")
-  ```
-
 ## Requirements
 * [Git-link](https://github.com/sshaw/git-link) This package is used to extract
 the git link of the current buffer.
@@ -164,6 +158,22 @@ If it does then it checks the first 5 lines for any mention of "License" and
 
 Instructions to install these packages are available at their links.
 
+## Installation
+* `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
+* Add these lines to your `.emacs` or your init file.
+  ```
+  (add-to-list 'load-path "~/.emacs.d/lisp/header3")
+  (load "header3-launcher")
+  ```
+
+## How to use?
+* All new files created inside Emacs will automatically trigger a function that
+will add the header.
+* If you need to add header to an existing file execute either
+  - `make-mini-header`
+  - `make-file-header`
+  - `make-package-header`
+
 ## Working
 * Files that are recognised as License files are
   - LICENSE
@@ -173,13 +183,13 @@ Instructions to install these packages are available at their links.
   - LICENSE.txt
   - License.txt
 * License templates included with the package
-  - MIT
-  - Apache License Version 2
-  - Mozzila Public License
-  - GNU AFFERO GENERAL PUBLIC LICENSE
-  - GNU LESSER GENERAL PUBLIC LICENSE
-  - GNU GENERAL PUBLIC LICENSE VERSION 2
-  - GNU GENERAL PUBLIC LICENSE VERSION 3
+  - [MIT License](https://opensource.org/licenses/MIT)
+  - [Apache License](http://www.apache.org/licenses/LICENSE-2.0)
+  - [Mozzila Public License](https://opensource.org/licenses/MPL-2.0)
+  - [GNU AFFERO General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html)
+  - [GNU LESSER General Public License](https://www.gnu.org/licenses/lgpl.html)
+  - [GNU General Public License Version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+  - [GNU General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 * Default settings:
   - `file-header` is the default header for
     - C/C++
