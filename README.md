@@ -212,3 +212,7 @@ will add the header.
     - PHP
     - Shell scripts
 * Default settings are stored in `header3-launcher.el` file.
+
+[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/winter-is-coming.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
