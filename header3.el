@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.3
 ;; Package-Requires: (projectile git-link)
-;; Last-Updated: Sat 30 Jun 2018 12:52:13 IST
+;; Last-Updated: Sat 30 Jun 2018 15:21:47 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2129
+;;     Update #: 2140
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -791,11 +791,40 @@ with the license name"
   (insert "\n")
   )
 
-(defun header-template--insert (file-name)
+(defsubst header-template--insert (file-name)
   "INTERNAL FUNCTION. Insert contents of file"
   (insert-file-contents
    (concat (header-fetch-resource-path "templates/")
            file-name)))
+
+(defsubst header-readme--get-random-footer-elements ()
+  "INTERNAL FUNCTION. Returns random footer element"
+  (let (index)
+    (setq index (random (length temp_footer_element_vector)))
+    (insert (aref temp_footer_element_vector index) "\n")
+    (remove (aref temp_footer_element_vector index)
+            temp_footer_element_vector)
+    ))
+
+(defvar readme_footer_element_list)
+(defvar temp_footer_element_vector)
+
+(defsubst header-readme-insert()
+  "INTERNAL FUNCTION. Insert readme template and footer"
+  (with-temp-buffer
+    (insert-file-contents
+     (concat (header-fetch-resource-path "templates/") "readme_footer.txt"))
+    (setq readme_footer_element_list (split-string (buffer-string) "\n")))
+  (setq temp_footer_element_vector (vconcat readme_footer_element_list nil))
+
+  (header-template--insert "readme.txt")
+  (goto-char (point-max))
+  (insert "\n\n- - -\n")
+  (header-readme--get-random-footer-elements)
+  (header-readme--get-random-footer-elements)
+  (header-readme--get-random-footer-elements)
+  (insert "- - -")
+  )
 
 (defsubst header3-copyright ()
   "Insert copyright line."
@@ -1174,7 +1203,8 @@ the comment."
   (let* ((return-to             nil)    ; To be set by `make-mini-header-hook'.
          (header-prefix-string  (header-prefix-string))) ; Cache result.
     ;; (mapc #'funcall make-mini-header-hook)
-    (header-template--insert "readme.txt")
+    ;; (header-template--insert "readme.txt")
+    (header-readme-insert)
     (when return-to (goto-char return-to))))
 
 ;;;###autoload
