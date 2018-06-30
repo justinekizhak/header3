@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.3
 ;; Package-Requires: (projectile git-link)
-;; Last-Updated: Sat 30 Jun 2018 21:06:41 IST
+;; Last-Updated: Sat 30 Jun 2018 21:12:46 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2148
+;;     Update #: 2149
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -804,16 +804,16 @@ with the license name"
   "INTERNAL FUNCTION. Insert readme template and footer"
   (with-temp-buffer
     (insert-file-contents
-     (concat (header-fetch-resource-path "templates/") "readme_footer.txt"))
+     (concat (header-fetch-resource-path "templates/") "readme/readme_footer.txt"))
     (setq readme_footer_element_list (split-string (buffer-string) "\n")))
   (setq temp_footer_element_vector (vconcat readme_footer_element_list nil))
   (setq insert_readme_contents nil)
   (if (zerop (buffer-size))
       (progn
-        (header-template--insert "readme_header.txt")
+        (header-template--insert "readme/readme_header.txt")
         (goto-char (point-max))
-        (header-template--insert "readme_contents.txt"))
-    (header-template--insert "readme_header.txt"))
+        (header-template--insert "readme/readme_contents.txt"))
+    (header-template--insert "readme/readme_header.txt"))
   (goto-char (point-max))
   (insert "\n\n- - -\n")
   (header-readme--get-random-footer-elements)
