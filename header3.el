@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.3
 ;; Package-Requires: (projectile git-link)
-;; Last-Updated: Fri 29 Jun 2018 17:35:01 IST
+;; Last-Updated: Sat 30 Jun 2018 12:52:13 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2127
+;;     Update #: 2129
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -562,10 +562,10 @@ file `header3.el' to do this."
 can't find your project name."
   :type 'string :group 'Automatic-File-Header)
 
-;; (defcustom header-license-template-location "license_templates/"
-;;   "*Set the location of license templates. This value is where your 'license_templates'
+;; (defcustom header-license-template-location "templates/"
+;;   "*Set the location of license templates. This value is where your 'templates'
 ;; folder is located. It is inside the header3 folder, but you can take out this folder
-;; and place it different location. Default value '~/.emacs.d/lisp/header3/license_templates/'"
+;; and place it different location. Default value '~/.emacs.d/lisp/header3/templates/'"
 ;;   :type 'string :group 'Automatic-File-Header)
 
 ;; (defcustom header-free-software
@@ -761,7 +761,7 @@ after getting the license file name"
   "INTERNAL FUNCTION. Inserts the contents of license from the resource"
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
-     (concat (header-fetch-resource-path "license_templates/")
+     (concat (header-fetch-resource-path "templates/")
              file-name))
     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list
@@ -790,6 +790,12 @@ with the license name"
    )
   (insert "\n")
   )
+
+(defun header-template--insert (file-name)
+  "INTERNAL FUNCTION. Insert contents of file"
+  (insert-file-contents
+   (concat (header-fetch-resource-path "templates/")
+           file-name)))
 
 (defsubst header3-copyright ()
   "Insert copyright line."
@@ -1107,9 +1113,6 @@ It is sensitive to language-dependent comment conventions."
 (defun auto-make-header (header-type)
   "Call `make-file-header' if current buffer is empty and is a file buffer."
   (and (zerop (buffer-size)) (not buffer-read-only) (buffer-file-name)
-       ;; (if (string-equal header-default-format "file-header")
-       ;;     (make-file-header)
-       ;;   (make-package-header)))
        (cond
         ((string-equal header-type "mini-header")
          (make-mini-header))
@@ -1117,6 +1120,8 @@ It is sensitive to language-dependent comment conventions."
          (make-file-header))
         ((string-equal header-type "package-header")
          (make-package-header))
+        ((string-equal header-type "readme")
+         (make-readme-header))
         )
        )
   )
@@ -1159,6 +1164,17 @@ the comment."
   (let* ((return-to             nil)    ; To be set by `make-package-header-hook'.
          (header-prefix-string  (header-prefix-string))) ; Cache result.
     (mapc #'funcall make-package-header-hook)
+    (when return-to (goto-char return-to))))
+
+;;;###autoload
+(defun make-readme-header ()
+  "Insert mini (mode-dependent) header comment at beginning of file."
+  (interactive)
+  (goto-char (point-min))                 ; Leave mark at old location.
+  (let* ((return-to             nil)    ; To be set by `make-mini-header-hook'.
+         (header-prefix-string  (header-prefix-string))) ; Cache result.
+    ;; (mapc #'funcall make-mini-header-hook)
+    (header-template--insert "readme.txt")
     (when return-to (goto-char return-to))))
 
 ;;;###autoload

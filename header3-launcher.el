@@ -1,6 +1,6 @@
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Last-Updated: Fri 29 Jun 2018 17:46:27 IST
+;; Last-Updated: Sat 30 Jun 2018 12:55:36 IST
 ;;
 ;; header3-launch.el is part of header3
 ;; URL: https://github.com/justinethomas/header3
@@ -49,21 +49,31 @@
 ;; - "file-header"
 ;; - "package-header" as parameters
 (add-hook 'c++-mode-hook        (lambda () (auto-make-header "file-header")))
-(add-hook 'c-mode-common-hook   (lambda () (auto-make-header "file-header")))
-(add-hook 'clojure-mode         (lambda () (auto-make-header "file-header")))
-(add-hook 'coffee-mode          (lambda () (auto-make-header "file-header")))
+;; (add-hook 'c-mode-common-hook   (lambda () (auto-make-header "file-header")))
+(add-hook 'clojure-mode-hook    (lambda () (auto-make-header "file-header")))
+(add-hook 'coffee-mode-hook     (lambda () (auto-make-header "file-header")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (auto-make-header "file-header")))
-(add-hook 'erlang-mode          (lambda () (auto-make-header "file-header")))
-(add-hook 'haskell-mode         (lambda () (auto-make-header "file-header")))
-(add-hook 'java-mode            (lambda () (auto-make-header "file-header")))
-(add-hook 'kotlin-mode          (lambda () (auto-make-header "file-header")))
+(add-hook 'erlang-mode-hook     (lambda () (auto-make-header "file-header")))
+(add-hook 'haskell-mode-hook    (lambda () (auto-make-header "file-header")))
+(add-hook 'java-mode-hook       (lambda () (auto-make-header "file-header")))
+(add-hook 'kotlin-mode-hook     (lambda () (auto-make-header "file-header")))
 (add-hook 'python-mode-hook     (lambda () (auto-make-header "file-header")))
-(add-hook 'python-mode-hook     (lambda () (auto-make-header "file-header")))
-(add-hook 'ruby-mode            (lambda () (auto-make-header "file-header")))
-(add-hook 'rust-mode            (lambda () (auto-make-header "file-header")))
-(add-hook 'scala-mode           (lambda () (auto-make-header "file-header")))
-(add-hook 'scheme-mode          (lambda () (auto-make-header "file-header")))
-(add-hook 'swift-mode           (lambda () (auto-make-header "file-header")))
+(add-hook 'ruby-mode-hook       (lambda () (auto-make-header "file-header")))
+(add-hook 'rust-mode-hook       (lambda () (auto-make-header "file-header")))
+(add-hook 'scala-mode-hook      (lambda () (auto-make-header "file-header")))
+(add-hook 'scheme-mode-hook     (lambda () (auto-make-header "file-header")))
+(add-hook 'swift-mode-hook      (lambda () (auto-make-header "file-header")))
 
-(add-hook 'php-mode             (lambda () (auto-make-header "mini-header")))
+(add-hook 'php-mode-hook        (lambda () (auto-make-header "mini-header")))
 (add-hook 'sh-mode-hook         (lambda () (auto-make-header "mini-header")))
+
+;; (add-hook 'find-file-hook       'check-for-shell-scripts)
+(add-hook 'markdown-mode-hook   'check-if-readme)
+
+(defun check-if-readme()
+  (if (cl-search "readme"(downcase (buffer-name)) )
+      (auto-make-header "readme")))
+
+(defun check-for-shell-scripts ()
+  (if (string-equal (file-name-extension (buffer-name) ""))
+      (auto-make-header "mini-header")))
