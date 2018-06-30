@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.3
 ;; Package-Requires: (projectile git-link)
-;; Last-Updated: Sat 30 Jun 2018 15:21:47 IST
+;; Last-Updated: Sat 30 Jun 2018 21:06:41 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2140
+;;     Update #: 2148
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -662,13 +662,6 @@ packages."
               (file-name-nondirectory (buffer-file-name))
             (buffer-name)) "\n"))
 
-;; (defsubst header3-filename ()
-;;   "Checks if 'projectile' package is installed or not and
-;; if installed then inserts the project name"
-;;   (if (require 'projectile nil 'noerror )
-;;       (header-inserting-filename-with-projectname)
-;;     (header-file-name)))
-
 (defsubst header3-filename ()
   "Insert the name of file and its association with a project.
 Format is: \"<this-file-name> is part of <project-name>\"
@@ -740,8 +733,7 @@ For more details on what constites a project check `projectile' docs"
      ((file-readable-p (concat (projectile-project-root) "License.txt"))
       (header3-license--get-license-name "License.txt"))
      (t (insert header-prefix-string "LICENSE file not available\n")))
-    )
- )
+    ))
 
 (defsubst header3-license--get-license-name (license-file-name)
   "INTERNAL FUNCTION. Get the name of license from the file,
@@ -788,8 +780,7 @@ with the license name"
    ((cl-search "gnu general public license version 3" (downcase license-name))
     (header3-license--insert-file "gpl3.txt"))
    )
-  (insert "\n")
-  )
+  (insert "\n"))
 
 (defsubst header-template--insert (file-name)
   "INTERNAL FUNCTION. Insert contents of file"
@@ -816,15 +807,19 @@ with the license name"
      (concat (header-fetch-resource-path "templates/") "readme_footer.txt"))
     (setq readme_footer_element_list (split-string (buffer-string) "\n")))
   (setq temp_footer_element_vector (vconcat readme_footer_element_list nil))
-
-  (header-template--insert "readme.txt")
+  (setq insert_readme_contents nil)
+  (if (zerop (buffer-size))
+      (progn
+        (header-template--insert "readme_header.txt")
+        (goto-char (point-max))
+        (header-template--insert "readme_contents.txt"))
+    (header-template--insert "readme_header.txt"))
   (goto-char (point-max))
   (insert "\n\n- - -\n")
   (header-readme--get-random-footer-elements)
   (header-readme--get-random-footer-elements)
   (header-readme--get-random-footer-elements)
-  (insert "- - -")
-  )
+  (insert "- - -"))
 
 (defsubst header3-copyright ()
   "Insert copyright line."
@@ -1151,9 +1146,7 @@ It is sensitive to language-dependent comment conventions."
          (make-package-header))
         ((string-equal header-type "readme")
          (make-readme-header))
-        )
-       )
-  )
+        )))
 
 ;;;###autoload
 (defun make-mini-header ()
@@ -1202,8 +1195,6 @@ the comment."
   (goto-char (point-min))                 ; Leave mark at old location.
   (let* ((return-to             nil)    ; To be set by `make-mini-header-hook'.
          (header-prefix-string  (header-prefix-string))) ; Cache result.
-    ;; (mapc #'funcall make-mini-header-hook)
-    ;; (header-template--insert "readme.txt")
     (header-readme-insert)
     (when return-to (goto-char return-to))))
 
