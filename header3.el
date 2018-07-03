@@ -5,17 +5,17 @@
 ;; Author: Lynn Slater
 ;;         Drew Adams
 ;;         Justine T Kizhakkinedath
-;; Maintainer: Justine Thomas (concat "justinethomas009" "@" "gmail" ".com")
+;; Copyright (c) 2018, Justine T Kizhakkinedath <justinethomas009@gmail.com>
 ;; Copyright (C) 2018, Justine Thomas Kizhakkinedath, All rights reserved.
 ;; Copyright (C) 1996-2018, Drew Adams.
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.3
+;; Version: 0.3
 ;; Package-Requires: ()
-;; Last-Updated: Mon  2 Jul 2018 02:22:39 IST
+;; Last-Updated: Wed  4 Jul 2018 00:09:05 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2150
+;;     Update #: 2152
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -780,6 +780,12 @@ Launches the \"insert-file\" function after comparing with the license name"
    )
   (insert "\n"))
 
+(defconst header-root-folder (file-name-directory load-file-name))
+
+(defsubst header-fetch-resource-path (file)
+  "INTERNAL FUNCTION. Get the path to the resource files"
+  (expand-file-name file header-root-folder))
+
 (defsubst header-template--insert (file-name)
   "INTERNAL FUNCTION. Insert contents of file."
   (insert-file-contents
@@ -794,6 +800,10 @@ Launches the \"insert-file\" function after comparing with the license name"
     (remove (aref temp_footer_element_vector index)
             temp_footer_element_vector)
     ))
+
+(defun header-check-if-readme()
+  (if (cl-search "readme"(downcase (buffer-name)) )
+      (auto-make-header "readme")))
 
 (defvar readme_footer_element_list)
 (defvar temp_footer_element_vector)
