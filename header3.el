@@ -100,7 +100,7 @@
 ;;     I tried to maintain backwards compatibility with 'header2', so that means
 ;;     if you replaced 'header2' with 'header3' you would be ready to go from the
 ;;     start except this will be using 'file-header' as default one. But you can
-;;     change that in your customize emacs page. Over there just change the value
+;;     change that in your customize Emacs page. Over there just change the value
 ;;     of `header-default-format' to 'package-header'. But anyways you would be
 ;;     still be able to use either of the two format by their respective interactive
 ;;     commands `make-file-header' and `make-package-header'.
@@ -558,8 +558,7 @@ file `header3.el' to do this."
 ;;   :type 'string :group 'Automatic-File-Header)
 
 (defcustom header-default-project-name "<Project name>"
-  "*Set the default project name. This value will be used when projectile
-can't find your project name."
+  "*Set the default project name. This value will be used when projectile can't find your project name."
   :type 'string :group 'Automatic-File-Header)
 
 ;; (defcustom header-license-template-location "templates/"
@@ -761,8 +760,8 @@ For more details on what constites a project check `projectile' docs"
        (header-seperator)))
 
 (defsubst header3-license--insert ()
-  "INTERNAL FUNCTION. Launches the \"insert-file\" function after comparing
-with the license name"
+  "INTERNAL FUNCTION.
+Launches the \"insert-file\" function after comparing with the license name"
   (cond
    ((cl-search "mit" (downcase license-name))
     (header3-license--insert-file "mit.txt"))
