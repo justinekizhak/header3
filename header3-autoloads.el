@@ -1,8 +1,11 @@
+;;; header3-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
 ;; -----------------------------------------------------------------------------
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
 ;; Last-Updated: Sat 30 Jun 2018 12:55:36 IST
 ;;
-;; header3-launch.el is part of header3
+;; header3-autoloads.el is part of header3
 ;; URL: https://github.com/justinethomas/header3
 ;; Description: Launches header3 package and sets the default values
 ;;
@@ -35,6 +38,7 @@
   "INTERNAL FUNCTION. Get the path to the resource files"
   (expand-file-name file header-root-folder))
 
+testing
 (add-to-list 'load-path (header-fetch-resource-path ""))
 (load "header3")
 
