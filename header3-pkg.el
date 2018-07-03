@@ -1,8 +1,6 @@
 ;;; -*- no-byte-compile: t -*-
-(define-package "header3" "3.3" "Create files with awesome headers."
+(define-package "header3" "0.3" "Create files with awesome headers."
   '(
-    (emacs "24.3")
-    (pkg-info "0.4")
-    (git-link)
-    (projectile)
+    (git-link "20180606.2139")
+    (projectile "20180621.2239")
     ))
