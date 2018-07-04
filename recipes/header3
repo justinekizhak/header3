@@ -1,0 +1,29 @@
+(header3
+ :fetcher github
+ :repo "justinethomas/header3"
+ :version "0.3"
+ :doc "Create files with awesome headers."
+ :requires
+ :branch "develop"
+ (git-link "20180606.2139")
+ (projectile "20180621.2239")
+ ;; :files
+ ;; (
+ ;;  "header3.el"
+ ;;  "header3-defaults.el"
+  ;; )
+ ;; :test
+ ;; (:files
+ ;;  ("elpakit-tests.el"))
+ )
+
+;; ;; (elpakit "/tmp/new-elpakit" (list :archive "local"))
+
+;; (elpakit
+;;  "~/My_Projects/header3"    ;; the directory to make the archive in
+;;   :files
+;;   (
+;;    "../header3.el"
+;;    "../header3-defaults.el"
+;;    )
+;;  )
