@@ -1,136 +1,75 @@
 <a name="top"></a>
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<a href="https://www.instagram.com/justinekizhakkinedath"><img src="https://i.imgur.com/G9YJUZI.png" alt="Instagram" align="right"></a>
 <a href="http://www.twitter.com/justinethomask"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
 <a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
 - - -
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
+[![Waffle.io](https://badge.waffle.io/justinethomas/header3.svg)](https://waffle.io/justinethomas/header3)
 
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
 to your source code files when you create a new one in Emacs.  
 Header3 is built upon [header2.el](https://www.emacswiki.org/emacs/download/header2.el)
-and adds more features to it, but I have made efforts to be compatible with header2.
+and adds more features to it, but I have made efforts to make it compatible with header2.
 
 ## Table of contents
 
-  * [Types of headers](#types-of-headers)
-     * [mini-header](#mini-header)
-     * [file-header](#file-header)
-     * [package-header](#package-header)
-  * [Features](#features)
-  * [Installation](#installation)
-  * [Requirements](#requirements)
-  * [Working](#working)
+<!-- toc -->
+
+- [Types of headers](#types-of-headers)
+  * [Mini Header](#mini-header)
+  * [File Header](#file-header)
+  * [Package Header](#package-header)
+  * [Readme Header](#readme-header)
+    + [Template for new file](#template-for-new-file)
+    + [Template for existing file](#template-for-existing-file)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [How to use ?](#how-to-use-)
+- [Working](#working)
+
+<!-- tocstop -->
 
 ## Types of headers
 
-### mini-header
-is useful if you need the smallest header.
+### Mini Header
+if you need the smallest header.
 
-```
-# -----------------------------------------------------------------------------
-# Copyright (c) 2018, Justine T Kizhakkinedath
-# All rights reserved
-#
-# Licensed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
-# See LICENSE file in the project root for full information.
-# -----------------------------------------------------------------------------
-```
-### file-header
-is useful if you need a little bigger headers.
+![alt text](resources/mini_header.png "Mini Header")
+---
 
-```
-;; -----------------------------------------------------------------------------
-;; Created: Fri  8 Jun 2018 03:20:29 IST
-;; Last-Updated: Fri 29 Jun 2018 01:33:00 IST
-;;
-;; example-package.el is part of header3
-;; URL: https://github.com/justinethomas/header3
-;; Description: Example of "file-header"
-;;
-;; Copyright (c) 2018, Justine T Kizhakkinedath
-;; All rights reserved
-;;
-;; Licensed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
-;; See LICENSE file in the project root for full information.
-;; -----------------------------------------------------------------------------
-;;
-;;  This program is free software: you can redistribute it and/or modify
-;;  it under the terms of the GNU General Public License as published by
-;;  the Free Software Foundation, either version 3 of the License, or
-;;  (at your option) any later version.
-;;
-;;  This program is distributed in the hope that it will be useful,
-;;  but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;  GNU General Public License for more details.
-;;
-;;  You should have received a copy of the GNU General Public License
-;;  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-;;
-;; -----------------------------------------------------------------------------
-```
-### package-header
-is the biggest and the original one from `header2`.   
-But this one can change the contents of the License inserted automatically when
-it is inside a project and also insert the URL of project.
+### File Header
+if you need a little bigger headers.
 
-```
-;;; example-package.el ---
-;;
-;; Filename: example-package.el
-;; Description: Example of "package-header"
-;; Author: Justine T Kizhakkinedath
-;; Maintainer:
-;; Copyright (c) 2018, Justine T Kizhakkinedath
-;; All rights reserved
-;; Created: Fri  8 Jun 2018 03:21:24 IST
-;; Version:
-;; Package-Requires: ()
-;; Last-Updated: Fri  8 Jun 2018 03:21:26 IST
-;;           By: Justine T Kizhakkinedath
-;;     Update #: 1
-;; URL: https://github.com/justinethomas/header3
-;; Doc URL:
-;; Keywords:
-;; Compatibility:
-;;
-;; -----------------------------------------------------------------------------
-;;
-;;; Commentary:
-;;
-;;
-;;
-;; -----------------------------------------------------------------------------
-;;
-;;; Change Log:
-;;
-;;
-;; -----------------------------------------------------------------------------
-;;
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;; -----------------------------------------------------------------------------
-;;
-;;; Code:
+![alt text](resources/file_header.png "File Header")
+---
+### Package Header
+if you need the biggest one.
 
+![alt text](resources/package_header.png "Package Header")
+---
+### Readme Header
 
+#### Template for new file
+The following example is auto generated when you create a new Readme.md file
+(file name is case insensitive)
 
-;; -----------------------------------------------------------------------------
-;;; example-package.el ends here
-```
+![alt text](resources/full_readme_1.jpg "Readme generated on a new file")
+![alt text](resources/full_readme_2.jpg "Readme generated on a new file")
+
+------
+
+#### Template for existing file
+The following example is generated when you run `make-readme-header` and the file
+already has some contents
+
+![alt text](resources/readme_with_content.jpg "Readme generated on a file with contents")
+
+---
 *All examples are generated using Header3.*
 
 ## Features
@@ -142,14 +81,8 @@ it is inside a project and also insert the URL of project.
   * Keep Commentary and Change Log inside the file.
 * Automatically add git project link into the header
 * Automatically add License to the files.
-
-## Installation
-* `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
-* Add these lines to your `.emacs` or your init file.
-  ```
-  (add-to-list 'load-path "~/.emacs.d/lisp/header3")
-  (load "header3-launcher")
-  ```
+* Automatically add Readme template with random footer badges from
+[For the Badge](https://forthebadge.com)
 
 ## Requirements
 * [Git-link](https://github.com/sshaw/git-link) This package is used to extract
@@ -164,6 +97,23 @@ If it does then it checks the first 5 lines for any mention of "License" and
 
 Instructions to install these packages are available at their links.
 
+## Installation
+* `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
+* Add these lines to your `.emacs` or your init file.
+  ```
+  (add-to-list 'load-path "~/.emacs.d/lisp/header3")
+  (load "header3-launcher")
+  ```
+
+## How to use ?
+* All new files created inside Emacs will automatically trigger a function that
+will add the header.
+* If you need to add header to an existing file execute using `M-x` and
+  - `make-mini-header`
+  - `make-file-header`
+  - `make-package-header`
+  - `make-readme-header`
+
 ## Working
 * Files that are recognised as License files are
   - LICENSE
@@ -173,16 +123,16 @@ Instructions to install these packages are available at their links.
   - LICENSE.txt
   - License.txt
 * License templates included with the package
-  - MIT
-  - Apache License Version 2
-  - Mozzila Public License
-  - GNU AFFERO GENERAL PUBLIC LICENSE
-  - GNU LESSER GENERAL PUBLIC LICENSE
-  - GNU GENERAL PUBLIC LICENSE VERSION 2
-  - GNU GENERAL PUBLIC LICENSE VERSION 3
+  - [MIT License](https://opensource.org/licenses/MIT)
+  - [Apache License](http://www.apache.org/licenses/LICENSE-2.0)
+  - [Mozzila Public License](https://opensource.org/licenses/MPL-2.0)
+  - [GNU AFFERO General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html)
+  - [GNU LESSER General Public License](https://www.gnu.org/licenses/lgpl.html)
+  - [GNU General Public License Version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+  - [GNU General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 * Default settings:
   - `file-header` is the default header for
-    - C/C++
+    - C++
     - Clojure
     - Coffee script
     - Emacs lisp
@@ -199,5 +149,10 @@ Instructions to install these packages are available at their links.
   - `mini-header` for
     - PHP
     - Shell scripts
-    - SQL
 * Default settings are stored in `header3-launcher.el` file.
+
+- - -
+[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/winter-is-coming.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
+- - -

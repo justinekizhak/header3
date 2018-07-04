@@ -5,17 +5,17 @@
 ;; Author: Lynn Slater
 ;;         Drew Adams
 ;;         Justine T Kizhakkinedath
-;; Maintainer: Justine Thomas (concat "justinethomas009" "@" "gmail" ".com")
+;; Copyright (c) 2018, Justine T Kizhakkinedath <justinethomas009@gmail.com>
 ;; Copyright (C) 2018, Justine Thomas Kizhakkinedath, All rights reserved.
 ;; Copyright (C) 1996-2018, Drew Adams.
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.3
-;; Package-Requires: (projectile git-link)
-;; Last-Updated: Fri 29 Jun 2018 03:32:45 IST
+;; Version: 3.4.1
+;; Package-Requires: ()
+;; Last-Updated: Wed  4 Jul 2018 00:09:05 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2121
+;;     Update #: 2152
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -100,7 +100,7 @@
 ;;     I tried to maintain backwards compatibility with 'header2', so that means
 ;;     if you replaced 'header2' with 'header3' you would be ready to go from the
 ;;     start except this will be using 'file-header' as default one. But you can
-;;     change that in your customize emacs page. Over there just change the value
+;;     change that in your customize Emacs page. Over there just change the value
 ;;     of `header-default-format' to 'package-header'. But anyways you would be
 ;;     still be able to use either of the two format by their respective interactive
 ;;     commands `make-file-header' and `make-package-header'.
@@ -467,7 +467,7 @@ t means use local time with timezone; nil means use UTC."
                               header3-mini-license
                               )
 
-  "*Functions that insert header elements for `mini-header'"
+  "*Functions that insert header elements for `mini-header'."
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-file-header-hook '(
@@ -484,7 +484,7 @@ t means use local time with timezone; nil means use UTC."
                               header3-file-license
                               )
 
-  "*Functions that insert header elements for `file-header'"
+  "*Functions that insert header elements for `file-header'."
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-package-header-hook '(
@@ -553,19 +553,18 @@ file `header3.el' to do this."
   "*Label introducing change log history."
   :type 'string :group 'Automatic-File-Header)
 
-(defcustom header-default-format "file-header"
-  "*Set the default header type \"file-header\" or \"package-header\"."
-  :type 'string :group 'Automatic-File-Header)
+;; (defcustom header-default-format "file-header"
+;;   "*Set the default header type \"file-header\" or \"package-header\"."
+;;   :type 'string :group 'Automatic-File-Header)
 
 (defcustom header-default-project-name "<Project name>"
-  "*Set the default project name. This value will be used when projectile
-can't find your project name."
+  "*Set the default project name. This value will be used when projectile can't find your project name."
   :type 'string :group 'Automatic-File-Header)
 
-;; (defcustom header-license-template-location "license_templates/"
-;;   "*Set the location of license templates. This value is where your 'license_templates'
+;; (defcustom header-license-template-location "templates/"
+;;   "*Set the location of license templates. This value is where your 'templates'
 ;; folder is located. It is inside the header3 folder, but you can take out this folder
-;; and place it different location. Default value '~/.emacs.d/lisp/header3/license_templates/'"
+;; and place it different location. Default value '~/.emacs.d/lisp/header3/templates/'"
 ;;   :type 'string :group 'Automatic-File-Header)
 
 ;; (defcustom header-free-software
@@ -615,7 +614,11 @@ the function to call if the string is found near the start of the file.")
   "Mode-specific comment prefix string for use in headers.")
 
 (defvar license-name ""
-  "Contains the name of license")
+  "Contains the name of license.")
+
+(defvar readme_footer_element_list)
+
+(defvar temp_footer_element_vector)
 
 ;;; Functions ----------------------------------------------
 
@@ -632,7 +635,7 @@ the function to call if the string is found near the start of the file.")
   (insert header-prefix-string  "\n"))
 
 (defsubst header-seperator ()
-  "Insert a --- divider line"
+  "Insert a --- divider line."
   (insert header-prefix-string)
   (insert (make-string 77 ?-) "\n"))
 
@@ -662,13 +665,6 @@ packages."
               (file-name-nondirectory (buffer-file-name))
             (buffer-name)) "\n"))
 
-;; (defsubst header3-filename ()
-;;   "Checks if 'projectile' package is installed or not and
-;; if installed then inserts the project name"
-;;   (if (require 'projectile nil 'noerror )
-;;       (header-inserting-filename-with-projectname)
-;;     (header-file-name)))
-
 (defsubst header3-filename ()
   "Insert the name of file and its association with a project.
 Format is: \"<this-file-name> is part of <project-name>\"
@@ -689,12 +685,13 @@ Format is: \"<this-file-name> is part of <project-name>\"
 
 (defsubst header3-file-license ()
   "Insert License info from the \"LICENCE\" file inside a project.
-If you are working inside a project and you already have a \"LICENSE\", then this
-will try to extract info from the file.
+If you are working inside a project and you already have a \"LICENSE\", then
+this will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
   (header3-license--get-file-name)
   (if (string= "" license-name)
-      (insert header-prefix-string "Unable to find license name from the file\n")
+      ;; (insert header-prefix-string "Unable to find license name from the file\n")
+      (error "Unable to find license name from the file")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
@@ -706,12 +703,13 @@ For more details on what constites a project check `projectile' docs"
 
 (defsubst header3-mini-license ()
   "Insert License info from the \"LICENCE\" file inside a project.
-If you are working inside a project and you already have a \"LICENSE\", then this
-will try to extract info from the file.
+If you are working inside a project and you already have a \"LICENSE\", then
+this will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
   (header3-license--get-file-name)
   (if (string= "" license-name)
-      (insert header-prefix-string "Unable to find license name from the file\n")
+      ;; (insert header-prefix-string "Unable to find license name from the file\n")
+      (error "Unable to find license name from the file")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
@@ -722,10 +720,11 @@ For more details on what constites a project check `projectile' docs"
   )
 
 (defsubst header3-license--get-file-name ()
-  "INTERNAL FUNCTION. Get license file name"
+  "INTERNAL FUNCTION. Get license file name."
   (setq license-name "")
   (if (string= (projectile-project-name) "-")
-      (insert header-prefix-string "Unable to find project root\n")
+      ;; (insert header-prefix-string "Unable to find project root\n")
+      (error "Unable to find project root")
     (cond
      ((file-readable-p (concat (projectile-project-root) "LICENSE"))
       (header3-license--get-license-name "LICENSE"))
@@ -740,12 +739,10 @@ For more details on what constites a project check `projectile' docs"
      ((file-readable-p (concat (projectile-project-root) "License.txt"))
       (header3-license--get-license-name "License.txt"))
      (t (insert header-prefix-string "LICENSE file not available\n")))
-    )
- )
+    ))
 
 (defsubst header3-license--get-license-name (license-file-name)
-  "INTERNAL FUNCTION. Get the name of license from the file,
-after getting the license file name"
+  "INTERNAL FUNCTION. Get license info from the license file."
   (setq temp-list '())
   (with-temp-buffer
     (insert-file-contents (concat (projectile-project-root) license-file-name))
@@ -758,10 +755,10 @@ after getting the license file name"
   )
 
 (defsubst header3-license--insert-file (file-name)
-  "INTERNAL FUNCTION. Inserts the contents of license from the resource"
+  "INTERNAL FUNCTION. Inserts the contents of license from the resource."
   (let (temp-list) (with-temp-buffer
     (insert-file-contents
-     (concat (header-fetch-resource-path "license_templates/")
+     (concat (header-fetch-resource-path "templates/")
              file-name))
     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list
@@ -770,8 +767,8 @@ after getting the license file name"
        (header-seperator)))
 
 (defsubst header3-license--insert ()
-  "INTERNAL FUNCTION. Launches the \"insert-file\" function after comparing
-with the license name"
+  "INTERNAL FUNCTION.
+Launches the \"insert-file\" function after comparing with the license name"
   (cond
    ((cl-search "mit" (downcase license-name))
     (header3-license--insert-file "mit.txt"))
@@ -788,8 +785,53 @@ with the license name"
    ((cl-search "gnu general public license version 3" (downcase license-name))
     (header3-license--insert-file "gpl3.txt"))
    )
-  (insert "\n")
-  )
+  (insert "\n"))
+
+(defconst header-root-folder (file-name-directory load-file-name))
+
+(defsubst header-fetch-resource-path (file)
+  "INTERNAL FUNCTION. Get the path to the resource files"
+  (expand-file-name file header-root-folder))
+
+(defsubst header-template--insert (file-name)
+  "INTERNAL FUNCTION. Insert contents of file."
+  (insert-file-contents
+   (concat (header-fetch-resource-path "templates/")
+           file-name)))
+
+(defsubst header-readme--get-random-footer-elements ()
+  "INTERNAL FUNCTION. Return random footer element."
+  (let (index)
+    (setq index (random (length temp_footer_element_vector)))
+    (insert (aref temp_footer_element_vector index) "\n")
+    (remove (aref temp_footer_element_vector index)
+            temp_footer_element_vector)
+    ))
+
+(defun header-check-if-readme()
+  (if (cl-search "readme"(downcase (buffer-name)) )
+      (auto-make-header "readme")))
+
+(defsubst header-readme-insert()
+  "INTERNAL FUNCTION. Insert readme template and footer."
+  (with-temp-buffer
+    (insert-file-contents
+     (concat (header-fetch-resource-path "templates/") "readme/readme_footer.md"))
+    (setq readme_footer_element_list (split-string (buffer-string) "\n")))
+  (setq temp_footer_element_vector (vconcat readme_footer_element_list nil))
+  (setq insert_readme_contents nil)
+  (if (zerop (buffer-size))
+      (progn
+        (header-template--insert "readme/readme_header.md")
+        (goto-char (point-max))
+        (header-template--insert "readme/readme_contents.md"))
+    (header-template--insert "readme/readme_header.md"))
+  (goto-char (point-max))
+  (insert "\n\n- - -\n")
+  (header-readme--get-random-footer-elements)
+  (header-readme--get-random-footer-elements)
+  (header-readme--get-random-footer-elements)
+  (insert "- - -"))
 
 (defsubst header3-copyright ()
   "Insert copyright line."
@@ -799,7 +841,7 @@ with the license name"
   (insert header-prefix-string "All rights reserved\n"))
 
 (defsubst header-author ()
-  "Insert current user's name (`user-full-name') as this file's author."
+  "Insert current user's name as this file's author."
   (insert header-prefix-string "Author: " (user-full-name) "\n"))
 
 (defsubst header-maintainer ()
@@ -866,7 +908,7 @@ Without this, `make-revision' inserts `header-history-label' after the header."
     (header-multiline)))
 
 (defun header3-package-license ()
-  "Insert package license"
+  "Insert package license."
   (header3-license--get-file-name)
   (if (string= "" license-name)
       (insert header-prefix-string "Unable to find license name from the file\n"))
@@ -1103,18 +1145,32 @@ It is sensitive to language-dependent comment conventions."
      comment-start)
     (t ";; ")))       ; Use Lisp as default.
 
-;; Usable as a programming language mode hook.
-(defun auto-make-header ()
-  "Call `make-file-header' if current buffer is empty and is a file buffer."
-  (and (zerop (buffer-size)) (not buffer-read-only) (buffer-file-name)
-       (if (string-equal header-default-format "file-header")
-           (make-file-header)
-         (make-package-header))))
+;;;###autoload
+(autoload 'auto-make-header "header3")
 
-(defun auto-make-mini-header ()
-  "Call `make-mini-header' if current buffer is empty and is a file buffer."
+;;;###autoload
+(autoload 'auto-update-file-header "header3")
+
+;;;###autoload
+(autoload 'header-check-if-readme "header3")
+
+;; Usable as a programming language mode hook.
+(defun auto-make-header (header-type)
+  "Call `make-file-header' if current buffer is empty and is a file buffer.
+Argument HEADER-TYPE takes any of these values and executes appropriate
+header function. The values can be 'mini-header', 'file-header',
+'package-header' or 'readme'."
   (and (zerop (buffer-size)) (not buffer-read-only) (buffer-file-name)
-       (make-mini-header)))
+       (cond
+        ((string-equal header-type "mini-header")
+         (make-mini-header))
+        ((string-equal header-type "file-header")
+         (make-file-header))
+        ((string-equal header-type "package-header")
+         (make-package-header))
+        ((string-equal header-type "readme")
+         (make-readme-header))
+        )))
 
 ;;;###autoload
 (defun make-mini-header ()
@@ -1146,14 +1202,24 @@ the comment."
 (defun make-package-header ()
   "Insert (mode-dependent) header comment at beginning of file.
 A header is composed of a mode line, a body, and an end line.  The body is
-constructed by calling the functions in `make-package-header-hook'.  The mode line
-and end lines start and terminate block comments.  The body lines continue
+constructed by calling the functions in `make-package-header-hook'.  The mode
+line and end lines start and terminate block comments.  The body lines continue
 the comment."
   (interactive)
   (goto-char (point-min))                 ; Leave mark at old location.
   (let* ((return-to             nil)    ; To be set by `make-package-header-hook'.
          (header-prefix-string  (header-prefix-string))) ; Cache result.
     (mapc #'funcall make-package-header-hook)
+    (when return-to (goto-char return-to))))
+
+;;;###autoload
+(defun make-readme-header ()
+  "Insert mini (mode-dependent) header comment at beginning of file."
+  (interactive)
+  (goto-char (point-min))                 ; Leave mark at old location.
+  (let* ((return-to             nil)    ; To be set by `make-mini-header-hook'.
+         (header-prefix-string  (header-prefix-string))) ; Cache result.
+    (header-readme-insert)
     (when return-to (goto-char return-to))))
 
 ;;;###autoload
@@ -1333,6 +1399,7 @@ Return nil, for use on a hook."
     str))
 
 (defun update-write-count ()
+  "This will update how many times the file has been saved."
   (let* ((str  (delete-and-forget-line))
    (rem  (read-from-string str))
    (num  (car rem)))

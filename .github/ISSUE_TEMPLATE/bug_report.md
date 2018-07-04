@@ -4,6 +4,8 @@ about: Create a report to help us improve
 
 ---
 
+[![forthebadge](https://forthebadge.com/images/badges/not-an-issue.svg)](https://forthebadge.com)
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
