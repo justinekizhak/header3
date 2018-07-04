@@ -11,7 +11,7 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 0.3
+;; Version: 3.4.1
 ;; Package-Requires: ()
 ;; Last-Updated: Wed  4 Jul 2018 00:09:05 IST
 ;;           By: Justine T Kizhakkinedath
@@ -616,6 +616,10 @@ the function to call if the string is found near the start of the file.")
 (defvar license-name ""
   "Contains the name of license.")
 
+(defvar readme_footer_element_list)
+
+(defvar temp_footer_element_vector)
+
 ;;; Functions ----------------------------------------------
 
 (defsubst nonempty-comment-start ()
@@ -686,7 +690,8 @@ this will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
   (header3-license--get-file-name)
   (if (string= "" license-name)
-      (insert header-prefix-string "Unable to find license name from the file\n")
+      ;; (insert header-prefix-string "Unable to find license name from the file\n")
+      (error "Unable to find license name from the file")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
@@ -703,7 +708,8 @@ this will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
   (header3-license--get-file-name)
   (if (string= "" license-name)
-      (insert header-prefix-string "Unable to find license name from the file\n")
+      ;; (insert header-prefix-string "Unable to find license name from the file\n")
+      (error "Unable to find license name from the file")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
@@ -717,7 +723,8 @@ For more details on what constites a project check `projectile' docs"
   "INTERNAL FUNCTION. Get license file name."
   (setq license-name "")
   (if (string= (projectile-project-name) "-")
-      (insert header-prefix-string "Unable to find project root\n")
+      ;; (insert header-prefix-string "Unable to find project root\n")
+      (error "Unable to find project root")
     (cond
      ((file-readable-p (concat (projectile-project-root) "LICENSE"))
       (header3-license--get-license-name "LICENSE"))
@@ -805,23 +812,20 @@ Launches the \"insert-file\" function after comparing with the license name"
   (if (cl-search "readme"(downcase (buffer-name)) )
       (auto-make-header "readme")))
 
-(defvar readme_footer_element_list)
-(defvar temp_footer_element_vector)
-
 (defsubst header-readme-insert()
   "INTERNAL FUNCTION. Insert readme template and footer."
   (with-temp-buffer
     (insert-file-contents
-     (concat (header-fetch-resource-path "templates/") "readme/readme_footer.txt"))
+     (concat (header-fetch-resource-path "templates/") "readme/readme_footer.md"))
     (setq readme_footer_element_list (split-string (buffer-string) "\n")))
   (setq temp_footer_element_vector (vconcat readme_footer_element_list nil))
   (setq insert_readme_contents nil)
   (if (zerop (buffer-size))
       (progn
-        (header-template--insert "readme/readme_header.txt")
+        (header-template--insert "readme/readme_header.md")
         (goto-char (point-max))
-        (header-template--insert "readme/readme_contents.txt"))
-    (header-template--insert "readme/readme_header.txt"))
+        (header-template--insert "readme/readme_contents.md"))
+    (header-template--insert "readme/readme_header.md"))
   (goto-char (point-max))
   (insert "\n\n- - -\n")
   (header-readme--get-random-footer-elements)
@@ -1140,6 +1144,15 @@ It is sensitive to language-dependent comment conventions."
      ;; used on each line.
      comment-start)
     (t ";; ")))       ; Use Lisp as default.
+
+;;;###autoload
+(autoload 'auto-make-header "header3")
+
+;;;###autoload
+(autoload 'auto-update-file-header "header3")
+
+;;;###autoload
+(autoload 'header-check-if-readme "header3")
 
 ;; Usable as a programming language mode hook.
 (defun auto-make-header (header-type)
