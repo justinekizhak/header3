@@ -7,7 +7,7 @@
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Version: 0.3
+;; Version: 3.4.1
 ;; Package-Requires: ()
 ;; Last-Updated: Wed  4 Jul 2018 00:07:44 IST
 ;;           By: Justine T Kizhakkinedath
@@ -40,36 +40,10 @@
 ;;
 ;;; Code:
 
-;; (add-to-list 'load-path (header-fetch-resource-path ""))
-;; (load "header3")
-
 ;; Launch auto-update before saving the file
-;;;###autoload
-(autoload 'auto-make-header "header3")
 
 ;;;###autoload
-(autoload 'auto-update-file-header "header3")
-
-;;;###autoload
-(autoload 'header-check-if-readme "header3")
-
-;;;###autoload
-(autoload 'header-fetch-resource-path "header3")
-
-;;;###autoload
-(defun header-load-hooks ()
-  (message "asdhflkkkkkkkkkkkkkkkkjasdlfjaksdjf ")
-  )
-
-
-
-;;;###autoload
-(eval-after-load 'header3
-
-  (progn
-    ;; (add-to-list 'load-path (header-fetch-resource-path ""))
-    ;; (load "header3-hooks")
-
+(eval-after-load 'header3 (progn
     (add-hook 'before-save-hook 'auto-update-file-header)
     (add-hook 'c++-mode-hook        (lambda () (auto-make-header "file-header")))
     ;; (add-hook 'c-mode-common-hook   (lambda () (auto-make-header "file-header")))
@@ -79,11 +53,6 @@
     (add-hook 'rust-mode-hook       (lambda () (auto-make-header "file-header")))
     (add-hook 'sh-mode-hook         (lambda () (auto-make-header "mini-header")))
     (add-hook 'markdown-mode-hook   'header-check-if-readme)
-    )
-  )
-
-;; (defun check-for-shell-scripts ()
-;;   (if (string-equal (file-name-extension (buffer-name) ""))
-;;       (auto-make-header "mini-header")))
+    ))
 
 ;;; header3-defaults.el ends here
