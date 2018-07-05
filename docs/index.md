@@ -1,15 +1,3 @@
-<a name="top"></a>
-[![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
-<a href="https://www.instagram.com/justinekizhakkinedath"><img src="https://i.imgur.com/G9YJUZI.png" alt="Instagram" align="right"></a>
-<a href="http://www.twitter.com/justinethomask"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
-<a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
-<br>
-- - -
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Development stage](https://img.shields.io/badge/Development_stage-alpha-red.svg)]()
-[![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
-[![Zube.io](https://img.shields.io/badge/Project_Management-Zube.io-yellow.svg)](https://zube.io)
-
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
 to your source code files when you create a new one in Emacs.
@@ -40,18 +28,15 @@ and adds more features to it, but I have made efforts to make it compatible with
 ### Mini Header
 if you need the smallest header.
 
-![alt text](resources/mini_header.png "Mini Header")
 ---
 
 ### File Header
 if you need a little bigger headers.
 
-![alt text](resources/file_header.png "File Header")
 ---
 ### Package Header
 if you need the biggest one.
 
-![alt text](resources/package_header.png "Package Header")
 ---
 ### Readme Header
 
@@ -59,16 +44,11 @@ if you need the biggest one.
 The following example is auto generated when you create a new Readme.md file
 (file name is case insensitive)
 
-![alt text](resources/full_readme_1.jpg "Readme generated on a new file")
-![alt text](resources/full_readme_2.jpg "Readme generated on a new file")
-
 ------
 
 #### Template for existing file
 The following example is generated when you run `make-readme-header` and the file
 already has some contents
-
-![alt text](resources/readme_with_content.jpg "Readme generated on a file with contents")
 
 ---
 *All examples are generated using Header3.*
@@ -151,9 +131,3 @@ will add the header.
     - PHP
     - Shell scripts
 * Default settings are stored in `header3-launcher.el` file.
-
-- - -
-[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/winter-is-coming.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
-- - -
