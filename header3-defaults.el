@@ -7,8 +7,7 @@
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Version: 3.4.1
-;; Package-Requires: ()
+;; Version: 3.4.2
 ;; Last-Updated: Wed  4 Jul 2018 00:07:44 IST
 ;;           By: Justine T Kizhakkinedath
 ;;     Update #: 4
@@ -39,8 +38,6 @@
 ;; -----------------------------------------------------------------------------
 ;;
 ;;; Code:
-
-;; Launch auto-update before saving the file
 
 ;;;###autoload
 (eval-after-load 'header3 (progn

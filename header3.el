@@ -2,17 +2,17 @@
 ;;
 ;; Filename: header3.el
 ;; Description: Support for creation and update of file headers.
-;; Author: Lynn Slater
+;; Author: Justine T Kizhakkinedath
 ;;         Drew Adams
-;;         Justine T Kizhakkinedath
-;; Copyright (c) 2018, Justine T Kizhakkinedath <justinethomas009@gmail.com>
+;;         Lynn Slater
+;; Maintainer: Justine Thomas <justinethomas009@gmail.com>
 ;; Copyright (C) 2018, Justine Thomas Kizhakkinedath, All rights reserved.
 ;; Copyright (C) 1996-2018, Drew Adams.
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.4.1
-;; Package-Requires: ()
+;; Version: 3.4.2
+;; Package-Requires: ((projectile git-link))
 ;; Last-Updated: Fri  6 Jul 2018 02:28:03 IST
 ;;           By: Justine T Kizhakkinedath
 ;;     Update #: 2154
