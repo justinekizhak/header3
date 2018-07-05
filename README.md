@@ -6,12 +6,13 @@
 <br>
 - - -
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Development stage](https://img.shields.io/badge/Development_stage-alpha-red.svg)]()
 [![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
-[![Waffle.io](https://badge.waffle.io/justinethomas/header3.svg)](https://waffle.io/justinethomas/header3)
+[![Zube.io](https://img.shields.io/badge/Project_Management-Zube.io-yellow.svg)](https://zube.io)
 
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
-to your source code files when you create a new one in Emacs.  
+to your source code files when you create a new one in Emacs.
 Header3 is built upon [header2.el](https://www.emacswiki.org/emacs/download/header2.el)
 and adds more features to it, but I have made efforts to make it compatible with header2.
 
@@ -89,9 +90,9 @@ already has some contents
 the git link of the current buffer.
 
 * [Projectile](https://github.com/bbatsov/projectile) This package is the one
-which will check your project directory and get its root path.  
+which will check your project directory and get its root path.
 Projectile provides us with project name and project path which is used to check
-if the project root contains any License file.  
+if the project root contains any License file.
 If it does then it checks the first 5 lines for any mention of "License" and
 "Version" (case-insensitive).
 
