@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.1
 ;; Package-Requires: ()
-;; Last-Updated: Wed  4 Jul 2018 00:09:05 IST
+;; Last-Updated: Fri  6 Jul 2018 02:28:03 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2152
+;;     Update #: 2154
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -688,43 +688,33 @@ Format is: \"<this-file-name> is part of <project-name>\"
 If you are working inside a project and you already have a \"LICENSE\", then
 this will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
+  (header3-license--insert-license_info)
+  (header3-license--insert))
+
+(defun header3-license--insert-license_info ()
   (header3-license--get-file-name)
   (if (string= "" license-name)
-      ;; (insert header-prefix-string "Unable to find license name from the file\n")
-      (error "Unable to find license name from the file")
+      (message "Unable to find license name from the file")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
       (insert "\n")
       (insert header-prefix-string "See LICENSE file in the project root for full information.\n")))
-  (header-seperator)
-  (header3-license--insert)
-  )
+  (header-seperator))
 
 (defsubst header3-mini-license ()
   "Insert License info from the \"LICENCE\" file inside a project.
 If you are working inside a project and you already have a \"LICENSE\", then
 this will try to extract info from the file.
 For more details on what constites a project check `projectile' docs"
-  (header3-license--get-file-name)
-  (if (string= "" license-name)
-      ;; (insert header-prefix-string "Unable to find license name from the file\n")
-      (error "Unable to find license name from the file")
-    (progn
-      (insert header-prefix-string "Licensed under the terms of ")
-      (insert license-name)
-      (insert "\n")
-      (insert header-prefix-string "See LICENSE file in the project root for full information.\n")))
-  (header-seperator)
-  (insert "\n")
-  )
+  (header3-license--insert-license_info)
+  (insert "\n"))
 
 (defsubst header3-license--get-file-name ()
   "INTERNAL FUNCTION. Get license file name."
   (setq license-name "")
   (if (string= (projectile-project-name) "-")
-      ;; (insert header-prefix-string "Unable to find project root\n")
-      (error "Unable to find project root")
+      (message "Unable to find project root")
     (cond
      ((file-readable-p (concat (projectile-project-root) "LICENSE"))
       (header3-license--get-license-name "LICENSE"))
