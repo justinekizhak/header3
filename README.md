@@ -40,18 +40,18 @@ and adds more features to it, but I have made efforts to make it compatible with
 ### Mini Header
 if you need the smallest header.
 
-![alt text](resources/mini_header.png "Mini Header")
+![alt text](docs/docs/resources/mini_header.png "Mini Header")
 ---
 
 ### File Header
 if you need a little bigger headers.
 
-![alt text](resources/file_header.png "File Header")
+![alt text](docs/resources/file_header.png "File Header")
 ---
 ### Package Header
 if you need the biggest one.
 
-![alt text](resources/package_header.png "Package Header")
+![alt text](docs/resources/package_header.png "Package Header")
 ---
 ### Readme Header
 
@@ -59,8 +59,8 @@ if you need the biggest one.
 The following example is auto generated when you create a new Readme.md file
 (file name is case insensitive)
 
-![alt text](resources/full_readme_1.jpg "Readme generated on a new file")
-![alt text](resources/full_readme_2.jpg "Readme generated on a new file")
+![alt text](docs/resources/full_readme_1.jpg "Readme generated on a new file")
+![alt text](docs/resources/full_readme_2.jpg "Readme generated on a new file")
 
 ------
 
@@ -68,7 +68,7 @@ The following example is auto generated when you create a new Readme.md file
 The following example is generated when you run `make-readme-header` and the file
 already has some contents
 
-![alt text](resources/readme_with_content.jpg "Readme generated on a file with contents")
+![alt text](docs/resources/readme_with_content.jpg "Readme generated on a file with contents")
 
 ---
 *All examples are generated using Header3.*
