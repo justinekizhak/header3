@@ -12,7 +12,7 @@
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.2
-;; Package-Requires: ((projectile git-link))
+;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
 ;; Last-Updated: Fri  6 Jul 2018 02:28:03 IST
 ;;           By: Justine T Kizhakkinedath
 ;;     Update #: 2154
