@@ -16,4 +16,5 @@
 temp.el
 
 package-*.el
-Makefile
+
+docs/_build/
