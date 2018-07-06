@@ -5,10 +5,12 @@
 <a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
 - - -
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Development stage](https://img.shields.io/badge/Development_stage-alpha-red.svg)]()
-[![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Zube.io](https://img.shields.io/badge/Project_Management-Zube.io-yellow.svg)](https://zube.io)
+[![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
+[![Documentation Status](https://readthedocs.org/projects/header3/badge/?version=latest)](https://header3.readthedocs.io/en/latest/?badge=latest)
+
 
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
@@ -40,7 +42,7 @@ and adds more features to it, but I have made efforts to make it compatible with
 ### Mini Header
 if you need the smallest header.
 
-![alt text](docs/docs/resources/mini_header.png "Mini Header")
+![alt text](docs/resources/mini_header.png "Mini Header")
 ---
 
 ### File Header
@@ -99,7 +101,7 @@ If it does then it checks the first 5 lines for any mention of "License" and
 Instructions to install these packages are available at their links.
 
 ## Installation
-* `git clone https://github.com/justinethomas/header3 ~/.emacs.d/lisp/header3`
+* Download zip file from [Releases](https://github.com/justinethomas/header3/releases)
 * Add these lines to your `.emacs` or your init file.
   ```
   (add-to-list 'load-path "~/.emacs.d/lisp/header3")
@@ -132,25 +134,33 @@ will add the header.
   - [GNU General Public License Version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
   - [GNU General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 * Default settings:
-  - `file-header` is the default header for
-    - C++
-    - Clojure
-    - Coffee script
-    - Emacs lisp
-    - Erlang
-    - Haskell
-    - Java
-    - Kotlin
-    - Python
-    - Ruby
-    - Rust
-    - Scala
-    - Scheme
-    - Swift
-  - `mini-header` for
-    - PHP
-    - Shell scripts
-* Default settings are stored in `header3-launcher.el` file.
+  - `mini-header` is the default header for
+    - [ ] PHP
+    - [x] Shell scripts
+  - `file-header` for
+    - [ ] C
+    - [x] C++
+    - [ ] Clojure
+    - [ ] Coffee script
+    - [ ] Erlang
+    - [ ] Haskell
+    - [ ] Java
+    - [ ] Kotlin
+    - [x] Python
+    - [ ] Ruby
+    - [ ] Rust
+    - [ ] Scala
+    - [ ] Scheme
+    - [ ] Swift
+  - `package-header`
+    - [x] Emacs Lisp
+  - `readme-header`
+    - When the file has `.md` extension and has `readme`(case insensitive) in
+    the name.  
+
+*Marked with* &#10003; *are tested*
+
+* Default settings are stored in `header3-defaults.el` file.
 
 - - -
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
