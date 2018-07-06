@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.2
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Fri  6 Jul 2018 02:28:03 IST
+;; Last-Updated: Fri  6 Jul 2018 13:54:30 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2154
+;;     Update #: 2155
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -694,7 +694,7 @@ For more details on what constites a project check `projectile' docs"
 (defun header3-license--insert-license_info ()
   (header3-license--get-file-name)
   (if (string= "" license-name)
-      (message "Unable to find license name from the file")
+      (message "Unable to find license name from the file.")
     (progn
       (insert header-prefix-string "Licensed under the terms of ")
       (insert license-name)
@@ -714,7 +714,7 @@ For more details on what constites a project check `projectile' docs"
   "INTERNAL FUNCTION. Get license file name."
   (setq license-name "")
   (if (string= (projectile-project-name) "-")
-      (message "Unable to find project root")
+      (message "Unable to find project root.")
     (cond
      ((file-readable-p (concat (projectile-project-root) "LICENSE"))
       (header3-license--get-license-name "LICENSE"))
@@ -728,7 +728,7 @@ For more details on what constites a project check `projectile' docs"
       (header3-license--get-license-name "LICENSE.txt"))
      ((file-readable-p (concat (projectile-project-root) "License.txt"))
       (header3-license--get-license-name "License.txt"))
-     (t (insert header-prefix-string "LICENSE file not available\n")))
+     (t (message "LICENSE file not available.")))
     ))
 
 (defsubst header3-license--get-license-name (license-file-name)
