@@ -15,6 +15,7 @@
 # Header3 for Emacs
 Header3 is a package for Emacs which will help you to automatically add headers
 to your source code files when you create a new one in Emacs.
+
 Header3 is built upon [header2.el](https://www.emacswiki.org/emacs/download/header2.el)
 and adds more features to it, but I have made efforts to make it compatible with header2.
 
