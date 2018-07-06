@@ -12,7 +12,7 @@
 [![Documentation Status](https://readthedocs.org/projects/header3/badge/?version=latest)](https://header3.readthedocs.io/en/latest/?badge=latest)
 
 
-# Header3 for Emacs
+# Header3
 Header3 is a package for Emacs which will help you to automatically add headers
 to your source code files when you create a new one in Emacs.
 
