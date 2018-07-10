@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.2
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Fri  6 Jul 2018 13:54:30 IST
+;; Last-Updated: Tue 10 Jul 2018 21:45:43 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2155
+;;     Update #: 2157
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -836,7 +836,8 @@ Launches the \"insert-file\" function after comparing with the license name"
 
 (defsubst header-maintainer ()
   "Insert \"Maintainer: \" line."
-  (insert header-prefix-string "Maintainer: \n"))
+  (insert header-prefix-string "Maintainer: ")
+  (insert (user-full-name) "\n"))
 
 (defun header-copyright ()
   "Insert `header-copyright-notice', unless nil."
@@ -954,7 +955,8 @@ Without this, `make-revision' inserts `header-history-label' after the header."
 (defsubst header-modification-date ()
   "Insert todays date as the time of last modification.
 This is normally overwritten with each file save."
-  (insert header-prefix-string "Last-Updated: \n"))
+  (insert header-prefix-string "Last-Updated: ")
+  (insert (header-date-string) "\n"))
 
 (defsubst header-modification-author ()
   "Insert current user's name as the last person who modified the file.
