@@ -1,12 +1,12 @@
 # Project Name
 
-## Contents
+## Table of contents
 
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Features](#features)
 - [User Guide](#user-guide)
-- [Contributor Code of Conduct](#contributor-code-of-conduct)
+- [Full Documentation](#full-documentation)
 - [License](#license)
 
 ## Introduction
@@ -25,9 +25,9 @@
 
 **[Back to top](#table-of-contents)**
 
-## Contributor Code of Conduct
+## Full Documentation
 
-**[Back to top](#table-of-contents)**
+For full documentation [read the docs]()
 
 ## License
 
