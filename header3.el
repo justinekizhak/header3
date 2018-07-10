@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.2
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Wed 11 Jul 2018 00:28:46 IST
+;; Last-Updated: Wed 11 Jul 2018 00:54:30 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2158
+;;     Update #: 2159
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -738,11 +738,12 @@ For more details on what constites a project check `projectile' docs"
     (insert-file-contents (concat (projectile-project-root) license-file-name))
     (setq license-list (split-string (buffer-string) "\n")))
   (dotimes (i 5)
-    (if (or (cl-search " license" (downcase (car license-list)))
-            (cl-search "version " (downcase (car license-list))))
-        (add-to-list 'temp-list (string-trim (pop license-list)) t)))
-  (setq license-name (string-join temp-list " "))
-  )
+    (if (not (string-equal (car license-list) ""))
+        (if (or (cl-search " license" (downcase (car license-list)))
+                (cl-search "version " (downcase (car license-list))))
+            (add-to-list 'temp-list (string-trim (pop license-list)) t))
+      (pop license-list)))
+  (setq license-name (string-join temp-list " ")))
 
 (defsubst header3-license--insert-file (file-name)
   "INTERNAL FUNCTION. Inserts the contents of license from the resource."
