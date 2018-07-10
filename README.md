@@ -11,8 +11,11 @@
 [![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
 [![Documentation Status](https://readthedocs.org/projects/header3/badge/?version=latest)](https://header3.readthedocs.io/en/latest/?badge=latest)
 
+- - -
+![alt text](docs/resources/header3.png "Header3")
 
-# Header3
+- - -
+
 Header3 is a package for Emacs which will help you to automatically add headers
 to your source code files when you create a new one in Emacs.
 
@@ -34,6 +37,8 @@ and adds more features to it, but I have made efforts to make it compatible with
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [How to use ?](#how-to-use-)
+- [Full Documentation](#full-documentation)
+- [License](#license)
 - [Working](#working)
 
 <!-- tocstop -->
@@ -42,19 +47,21 @@ and adds more features to it, but I have made efforts to make it compatible with
 
 ### Mini Header
 if you need the smallest header.
+<p align="center"><img src="docs/resources/mini_header.png" alt="Mini header"/></p>
 
-![alt text](docs/resources/mini_header.png "Mini Header")
 ---
 
 ### File Header
 if you need a little bigger headers.
 
-![alt text](docs/resources/file_header.png "File Header")
+<p align="center"><img src="docs/resources/file_header.png" alt="File header"/></p>
+
 ---
 ### Package Header
 if you need the biggest one.
 
-![alt text](docs/resources/package_header.png "Package Header")
+<p align="center"><img src="docs/resources/package_header.png" alt="Package header"/></p>
+
 ---
 ### Readme Header
 
@@ -62,8 +69,8 @@ if you need the biggest one.
 The following example is auto generated when you create a new Readme.md file
 (file name is case insensitive)
 
-![alt text](docs/resources/full_readme_1.jpg "Readme generated on a new file")
-![alt text](docs/resources/full_readme_2.jpg "Readme generated on a new file")
+<p align="center"><img src="docs/resources/full_readme_1.jpg" alt="Readme header"/></p>
+<p align="center"><img src="docs/resources/full_readme_2.jpg" alt="Readme header"/></p>
 
 ------
 
@@ -71,7 +78,7 @@ The following example is auto generated when you create a new Readme.md file
 The following example is generated when you run `make-readme-header` and the file
 already has some contents
 
-![alt text](docs/resources/readme_with_content.jpg "Readme generated on a file with contents")
+<p align="center"><img src="docs/resources/readme_with_content.jpg" alt="Readme header"/></p>
 
 ---
 *All examples are generated using Header3.*
@@ -118,6 +125,16 @@ will add the header.
   - `make-package-header`
   - `make-readme-header`
 
+## Full Documentation
+
+For full documentation [read the docs](https://header3.readthedocs.io/en/latest/)
+
+## License
+Licensed under the terms of GPL v3
+
+**[Back to top](#table-of-contents)**
+
+
 ## Working
 * Files that are recognised as License files are
   - LICENSE
@@ -157,7 +174,7 @@ will add the header.
     - [x] Emacs Lisp
   - `readme-header`
     - When the file has `.md` extension and has `readme`(case insensitive) in
-    the name.  
+    the name.
 
 *Marked with* &#10003; *are tested*
 
