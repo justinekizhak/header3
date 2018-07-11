@@ -7,10 +7,10 @@
 ;; Copyright (c) 2018, Justine T Kizhakkinedath
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Version: 3.4.2
-;; Last-Updated: Wed  4 Jul 2018 00:07:44 IST
+;; Version: 3.4.5
+;; Last-Updated: Thu 12 Jul 2018 00:53:22 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 4
+;;     Update #: 5
 ;; URL: https://github.com/justinethomas/header3
 ;; Doc URL:
 ;; Keywords:

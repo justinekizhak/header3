@@ -11,11 +11,11 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.4.2
+;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Fri  6 Jul 2018 13:54:30 IST
+;; Last-Updated: Thu 12 Jul 2018 00:53:46 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2155
+;;     Update #: 2160
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -738,11 +738,12 @@ For more details on what constites a project check `projectile' docs"
     (insert-file-contents (concat (projectile-project-root) license-file-name))
     (setq license-list (split-string (buffer-string) "\n")))
   (dotimes (i 5)
-    (if (or (cl-search " license" (downcase (car license-list)))
-            (cl-search "version " (downcase (car license-list))))
-        (add-to-list 'temp-list (string-trim (pop license-list)) t)))
-  (setq license-name (string-join temp-list " "))
-  )
+    (if (not (string-equal (car license-list) ""))
+        (if (or (cl-search " license" (downcase (car license-list)))
+                (cl-search "version " (downcase (car license-list))))
+            (add-to-list 'temp-list (string-trim (pop license-list)) t))
+      (pop license-list)))
+  (setq license-name (string-join temp-list " ")))
 
 (defsubst header3-license--insert-file (file-name)
   "INTERNAL FUNCTION. Inserts the contents of license from the resource."
@@ -836,7 +837,10 @@ Launches the \"insert-file\" function after comparing with the license name"
 
 (defsubst header-maintainer ()
   "Insert \"Maintainer: \" line."
-  (insert header-prefix-string "Maintainer: \n"))
+  (insert header-prefix-string "Maintainer: ")
+  ;; (insert (user-full-name) "\n")
+  (insert
+   (shell-command-to-string "git log --format='%an <%ae>' -1")))
 
 (defun header-copyright ()
   "Insert `header-copyright-notice', unless nil."
@@ -954,7 +958,8 @@ Without this, `make-revision' inserts `header-history-label' after the header."
 (defsubst header-modification-date ()
   "Insert todays date as the time of last modification.
 This is normally overwritten with each file save."
-  (insert header-prefix-string "Last-Updated: \n"))
+  (insert header-prefix-string "Last-Updated: ")
+  (insert (header-date-string) "\n"))
 
 (defsubst header-modification-author ()
   "Insert current user's name as the last person who modified the file.
@@ -1135,6 +1140,7 @@ It is sensitive to language-dependent comment conventions."
      comment-start)
     (t ";; ")))       ; Use Lisp as default.
 
+;; For autoloading functions
 ;;;###autoload
 (autoload 'auto-make-header "header3")
 
