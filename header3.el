@@ -11,11 +11,11 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.4.2
+;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Wed 11 Jul 2018 00:54:30 IST
+;; Last-Updated: Thu 12 Jul 2018 00:53:46 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2159
+;;     Update #: 2160
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
