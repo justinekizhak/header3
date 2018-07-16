@@ -1,11 +1,12 @@
+- - -
 # Project Name
+- - -
 
 ## Table of contents
 
 - [Introduction](#introduction)
-- [Installation](#installation)
 - [Features](#features)
-- [User Guide](#user-guide)
+- [Get Started](#get-started)
 - [Full Documentation](#full-documentation)
 - [License](#license)
 
@@ -13,15 +14,11 @@
 
 **[Back to top](#table-of-contents)**
 
-## Installation
-
-**[Back to top](#table-of-contents)**
-
 ## Features
 
 **[Back to top](#table-of-contents)**
 
-## User Guide
+## Get Started
 
 **[Back to top](#table-of-contents)**
 
