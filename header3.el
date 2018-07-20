@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Thu 12 Jul 2018 00:53:46 IST
+;; Last-Updated: Sat 21 Jul 2018 02:53:32 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 2160
+;;     Update #: 2164
 ;; URL: https://github.com/justinethomas009/header3
 ;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -77,35 +77,11 @@
 ;;   `header-multiline', `header-prefix-string', `return-to'.
 ;;
 ;;
-;; To have Emacs update file headers automatically whenever you save a
-;; file, put this in your init file (~/.emacs):
-;;
-;;   (add-to-list 'load-path "~/path/to/header3-folder/")
-;;   (load "header3")
-;;
-;;   (autoload 'auto-update-file-header "header3")
-;;   (add-hook 'before-save-hook 'auto-update-file-header)
-;;
-;; To have Emacs add a file header whenever you create a new file in
-;; some mode, put this in your init file (~/.emacs):
-;;
-;;   (autoload 'auto-make-header "header3")
-;;   (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-;;   (add-hook 'c-mode-common-hook   'auto-make-header)
-;;   (add-hook 'python-mode-hook 'auto-make-header)
-;;   ...
+;; Installing from Melpa is the best way because you won't have to configure
+;; anything. All the settings are in the header3-defaults.el.
 
 ;; From header3.el author text by Justine Thomas:
 ;;
-;;     I tried to maintain backwards compatibility with 'header2', so that means
-;;     if you replaced 'header2' with 'header3' you would be ready to go from the
-;;     start except this will be using 'file-header' as default one. But you can
-;;     change that in your customize Emacs page. Over there just change the value
-;;     of `header-default-format' to 'package-header'. But anyways you would be
-;;     still be able to use either of the two format by their respective interactive
-;;     commands `make-file-header' and `make-package-header'.
-;;     Also all the new features I have added needs `git-link' and `projectile', but
-;;     care has been taken if they are not available on your machine.
 ;;
 ;;
 ;; From the original header.el text by Lynn Slater:
@@ -462,9 +438,9 @@ t means use local time with timezone; nil means use UTC."
 
 (defcustom make-mini-header-hook '(
                               header-seperator
-                              header3-copyright
+                              header-copyright
                               header-blank
-                              header3-mini-license
+                              header-mini-license
                               )
 
   "*Functions that insert header elements for `mini-header'."
@@ -475,33 +451,29 @@ t means use local time with timezone; nil means use UTC."
                               header-creation-date
                               header-modification-date
                               header-blank
-                              header3-filename
+                              header-filename
                               header-url
                               header-description
                               header-blank
-                              header3-copyright
+                              header-copyright
                               header-blank
-                              header3-file-license
+                              header-file-license
                               )
 
   "*Functions that insert header elements for `file-header'."
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-package-header-hook '(
-                              ;;header-mode-line
                               header-title
                               header-blank
-                              header-file-name
+                              header-filename
                               header-description
-                              ;;header-status
                               header-author
                               header-maintainer
-                              header3-copyright
+                              header-copyright
                               header-creation-date
-                              ;;header-rcs-id
                               header-version
                               header-pkg-requires
-                              ;;header-sccs
                               header-modification-date
                               header-modification-author
                               header-update-count
@@ -511,21 +483,17 @@ t means use local time with timezone; nil means use UTC."
                               header-compatibility
                               header-blank
                               header-lib-requires
-                              ;; header-end-line
                               header-seperator
                               header-commentary
                               header-blank
                               header-blank
                               header-blank
-                              ;; header-end-line
                               header-seperator
                               header-history
                               header-blank
                               header-blank
-                              ;; header-rcs-log
-                              ;; header-end-line
                               header-seperator
-                              header3-package-license
+                              header-package-license
                               header-code
                               header-eof
                               )
@@ -553,42 +521,17 @@ file `header3.el' to do this."
   "*Label introducing change log history."
   :type 'string :group 'Automatic-File-Header)
 
-;; (defcustom header-default-format "file-header"
-;;   "*Set the default header type \"file-header\" or \"package-header\"."
-;;   :type 'string :group 'Automatic-File-Header)
-
 (defcustom header-default-project-name "<Project name>"
   "*Set the default project name. This value will be used when projectile can't find your project name."
   :type 'string :group 'Automatic-File-Header)
-
-;; (defcustom header-license-template-location "templates/"
-;;   "*Set the location of license templates. This value is where your 'templates'
-;; folder is located. It is inside the header3 folder, but you can take out this folder
-;; and place it different location. Default value '~/.emacs.d/lisp/header3/templates/'"
-;;   :type 'string :group 'Automatic-File-Header)
-
-;; (defcustom header-free-software
-;;   "This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or (at
-;; your option) any later version.
-
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <https://www.gnu.org/licenses/>."
-
-;;   "*Text saying that this is free software"
-;;   :type 'string :group 'Automatic-File-Header)
 
 (defcustom make-box-comment-region-replace-prefix-flag nil
   "Non-nil means remove any comment prefix from lines, before boxing."
   :type 'boolean :group 'Automatic-File-Header)
 
 ;;; Internal variables -------------------------------------
+
+(defconst header-root-folder (file-name-directory load-file-name))
 
 (defvar header-auto-update-enabled t
   "Non-nil means file-header updating is enabled for current buffer.")
@@ -658,14 +601,7 @@ packages."
                   " --- " "\n"))
   (setq return-to  (1- (point))))
 
-(defsubst header-file-name ()
-  "Insert \"Filename: \" line, using buffer's file name."
-  (insert header-prefix-string "Filename: "
-          (if (buffer-file-name)
-              (file-name-nondirectory (buffer-file-name))
-            (buffer-name)) "\n"))
-
-(defsubst header3-filename ()
+(defsubst header-filename ()
   "Insert the name of file and its association with a project.
 Format is: \"<this-file-name> is part of <project-name>\"
 <project-name> is received from `projectile' package"
@@ -683,7 +619,7 @@ Format is: \"<this-file-name> is part of <project-name>\"
   "Insert \"Description: \" line."
   (insert header-prefix-string "Description:\n"))
 
-(defsubst header3-file-license ()
+(defsubst header-file-license ()
   "Insert License info from the \"LICENCE\" file inside a project.
 If you are working inside a project and you already have a \"LICENSE\", then
 this will try to extract info from the file.
@@ -692,6 +628,7 @@ For more details on what constites a project check `projectile' docs"
   (header3-license--insert))
 
 (defun header3-license--insert-license_info ()
+  "INTERNAL FUNCTION. Insert the license information."
   (header3-license--get-file-name)
   (if (string= "" license-name)
       (message "Unable to find license name from the file.")
@@ -702,7 +639,7 @@ For more details on what constites a project check `projectile' docs"
       (insert header-prefix-string "See LICENSE file in the project root for full information.\n")))
   (header-seperator))
 
-(defsubst header3-mini-license ()
+(defsubst header-mini-license ()
   "Insert License info from the \"LICENCE\" file inside a project.
 If you are working inside a project and you already have a \"LICENSE\", then
 this will try to extract info from the file.
@@ -732,7 +669,8 @@ For more details on what constites a project check `projectile' docs"
     ))
 
 (defsubst header3-license--get-license-name (license-file-name)
-  "INTERNAL FUNCTION. Get license info from the license file."
+  "INTERNAL FUNCTION. Get license info from the license file.
+Argument LICENSE-FILE-NAME is the name of license file in the root directory of the project."
   (setq temp-list '())
   (with-temp-buffer
     (insert-file-contents (concat (projectile-project-root) license-file-name))
@@ -778,10 +716,8 @@ Launches the \"insert-file\" function after comparing with the license name"
    )
   (insert "\n"))
 
-(defconst header-root-folder (file-name-directory load-file-name))
-
 (defsubst header-fetch-resource-path (file)
-  "INTERNAL FUNCTION. Get the path to the resource files"
+  "INTERNAL FUNCTION. Get the path to the resource files."
   (expand-file-name file header-root-folder))
 
 (defsubst header-template--insert (file-name)
@@ -800,6 +736,7 @@ Launches the \"insert-file\" function after comparing with the license name"
     ))
 
 (defun header-check-if-readme()
+  "Check if the filename contain \"readme\"."
   (if (cl-search "readme"(downcase (buffer-name)) )
       (auto-make-header "readme")))
 
@@ -824,7 +761,7 @@ Launches the \"insert-file\" function after comparing with the license name"
   (header-readme--get-random-footer-elements)
   (insert "- - -"))
 
-(defsubst header3-copyright ()
+(defsubst header-copyright ()
   "Insert copyright line."
   (insert header-prefix-string "Copyright (c) ")
   (insert (format-time-string "%Y, "))
@@ -841,21 +778,6 @@ Launches the \"insert-file\" function after comparing with the license name"
   ;; (insert (user-full-name) "\n")
   (insert
    (shell-command-to-string "git log --format='%an <%ae>' -1")))
-
-(defun header-copyright ()
-  "Insert `header-copyright-notice', unless nil."
-  (when header-copyright-notice
-    (let ((start  (point)))
-      (insert header-copyright-notice)
-      (save-restriction
-        (narrow-to-region start (point))
-        (goto-char (point-min))
-        ;; Must now insert header prefix.  Cannot just replace string,
-        ;; because that would cause too many undo boundries.
-        (insert header-prefix-string)
-        (while (progn (skip-chars-forward "^\n") (looking-at "\n"))
-          (forward-char 1) (unless (eolp) (insert header-prefix-string)))
-        (goto-char (point-max))))))
 
 (defsubst header-creation-date ()
   "Insert today's time, date, and time zone as file creation date."
@@ -901,7 +823,7 @@ Without this, `make-revision' inserts `header-history-label' after the header."
   (let ((header-multiline  header-free-software))
     (header-multiline)))
 
-(defun header3-package-license ()
+(defun header-package-license ()
   "Insert package license."
   (header3-license--get-file-name)
   (if (string= "" license-name)

@@ -26,6 +26,13 @@
 
 For full documentation [read the docs]()
 
+Visit [website]().
+
+Read [CHANGELOG], [CONTRIBUTING] guide.
+
+[CHANGELOG]: CHANGELOG.md
+[CONTRIBUTING]: CONTRIBUTING.md
+
 ## License
 
 **[Back to top](#table-of-contents)**

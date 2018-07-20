@@ -8,9 +8,9 @@
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
 ;; Version: 3.4.5
-;; Last-Updated: Thu 12 Jul 2018 00:53:22 IST
+;; Last-Updated: Sat 21 Jul 2018 02:21:40 IST
 ;;           By: Justine T Kizhakkinedath
-;;     Update #: 5
+;;     Update #: 7
 ;; URL: https://github.com/justinethomas/header3
 ;; Doc URL:
 ;; Keywords:
@@ -39,11 +39,16 @@
 ;;
 ;;; Code:
 
+;; The `auto-make-header' function can take three values
+;; 1) mini-header
+;; 2) file-header
+;; 3) package-header
+;; Change it as per your preference.
+
 ;;;###autoload
 (eval-after-load 'header3 (progn
     (add-hook 'before-save-hook 'auto-update-file-header)
     (add-hook 'c++-mode-hook        (lambda () (auto-make-header "file-header")))
-    ;; (add-hook 'c-mode-common-hook   (lambda () (auto-make-header "file-header")))
     (add-hook 'emacs-lisp-mode-hook (lambda () (auto-make-header "package-header")))
     (add-hook 'haskell-mode-hook    (lambda () (auto-make-header "file-header")))
     (add-hook 'python-mode-hook     (lambda () (auto-make-header "file-header")))
