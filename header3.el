@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Wed  1 Aug 2018 03:32:19 IST
+;; Last-Updated: Wed  1 Aug 2018 03:35:11 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2176
+;;     Update #: 2177
 ;; URL: https://github.com/justine/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
@@ -25,7 +25,7 @@
 
 ;;; Commentary:
 ;;
-;; Support for creation and update of file headers.
+;; Automatic creation of headers for source files.
 ;;
 ;; Some of this code and commentary were originally written by Lynn
 ;; Slater as file `header.el'.  Drew Adams updated it and maintains it
