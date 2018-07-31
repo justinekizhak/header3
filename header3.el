@@ -1,42 +1,43 @@
-;;; header3.el --- Support for creation and update of file headers.
+;;; header3.el --- Automatic creation of headers for source files.
 ;;
 ;; Filename: header3.el
-;; Description: Support for creation and update of file headers.
-;; Author: Justine T Kizhakkinedath
+;; Description: Automatic creation of headers for source files.
+;; Author: Justine Kizhakkinedath
 ;;         Drew Adams
 ;;         Lynn Slater
-;; Maintainer: Justine Thomas <justinethomas009@gmail.com>
+;; Maintainer: Justine Kizhakkinedath <justine@kizhak.com>
 ;; Copyright (C) 2018, Justine Thomas Kizhakkinedath, All rights reserved.
 ;; Copyright (C) 1996-2018, Drew Adams.
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.5
-;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0"))
-;; Last-Updated: Sat 21 Jul 2018 02:53:32 IST
-;;           By: Justine T Kizhakkinedath
-;;     Update #: 2164
-;; URL: https://github.com/justinethomas009/header3
-;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
-;; Keywords: tools, docs, maint, abbrev, local
-;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x
+;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
+;; Last-Updated: Wed  1 Aug 2018 03:35:11 IST
+;;           By: Justine Kizhakkinedath
+;;     Update #: 2177
+;; URL: https://github.com/justine/header3
+;; Homepage: https://justine.kizhak.com/header3
+;; Keywords: automatic, header, creation, tools, docs
+;; Compatibility: GNU Emacs: 25.x, 26.x
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Commentary:
 ;;
-;; Support for creation and update of file headers.
+;; Automatic creation of headers for source files.
 ;;
 ;; Some of this code and commentary were originally written by Lynn
 ;; Slater as file `header.el'.  Drew Adams updated it and maintains it
-;; as `header2.el'. This package was updated by Justine Thomas
+;; as `header2.el'. This package was updated by Justine Kizhakkinedath
 ;; and maintained as `header3.el'. The original is here:
 ;; `https://www.emacswiki.org/emacs/download/OriginalHeaderEl'. Drew Adams
 ;; version is at 'https://www.emacswiki.org/emacs/download/header2.el'.
 ;;
 ;; Commands (interactive functions) defined here:
 ;;
-;;   `make-file-header', `make-revision', `make-divider',
+;;   `make-mini-header', `make-file-header', `make-package-header',
+;;   `make-readme-header', `make-revision', `make-divider',
 ;;   `make-box-comment', `make-box-comment-region',
 ;;   `update-file-header'.
 ;;
@@ -75,14 +76,10 @@
 ;;
 ;;   `file-header-update-alist', `header-auto-update-enabled',
 ;;   `header-multiline', `header-prefix-string', `return-to'.
-;;
-;;
-;; Installing from Melpa is the best way because you won't have to configure
-;; anything. All the settings are in the header3-defaults.el.
 
-;; From header3.el author text by Justine Thomas:
-;;
-;;
+;; From header3.el author text by Justine Kizhakkinedath:
+;;     Please refer README on https://github.com/justinekizhak/header3
+;;     for full information.
 ;;
 ;; From the original header.el text by Lynn Slater:
 ;;
@@ -167,9 +164,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 1-Aug-2018    Justine Kizhakkinedath
+;;    Last-Updated: Wed  1 Aug 2018 03:26:15 IST #2175 (Justine Kizhakkinedath)
+;;    Refine all the settings and default values. Clean up code. Rename file
+;;    `header-launcher.el' to `header3-hooks.el'. This file will hold only the
+;;    hooks for various modes. And the default values for the hooks are kept in
+;;    the main file. Read CHANGELOG at https://github.com/justinekizhak/header3
+;;    for full information.
 ;; 29-Jun-2018    Justine T Kizhakkinedath
 ;;    Last-Updated: Fri 29 Jun 2018 01:10:36 IST #2120 (Justine T Kizhakkinedath)
-;;    Add `header-launcher.el' for holding the default values. Make the installation
+;;    Add `header-launcher.el' for holding the default values. Made the installation
 ;;    easier.
 ;; 28-Jun-2018    Justine T Kizhakkinedath
 ;;    Last-Updated: Thu 28 Jun 2018 21:38:00 IST #2115 (Justine T Kizhakkinedath)
@@ -380,10 +384,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;
 
-(provide 'header3)
-(require 'header3)                      ; Ensure loaded before compile.
+;; (require 'header3)                      ; Ensure loaded before compile.
 (require 'projectile)
 (require 'git-link)
+(require 'cl-lib)
 
 
 ;; Quiet byte-compiler.
@@ -529,6 +533,76 @@ file `header3.el' to do this."
   "Non-nil means remove any comment prefix from lines, before boxing."
   :type 'boolean :group 'Automatic-File-Header)
 
+;;; --------------------------------------------------------
+
+(defcustom header-type-c "file-header"
+  "*Header type for c files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-c++ "file-header"
+  "*Header type for c++ files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-clojure "file-header"
+  "*Header type for clojure files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-coffe-script "file-header"
+  "*Header type for coffe-script files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-emacs-lisp "package-header"
+  "*Header type for emacs-lisp files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-erlang "file-header"
+  "*Header type for erlang files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-haskell "file-header"
+  "*Header type for haskell files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-java "file-header"
+  "*Header type for java files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-kotlin "file-header"
+  "*Header type for kotlin files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-python "file-header"
+  "*Header type for python files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-php "mini-header"
+  "*Header type for php files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-shell-script "mini-header"
+  "*Header type for shell-script files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-ruby "file-header"
+  "*Header type for ruby files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-rust "file-header"
+  "*Header type for rust files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-scala "file-header"
+  "*Header type for scala files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-scheme "file-header"
+  "*Header type for scheme files."
+  :type 'string :group 'Automatic-File-Header)
+
+(defcustom header-type-swift "file-header"
+  "*Header type for swift files."
+  :type 'string :group 'Automatic-File-Header)
+
 ;;; Internal variables -------------------------------------
 
 (defconst header-root-folder (file-name-directory load-file-name))
@@ -559,9 +633,9 @@ the function to call if the string is found near the start of the file.")
 (defvar license-name ""
   "Contains the name of license.")
 
-(defvar readme_footer_element_list)
+(defvar header-readme_footer-element--list)
 
-(defvar temp_footer_element_vector)
+(defvar header-readme_footer-element--vector)
 
 ;;; Functions ----------------------------------------------
 
@@ -671,17 +745,19 @@ For more details on what constites a project check `projectile' docs"
 (defsubst header3-license--get-license-name (license-file-name)
   "INTERNAL FUNCTION. Get license info from the license file.
 Argument LICENSE-FILE-NAME is the name of license file in the root directory of the project."
-  (setq temp-list '())
-  (with-temp-buffer
-    (insert-file-contents (concat (projectile-project-root) license-file-name))
-    (setq license-list (split-string (buffer-string) "\n")))
-  (dotimes (i 5)
-    (if (not (string-equal (car license-list) ""))
-        (if (or (cl-search " license" (downcase (car license-list)))
-                (cl-search "version " (downcase (car license-list))))
-            (add-to-list 'temp-list (string-trim (pop license-list)) t))
-      (pop license-list)))
-  (setq license-name (string-join temp-list " ")))
+  (let (temp-list license-list)
+      (setq temp-list '())
+    (with-temp-buffer
+      (insert-file-contents (concat (projectile-project-root) license-file-name))
+      (setq license-list (split-string (buffer-string) "\n")))
+    (dotimes (i 5)
+      (if (not (string-equal (car license-list) ""))
+          (if (or (cl-search " license" (downcase (car license-list)))
+                  (cl-search "version " (downcase (car license-list))))
+              (add-to-list 'temp-list (string-trim (pop license-list)) t))
+        (pop license-list)))
+    (setq license-name (string-join temp-list " ")))
+  )
 
 (defsubst header3-license--insert-file (file-name)
   "INTERNAL FUNCTION. Inserts the contents of license from the resource."
@@ -729,10 +805,10 @@ Launches the \"insert-file\" function after comparing with the license name"
 (defsubst header-readme--get-random-footer-elements ()
   "INTERNAL FUNCTION. Return random footer element."
   (let (index)
-    (setq index (random (length temp_footer_element_vector)))
-    (insert (aref temp_footer_element_vector index) "\n")
-    (remove (aref temp_footer_element_vector index)
-            temp_footer_element_vector)
+    (setq index (random (length header-readme_footer-element--vector)))
+    (insert (aref header-readme_footer-element--vector index) "\n")
+    (remove (aref header-readme_footer-element--vector index)
+            header-readme_footer-element--vector)
     ))
 
 (defun header-check-if-readme()
@@ -745,9 +821,8 @@ Launches the \"insert-file\" function after comparing with the license name"
   (with-temp-buffer
     (insert-file-contents
      (concat (header-fetch-resource-path "templates/") "readme/readme_footer.md"))
-    (setq readme_footer_element_list (split-string (buffer-string) "\n")))
-  (setq temp_footer_element_vector (vconcat readme_footer_element_list nil))
-  (setq insert_readme_contents nil)
+    (setq header-readme_footer-element--list (split-string (buffer-string) "\n")))
+  (setq header-readme_footer-element--vector (vconcat header-readme_footer-element--list nil))
   (if (zerop (buffer-size))
       (progn
         (header-template--insert "readme/readme_header.md")
@@ -817,11 +892,6 @@ Launches the \"insert-file\" function after comparing with the license name"
   "Insert `header-history-label' into header for use by `make-revision'.
 Without this, `make-revision' inserts `header-history-label' after the header."
   (insert (concat (section-comment-start) header-history-label "\n")))
-
-(defun header-free-software ()
-  "Insert text saying that this is free software."
-  (let ((header-multiline  header-free-software))
-    (header-multiline)))
 
 (defun header-package-license ()
   "Insert package license."
@@ -1072,7 +1142,6 @@ It is sensitive to language-dependent comment conventions."
 ;;;###autoload
 (autoload 'header-check-if-readme "header3")
 
-;; Usable as a programming language mode hook.
 (defun auto-make-header (header-type)
   "Call `make-file-header' if current buffer is empty and is a file buffer.
 Argument HEADER-TYPE takes any of these values and executes appropriate
@@ -1088,6 +1157,7 @@ header function. The values can be 'mini-header', 'file-header',
          (make-package-header))
         ((string-equal header-type "readme")
          (make-readme-header))
+        (t (make-file-header))
         )))
 
 ;;;###autoload
@@ -1150,7 +1220,7 @@ the comment."
                                     (concat comment-start comment-start " ")
                                   comment-start)))
     ;; Look for the history line
-    (beginning-of-buffer)               ; Leave a mark behind.
+    (goto-char (point-min))               ; Leave a mark behind.
     (if (re-search-forward (concat "^\\(" (and comment-start
                                                (regexp-quote comment-start))
                                    (regexp-quote (header-prefix-string)) "\\|"
@@ -1326,28 +1396,6 @@ Return nil, for use on a hook."
       (insert str)
       (error "Invalid number for update count `%s'" str))))
 
-;;; ;;;###autoload
-;;; (defun update-VCS-version ()
-;;;   "Update VCS version, of the form $VERSION = \"NUM\".
-;;; NUM is a decimal number with one or more decimal points -
-;;; e.g. 3.1415.9265.  Only the part after the last decimal point is
-;;; incremented."
-;;;   (interactive)
-;;;   (let* ((beg  (point))
-;;;          (eol  (line-end-position))
-;;;          (end  (re-search-forward "\\([^\\\"]+\\)\"" eol t))
-;;;          (str  (buffer-substring beg (1- end)))
-;;;          (num  (car (condition-case err
-;;;                         (read-from-string str)
-;;;                       (error (format "Invalid number for version `%s'" str))))))
-;;;     (when (>= num most-positive-fixnum)
-;;;       (error "Version number is too large to increment: `%s'" num))
-;;;     (when (and end (numberp num))
-;;;       (let ((newnum (condition-case err2
-;;;                         (1+ num)
-;;;                       (error (format "Invalid number for version `%s'" str)))))
-;;;         (replace-match (format "%d" newnum) nil nil nil 1)))))
-
 (defsubst update-last-modifier ()
   "Update the line that indicates who last modified the file."
   (delete-and-forget-line)
@@ -1400,14 +1448,6 @@ result of `update-lib-requires'."
             (error (insert libreq-file-header (header-prefix-string) "  "
                            (error-message-string err) ".\n;;\n"))))))))
 
-
-
-;;(setq file-header-update-alist nil)
-;;(setq file-header-update-alist (cdr file-header-update-alist))
-
-;; Stand-alone Headers
-;; These functions give the ability to invoke headers from the command line.
-;;   E.g Can use with `vi' instead of emacs.
 ;; -------------------------------------------------------------------------
 (defun headerable-file-p (file)
   "Return non-nil if FILE is an existing file."
@@ -1426,115 +1466,6 @@ result of `update-lib-requires'."
       (setq rest  (cdr rest)))
     list))
 
-;;(headerable-file-p "AFS")
-;;(headerable-file-p "dbiogen.el")
-;;(headerable-file-p "dbiogen.elc")
-
-;;; Rest commented out -- Needs Lynn Slater's
-;;; customizations to startup.el to allow command-line-hooks.
-;;
-;;
-;; (defvar header-required-mode nil
-;;   "The mode we force files to be in, regardless of file suffix.")
-;;
-;; Define a touch-headers command.  This depends upon Lynn Slater's
-;; customizations to startup.el to allow command-line-hooks.
-;; ---------------------------------------------------------------
-;;;(setq command-line-hooks (cons 'touch-headers command-line-hooks))
-;(defun touch-headers ()
-;  (if (or (string= argi "-touch") (string= argi "-touch-headers"))
-;      (let ((trim-versions-without-asking t)
-;            ;; Next line should have a Control-G char, not a space, before `true'.
-;            (executing-macro " true"));; suppress "Mark Set" messages
-;        ;; Consume all following arguments until one starts with a "-"
-;        (while (and command-line-args-left
-;                    (not (char-equal ?- (aref (car command-line-args-left) 0))))
-;          (if (headerable-file-p (car command-line-args-left))
-;              (progn
-;                (set-buffer (find-file-noselect (car command-line-args-left)))
-;                (make-revision)
-;                (write-file nil)
-;                (kill-buffer (current-buffer))))
-;          (setq command-line-args-left (cdr command-line-args-left))))))
-
-
-;; Define a make-headers command line option.
-;; ------------------------------------------
-;;;(setq command-line-hooks (cons 'make-headers command-line-hooks))
-;(defun make-headers ()
-;  (if (or (string= argi "-make-headers") (string= argi "-make"))
-;      (let ((trim-versions-without-asking t)
-;            ;; Next line should have a Control-G char, not a space, before `true'.
-;            (executing-macro " true"));; suppress "Mark Set" messages
-;        ;; Consume all following arguments until one starts with a "-"
-;        (while (and command-line-args-left
-;                    (not (char-equal ?- (aref (car command-line-args-left) 0))))
-
-;          (if (headerable-file-p (car command-line-args-left))
-;              (progn
-;                (set-buffer (find-file-noselect (car command-line-args-left)))
-;                (if header-required-mode
-;                    (funcall header-required-mode))
-;                (make-header)
-;                (write-file nil)
-;                (message "  Mode was %s" major-mode)
-;                (kill-buffer (current-buffer))))
-;          (setq command-line-args-left (cdr command-line-args-left))))))
-
-;; Define a -default-mode command line option.
-;; -------------------------------------------
-;;;(setq command-line-hooks (cons 'set-header-mode command-line-hooks))
-;(defun set-header-mode ()
-;  (if (or (string= argi "-default-mode")
-;          (string= argi "-default"))
-;      (let ((trim-versions-without-asking t)
-;            ;; Next line should have a Control-G char, not a space, before `true'.
-;            (executing-macro " true");; suppress "Mark Set" messages
-;            (mode (intern (car command-line-args-left))))
-;        (if (memq mode (mapcar 'cdr auto-mode-alist))
-;            (progn
-;              (setq default-major-mode mode)
-;              (message "Default mode is %s" default-major-mode)
-;              (setq command-line-args-left (cdr command-line-args-left)))
-;          (message "Mode \"%s\" is invalid.  Try one of %s" mode
-;                   (uniquify-list (mapcar 'cdr auto-mode-alist)))
-;          (kill-emacs 1)))))
-
-
-;; Define a -required-mode command line option.
-;; --------------------------------------------
-;;;(setq command-line-hooks (cons 'set-header-required-mode command-line-hooks))
-;(defun set-header-required-mode ()
-;  (if (or (string= argi "-required-mode")
-;          (string= argi "-mode"))
-;      (let ((trim-versions-without-asking t)
-;            ;; Next line should have a Control-G, not a space, char before `true'.
-;            (executing-macro " true");; suppress "Mark Set" messages
-;            (mode (intern (car command-line-args-left))))
-;        (if (memq mode (mapcar 'cdr auto-mode-alist))
-;            (progn
-;              (setq header-required-mode mode)
-;              (message "Required mode is %s" header-required-mode)
-;              (setq command-line-args-left (cdr command-line-args-left)))
-;          (message "Mode \"%s\" is invalid.  Try one of %s" mode
-;                   (uniquify-list (mapcar 'cdr auto-mode-alist)))
-;          (kill-emacs 1)))))
-
-
-;; Things in the works or still to do.
-;;------------------------------------
-;; effort.el -- allows an "effort" to be resgistered in the mode line much
-;; like the mode is.  The effort then determines some header characteristics
-;; such as copyright.  Typical efforts would be 'gdb 'gcc, 'g++, 'emacs, etc.
-;; This would let the copyright (and c-style) be adjusted even within
-;; common modes.
-;;
-;; need ez access to values in the header
-;; need a headerp fcn
-;;
-;; auto make-revision if current user is not same as last modifier
-;;   this would give a history of who touched what.
-
-
+(provide 'header3)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; header3.el ends here
