@@ -13,11 +13,11 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Wed  1 Aug 2018 03:09:10 IST
+;; Last-Updated: Wed  1 Aug 2018 03:32:19 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2174
-;; Homepage: https://justine.kizhak.com/header3
+;;     Update #: 2176
 ;; URL: https://github.com/justine/header3
+;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
 ;; Compatibility: GNU Emacs: 25.x, 26.x
 ;;
@@ -164,9 +164,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 1-Aug-2018    Justine Kizhakkinedath
+;;    Last-Updated: Wed  1 Aug 2018 03:26:15 IST #2175 (Justine Kizhakkinedath)
+;;    Refine all the settings and default values. Clean up code. Rename file
+;;    `header-launcher.el' to `header3-hooks.el'. This file will hold only the
+;;    hooks for various modes. And the default values for the hooks are kept in
+;;    the main file. Read CHANGELOG at https://github.com/justinekizhak/header3
+;;    for full information.
 ;; 29-Jun-2018    Justine T Kizhakkinedath
 ;;    Last-Updated: Fri 29 Jun 2018 01:10:36 IST #2120 (Justine T Kizhakkinedath)
-;;    Add `header-launcher.el' for holding the default values. Make the installation
+;;    Add `header-launcher.el' for holding the default values. Made the installation
 ;;    easier.
 ;; 28-Jun-2018    Justine T Kizhakkinedath
 ;;    Last-Updated: Thu 28 Jun 2018 21:38:00 IST #2115 (Justine T Kizhakkinedath)
