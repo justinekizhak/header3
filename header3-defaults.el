@@ -1,24 +1,33 @@
-;;; header3-defaults.el --- stores default values
+;;; header3-hooks.el --- Keeps all the hooks in one place.
 ;;
-;; Filename: header3-defaults.el
-;; Description: Launches header3 package and sets the default values
-;; Author: Justine T Kizhakkinedath
-;; Maintainer: Justine Thomas <justinethomas009@gmail.com>
-;; Copyright (c) 2018, Justine T Kizhakkinedath
+;; Filename: header3-hooks.el
+;; Description: Keeps all the hooks in one place.
+;; Author: Justine Kizhakkinedath
+;; Maintainer: Justine Kizhakkinedath <justine@kizhak.com>
+;; Copyright (c) 2018, Justine Kizhakkinedath
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
 ;; Version: 3.4.5
-;; Last-Updated: Sat 21 Jul 2018 14:24:59 IST
-;;           By: Justine T Kizhakkinedath
-;;     Update #: 12
-;; URL: https://github.com/justinethomas/header3
+;; Last-Updated: Wed  1 Aug 2018 03:20:11 IST
+;;           By: Justine Kizhakkinedath
+;;     Update #: 13
+;; URL: https://github.com/justinekizhak/header3
 ;; Doc URL:
 ;; Keywords:
 ;; Compatibility:
 ;;
 ;; -----------------------------------------------------------------------------
 ;;
-;;; Commentary: This file add hooks to modes.
+;;; Commentary: This file keeps all the hooks in one place. Variables of the
+;;  format "header-type-*" sets the type of header you want. The possible values
+;;  are:
+;;  1) mini-header
+;;  2) file-header
+;;  3) package-header
+;;  Example:- (add-hook 'python-mode-hook (lambda () (auto-make-header header-type-python)))
+;;  Here the hook "auto-make-header" is added to Python mode and "auto-make-header"
+;;  takes the value from the variable header-type-python, which is set from the
+;;  customize buffer.
 ;;
 ;; -----------------------------------------------------------------------------
 ;;
@@ -38,12 +47,6 @@
 ;; -----------------------------------------------------------------------------
 ;;
 ;;; Code:
-
-;; The `auto-make-header' function can take three values
-;; 1) mini-header
-;; 2) file-header
-;; 3) package-header
-;; Change it as per your preference.
 
 ;;;###autoload
 (eval-after-load 'header3 (progn

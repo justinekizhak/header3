@@ -1,11 +1,11 @@
-;;; header3.el --- Support for creation and update of file headers.
+;;; header3.el --- Automatic creation of headers for source files.
 ;;
 ;; Filename: header3.el
-;; Description: Support for creation and update of file headers.
-;; Author: Justine T Kizhakkinedath
+;; Description: Automatic creation of headers for source files.
+;; Author: Justine Kizhakkinedath
 ;;         Drew Adams
 ;;         Lynn Slater
-;; Maintainer: Justine Thomas <justinethomas009@gmail.com>
+;; Maintainer: Justine Kizhakkinedath <justine@kizhak.com>
 ;; Copyright (C) 2018, Justine Thomas Kizhakkinedath, All rights reserved.
 ;; Copyright (C) 1996-2018, Drew Adams.
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
@@ -13,13 +13,13 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Sat 21 Jul 2018 14:44:15 IST
-;;           By: Justine T Kizhakkinedath
-;;     Update #: 2172
-;; URL: https://github.com/justinethomas009/header3
-;; Doc URL: https://emacswiki.org/emacs/AutomaticFileHeaders
-;; Keywords: tools, docs, maint, abbrev, local
-;; Compatibility: GNU Emacs: 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x
+;; Last-Updated: Wed  1 Aug 2018 03:09:10 IST
+;;           By: Justine Kizhakkinedath
+;;     Update #: 2174
+;; Homepage: https://justine.kizhak.com/header3
+;; URL: https://github.com/justine/header3
+;; Keywords: automatic, header, creation, tools, docs
+;; Compatibility: GNU Emacs: 25.x, 26.x
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -29,14 +29,15 @@
 ;;
 ;; Some of this code and commentary were originally written by Lynn
 ;; Slater as file `header.el'.  Drew Adams updated it and maintains it
-;; as `header2.el'. This package was updated by Justine Thomas
+;; as `header2.el'. This package was updated by Justine Kizhakkinedath
 ;; and maintained as `header3.el'. The original is here:
 ;; `https://www.emacswiki.org/emacs/download/OriginalHeaderEl'. Drew Adams
 ;; version is at 'https://www.emacswiki.org/emacs/download/header2.el'.
 ;;
 ;; Commands (interactive functions) defined here:
 ;;
-;;   `make-file-header', `make-revision', `make-divider',
+;;   `make-mini-header', `make-file-header', `make-package-header',
+;;   `make-readme-header', `make-revision', `make-divider',
 ;;   `make-box-comment', `make-box-comment-region',
 ;;   `update-file-header'.
 ;;
@@ -75,14 +76,10 @@
 ;;
 ;;   `file-header-update-alist', `header-auto-update-enabled',
 ;;   `header-multiline', `header-prefix-string', `return-to'.
-;;
-;;
-;; Installing from Melpa is the best way because you won't have to configure
-;; anything. All the settings are in the header3-defaults.el.
 
-;; From header3.el author text by Justine Thomas:
-;;
-;;
+;; From header3.el author text by Justine Kizhakkinedath:
+;;     Please refer README on https://github.com/justinekizhak/header3
+;;     for full information.
 ;;
 ;; From the original header.el text by Lynn Slater:
 ;;
