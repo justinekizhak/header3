@@ -26,7 +26,7 @@ author = u'Justine Kizhakkinedath'
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u'3.4.5'
+release = u'3.8.0'
 
 
 # -- General configuration ---------------------------------------------------

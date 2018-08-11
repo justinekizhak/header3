@@ -11,11 +11,11 @@
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.4.5
+;; Version: 3.8.0
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Sat 11 Aug 2018 21:59:55 IST
+;; Last-Updated: Sat 11 Aug 2018 23:57:31 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2178
+;;     Update #: 2180
 ;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
@@ -164,6 +164,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Change Log:
+;; 11-Aug-2018    Justine Kizhakkinedath
+;;    Last-Updated: Sat 11 Aug 2018 23:55:08 IST #2179 (Justine Kizhakkinedath)
+;;    Clean up. Now all default values are managed through the customize buffer.
+;;    Add Contributing guide.
 ;; 1-Aug-2018    Justine Kizhakkinedath
 ;;    Last-Updated: Wed  1 Aug 2018 03:26:15 IST #2175 (Justine Kizhakkinedath)
 ;;    Refine all the settings and default values. Clean up code. Rename file
