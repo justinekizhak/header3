@@ -7,12 +7,12 @@
 ;; Copyright (c) 2018, Justine Kizhakkinedath
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
-;; Version: 3.4.5
-;; Last-Updated: Sat 11 Aug 2018 22:00:09 IST
+;; Version: 3.8.0
+;; Last-Updated: Sat 11 Aug 2018 23:58:35 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 14
+;;     Update #: 15
 ;; URL: https://gitlab.com/justinekizhak/header3
-;; Doc URL:
+;; Homepage: https://justine.kizhak.com/header3.html
 ;; Keywords:
 ;; Compatibility:
 ;;
