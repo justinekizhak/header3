@@ -8,10 +8,10 @@
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
 ;; Version: 3.4.5
-;; Last-Updated: Wed  1 Aug 2018 03:20:11 IST
+;; Last-Updated: Sat 11 Aug 2018 22:00:09 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 13
-;; URL: https://github.com/justinekizhak/header3
+;;     Update #: 14
+;; URL: https://gitlab.com/justinekizhak/header3
 ;; Doc URL:
 ;; Keywords:
 ;; Compatibility:

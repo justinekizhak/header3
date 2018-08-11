@@ -13,10 +13,10 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.4.5
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Wed  1 Aug 2018 03:35:11 IST
+;; Last-Updated: Sat 11 Aug 2018 21:59:55 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2177
-;; URL: https://github.com/justine/header3
+;;     Update #: 2178
+;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
 ;; Compatibility: GNU Emacs: 25.x, 26.x
