@@ -1,20 +1,15 @@
-.. Header3 documentation master file, created by
-   sphinx-quickstart on Fri Jul  6 15:45:49 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to Header3's documentation!
+Header3
 ===================================
+Header3 is a package for Emacs which will help you to automatically add headers
+to your source code files when you create a new one in Emacs.
+
+Header3 is built upon header2.el and adds more features to it. 
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   features
+   getting_started
+   working

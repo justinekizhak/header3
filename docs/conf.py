@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = u'Header3'
-copyright = u'2018, Justine T Kizhakkinedath'
-author = u'Justine T Kizhakkinedath'
+copyright = u'2018, Justine Kizhakkinedath'
+author = u'Justine Kizhakkinedath'
 
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u'3.4.5'
+release = u'3.8.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -130,7 +130,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'Header3.tex', u'Header3 Documentation',
-     u'Justine T Kizhakkinedath', 'manual'),
+     u'Justine Kizhakkinedath', 'manual'),
 ]
 
 

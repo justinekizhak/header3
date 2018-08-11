@@ -1,14 +1,14 @@
 <a name="top"></a>
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
-<a href="https://www.instagram.com/justinekizhakkinedath"><img src="https://i.imgur.com/G9YJUZI.png" alt="Instagram" align="right"></a>
-<a href="http://www.twitter.com/justinethomask"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
-<a href="https://www.facebook.com/JustineKizhakkinedath"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
+<a href="https://www.instagram.com/justinekizhak"><img src="https://i.imgur.com/G9YJUZI.png" alt="Instagram" align="right"></a>
+<a href="http://www.twitter.com/justinekizhak"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
+<a href="https://www.facebook.com/justinekizhak"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
 - - -
 [![Development stage](https://img.shields.io/badge/Development_stage-alpha-red.svg)]()
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Zube.io](https://img.shields.io/badge/Project_Management-Zube.io-yellow.svg)](https://zube.io)
-[![GitHub release](https://img.shields.io/github/release/justinethomas/header3.svg)](https://github.com/justinethomas/header3/releases)
+[![GitHub release](https://img.shields.io/github/release/justinekizhak/header3.svg)](https://github.com/justinekizhak/header3/releases)
 [![Documentation Status](https://readthedocs.org/projects/header3/badge/?version=latest)](https://header3.readthedocs.io/en/latest/?badge=latest)
 
 - - -
@@ -16,56 +16,52 @@
 
 - - -
 
+- [Introduction](#introduction)
+  - [Types of headers](#types-of-headers)
+    - [Mini Header](#mini-header)
+    - [File Header](#file-header)
+    - [Package Header](#package-header)
+    - [Readme Header](#readme-header)
+      - [Template for new file](#template-for-new-file)
+      - [Template for existing file](#template-for-existing-file)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Full Documentation](#full-documentation)
+  - [Requirements](#requirements)
+  - [How to use?](#how-to-use)
+- [License](#license)
+
+## Introduction
+
 Header3 is a package for Emacs which will help you to automatically add headers
 to your source code files when you create a new one in Emacs.
 
 Header3 is built upon [header2.el](https://www.emacswiki.org/emacs/download/header2.el)
-and adds more features to it, but I have made efforts to make it compatible with header2.
+and adds more features to it.
 
-## Table of contents
+### Types of headers
 
-<!-- toc -->
-
-- [Types of headers](#types-of-headers)
-  * [Mini Header](#mini-header)
-  * [File Header](#file-header)
-  * [Package Header](#package-header)
-  * [Readme Header](#readme-header)
-    + [Template for new file](#template-for-new-file)
-    + [Template for existing file](#template-for-existing-file)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [How to use ?](#how-to-use-)
-- [Full Documentation](#full-documentation)
-- [License](#license)
-- [Working](#working)
-
-<!-- tocstop -->
-
-## Types of headers
-
-### Mini Header
+#### Mini Header
 if you need the smallest header.
 <p align="center"><img src="docs/resources/mini_header.png" alt="Mini header"/></p>
 
 ---
 
-### File Header
+#### File Header
 if you need a little bigger headers.
 
 <p align="center"><img src="docs/resources/file_header.png" alt="File header"/></p>
 
 ---
-### Package Header
+#### Package Header
 if you need the biggest one.
 
 <p align="center"><img src="docs/resources/package_header.png" alt="Package header"/></p>
 
 ---
-### Readme Header
+#### Readme Header
 
-#### Template for new file
+##### Template for new file
 The following example is auto generated when you create a new Readme.md file
 (file name is case insensitive)
 
@@ -74,7 +70,7 @@ The following example is auto generated when you create a new Readme.md file
 
 ------
 
-#### Template for existing file
+##### Template for existing file
 The following example is generated when you run `make-readme-header` and the file
 already has some contents
 
@@ -83,7 +79,10 @@ already has some contents
 ---
 *All examples are generated using Header3.*
 
+**[Back to top](#table-of-contents)**
+
 ## Features
+
 * All Features of [header2.el](https://www.emacswiki.org/emacs/download/header2.el) plus
   * Standard header format.
   * Auto timestamp for file creation and file updating.
@@ -95,7 +94,19 @@ already has some contents
 * Automatically add Readme template with random footer badges from
 [For the Badge](https://forthebadge.com)
 
-## Requirements
+**[Back to top](#table-of-contents)**
+
+## Getting Started
+
+* Download tar file from the [Releases](https://github.com/justinekizhak/header3/releases).
+
+* Then use `package-install-file` inside emacs and point it to the tar package.
+
+**[Back to top](#table-of-contents)**
+
+## Full Documentation
+
+### Requirements
 * [Git-link](https://github.com/sshaw/git-link) This package is used to extract
 the git link of the current buffer.
 
@@ -106,17 +117,9 @@ if the project root contains any License file.
 If it does then it checks the first 5 lines for any mention of "License" and
 "Version" (case-insensitive).
 
-Instructions to install these packages are available at their links.
+*Instructions to install these packages are available at their links.*
 
-## Installation
-* Download zip file from [Releases](https://github.com/justinethomas/header3/releases)
-* Add these lines to your `.emacs` or your init file.
-  ```
-  (add-to-list 'load-path "~/.emacs.d/lisp/header3")
-  (load "header3-launcher")
-  ```
-
-## How to use ?
+### How to use?
 * All new files created inside Emacs will automatically trigger a function that
 will add the header.
 * If you need to add header to an existing file execute using `M-x` and
@@ -125,60 +128,20 @@ will add the header.
   - `make-package-header`
   - `make-readme-header`
 
-## Full Documentation
-
 For full documentation [read the docs](https://header3.readthedocs.io/en/latest/)
 
+Visit [website](https://justine.kizhak.com/header3.html).
+
+Read [CHANGELOG], [CONTRIBUTING] guide.
+
+[CHANGELOG]: CHANGELOG.md
+[CONTRIBUTING]: CONTRIBUTING.md
+
 ## License
+
 Licensed under the terms of GPL v3
 
 **[Back to top](#table-of-contents)**
-
-
-## Working
-* Files that are recognised as License files are
-  - LICENSE
-  - License
-  - LICENSE.md
-  - License.md
-  - LICENSE.txt
-  - License.txt
-* License templates included with the package
-  - [MIT License](https://opensource.org/licenses/MIT)
-  - [Apache License](http://www.apache.org/licenses/LICENSE-2.0)
-  - [Mozzila Public License](https://opensource.org/licenses/MPL-2.0)
-  - [GNU AFFERO General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html)
-  - [GNU LESSER General Public License](https://www.gnu.org/licenses/lgpl.html)
-  - [GNU General Public License Version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
-  - [GNU General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
-* Default settings:
-  - `mini-header` is the default header for
-    - [ ] PHP
-    - [x] Shell scripts
-  - `file-header` for
-    - [ ] C
-    - [x] C++
-    - [ ] Clojure
-    - [ ] Coffee script
-    - [ ] Erlang
-    - [ ] Haskell
-    - [ ] Java
-    - [ ] Kotlin
-    - [x] Python
-    - [ ] Ruby
-    - [ ] Rust
-    - [ ] Scala
-    - [ ] Scheme
-    - [ ] Swift
-  - `package-header`
-    - [x] Emacs Lisp
-  - `readme-header`
-    - When the file has `.md` extension and has `readme`(case insensitive) in
-    the name.
-
-*Marked with* &#10003; *are tested*
-
-* Default settings are stored in `header3-defaults.el` file.
 
 - - -
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
