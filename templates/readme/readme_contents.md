@@ -1,12 +1,14 @@
 - - -
-# Project Name
+
+# Project Name <!-- omit in toc -->
+
 - - -
 
-## Table of contents
+## Table of contents <!-- omit in toc -->
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Get Started](#get-started)
+- [Getting Started](#getting-started)
 - [Full Documentation](#full-documentation)
 - [License](#license)
 
@@ -18,7 +20,7 @@
 
 **[Back to top](#table-of-contents)**
 
-## Get Started
+## Getting Started
 
 **[Back to top](#table-of-contents)**
 
@@ -28,9 +30,10 @@ For full documentation [read the docs]()
 
 Visit [website]().
 
-Read [CHANGELOG], [CONTRIBUTING] guide.
+Read [CHANGELOG], [CODE OF CONDUCT], [CONTRIBUTING] guide.
 
 [CHANGELOG]: CHANGELOG.md
+[CODE OF CONDUCT]: CODE_OF_CONDUCT.md
 [CONTRIBUTING]: CONTRIBUTING.md
 
 ## License

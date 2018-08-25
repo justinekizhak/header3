@@ -4,5 +4,7 @@
 <a href="https://twitter.com/justinekizhak"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a>
 <a href="https://www.facebook.com/justinekizhak"><img src="http://i.imgur.com/P3YfQoD.png" alt="Facebook" align="right"></a>
 <br>
+
 - - -
+
 <!-- {Put your badges here} -->
