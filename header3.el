@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.8.0
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Sat 11 Aug 2018 23:57:31 IST
+;; Last-Updated: Wed 15 Jan 2020 14:17:29 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2180
+;;     Update #: 2196
 ;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
@@ -383,8 +383,8 @@
 ;;; Code:
 
 (require 'lib-requires nil t)
-  ;; (no error if not found):
-  ;; libreq-insert-lib-requires-as-comment, libreq-file-header
+;; (no error if not found):
+;; libreq-insert-lib-requires-as-comment, libreq-file-header
 
 ;;;;;;;;;;;;;;;;;;;;;;
 
@@ -405,14 +405,14 @@
   :group 'files :group 'editing :group 'convenience :group 'programming
   :group 'development
   :link `(url-link :tag "Send Bug Report"
-          ,(concat "mailto:" "justinethomas009" "@" "gmail" ".com?subject=\
+                   ,(concat "mailto:" "justinethomas009" "@" "gmail" ".com?subject=\
 header3.el bug: \
 &body=Describe bug here, starting with `emacs -q'.  \
 Don't forget to mention your Emacs and library versions."))
   :link '(url-link :tag "Download"
-          "https://github.com/justinethomas009/header3")
+                   "https://github.com/justinethomas009/header3")
   :link '(url-link :tag "Description"
-          "https://www.emacswiki.org/emacs/AutomaticFileHeaders#header2")
+                   "https://www.emacswiki.org/emacs/AutomaticFileHeaders#header2")
   :link '(emacs-commentary-link :tag "Commentary" "header3")
   )
 
@@ -445,66 +445,67 @@ t means use local time with timezone; nil means use UTC."
 ;; default value corresponds to what the Elisp manual recommends for Emacs Lisp.
 
 (defcustom make-mini-header-hook '(
-                              header-seperator
-                              header-copyright
-                              header-blank
-                              header-mini-license
-                              )
+                                   header-seperator
+                                   header-copyright
+                                   header-blank
+                                   header-mini-license
+                                   )
 
   "*Functions that insert header elements for `mini-header'."
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-file-header-hook '(
-                              header-seperator
-                              header-creation-date
-                              header-modification-date
-                              header-blank
-                              header-filename
-                              header-url
-                              header-description
-                              header-blank
-                              header-copyright
-                              header-blank
-                              header-file-license
-                              )
+                                   header-seperator
+                                   header-creation-date
+                                   header-modification-date
+                                   header-blank
+                                   header-filename
+                                   header-url
+                                   header-description
+                                   header-blank
+                                   header-copyright
+                                   header-blank
+                                   header-file-license
+                                   )
 
   "*Functions that insert header elements for `file-header'."
   :type 'hook :group 'Automatic-File-Header)
 
 (defcustom make-package-header-hook '(
-                              header-title
-                              header-blank
-                              header-filename
-                              header-description
-                              header-author
-                              header-maintainer
-                              header-copyright
-                              header-creation-date
-                              header-version
-                              header-pkg-requires
-                              header-modification-date
-                              header-modification-author
-                              header-update-count
-                              header-url
-                              header-doc-url
-                              header-keywords
-                              header-compatibility
-                              header-blank
-                              header-lib-requires
-                              header-seperator
-                              header-commentary
-                              header-blank
-                              header-blank
-                              header-blank
-                              header-seperator
-                              header-history
-                              header-blank
-                              header-blank
-                              header-seperator
-                              header-package-license
-                              header-code
-                              header-eof
-                              )
+                                      header-lexical-binding
+                                      header-title
+                                      header-blank
+                                      header-filename
+                                      header-description
+                                      header-author
+                                      header-maintainer
+                                      header-copyright
+                                      header-creation-date
+                                      header-version
+                                      header-pkg-requires
+                                      header-modification-date
+                                      header-modification-author
+                                      header-update-count
+                                      header-url
+                                      header-doc-url
+                                      header-keywords
+                                      header-compatibility
+                                      header-blank
+                                      header-lib-requires
+                                      header-seperator
+                                      header-commentary
+                                      header-blank
+                                      header-blank
+                                      header-blank
+                                      header-seperator
+                                      header-history
+                                      header-blank
+                                      header-blank
+                                      header-seperator
+                                      header-package-license
+                                      header-code
+                                      header-eof
+                                      )
 
   "*Functions that insert header elements.
 Each function is started on a new line and is expected to end in a new line.
@@ -607,6 +608,128 @@ file `header3.el' to do this."
   "*Header type for swift files."
   :type 'string :group 'Automatic-File-Header)
 
+(defcustom header3-mit-license "
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the \"software\"), to deal
+  in the software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the software, and to permit persons to whom the software is
+  furnished to do so, subject to the following conditions:
+
+  the above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the software.
+
+  the software is provided \"as is\", without warranty of any kind,
+  express or implied, including but not limited to the warranties of
+  merchantability, fitness for a particular purpose and noninfringement.
+  in no event shall the authors or copyright holders be liable for any claim,
+  damages or other liability, whether in an action of contract, tort or
+  otherwise, arising from, out of or in connection with the software or the use
+  or other dealings in the software. "
+
+  "*Mit license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
+(defcustom header3-apache-license "
+    Licensed under the Apache License, Version 2.0 (the \"License\");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an \"AS IS\" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+    or implied. See the License for the specific language governing
+    permissions and limitations under the License.
+  "
+  "*Apache license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
+(defcustom header3-mozilla-license "
+    This Source Code Form is subject to the terms of the
+    Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed
+    with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  "
+  "*Mozilla license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
+(defcustom header3-gnu-affero-license "
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  "
+  "*GNU Affero license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
+(defcustom header3-lgpl-license "
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA  "
+  "*Lower GPL license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
+(defcustom header3-gpl2-license "
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  "
+  "*GLP 2 license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
+(defcustom header3-gpl3-license "
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  "
+  "*GPL 3 license text"
+  :group 'Automatic-File-Header
+  :type 'string)
+
 ;;; Internal variables -------------------------------------
 
 (defconst header-root-folder (file-name-directory load-file-name))
@@ -620,16 +743,16 @@ file `header3.el' to do this."
 
 (defvar return-to nil
   "Position to move point to after header fns are processed.
-Any header function may set this.  The last setting will take effect.")
+  Any header function may set this.  The last setting will take effect.")
 
 (defvar header-multiline ""
   "Multiline text to be inserted as a comment.
-Leave the global value of this as\"\", and bind the value as needed.")
+  Leave the global value of this as\"\", and bind the value as needed.")
 
 (defvar file-header-update-alist ()
   "Used by `update-file-header' to know what to do in a file.
-Is a list of sets of cons cells where the car is a regexp string and the cdr is
-the function to call if the string is found near the start of the file.")
+  Is a list of sets of cons cells where the car is a regexp string and the cdr is
+  the function to call if the string is found near the start of the file.")
 
 (defvar header-prefix-string ""
   "Mode-specific comment prefix string for use in headers.")
@@ -668,6 +791,12 @@ the function to call if the string is found near the start of the file.")
       (concat header-prefix-string "\n" comment-start header-prefix-string)
     (concat "\n" comment-start)))       ; e.g. C: "\n/*"
 
+(defsubst header-lexical-binding ()
+  "Insert lexical binding line at the top"
+  (insert (concat comment-start (and (= 1 (length comment-start)) header-prefix-string)
+                  "-*- lexical-binding: t -*- \n"))
+  (setq return-to  (1- (point))))
+
 (defsubst header-title ()
   "Insert buffer's file name and leave room for a description.
 In `emacs-lisp-mode', this should produce the title line for library
@@ -684,13 +813,13 @@ packages."
 Format is: \"<this-file-name> is part of <project-name>\"
 <project-name> is received from `projectile' package"
   (insert header-prefix-string
-      (if (buffer-file-name)
-          (file-name-nondirectory (buffer-file-name))
-        (buffer-name))
-      " is part of ")
+          (if (buffer-file-name)
+              (file-name-nondirectory (buffer-file-name))
+            (buffer-name))
+          " is part of ")
   ((lambda () (if (string= (projectile-project-name) "-")
-       (insert header-default-project-name)
-     (insert (projectile-project-name)))))
+                  (insert header-default-project-name)
+                (insert (projectile-project-name)))))
   (insert "\n"))
 
 (defsubst header-description ()
@@ -731,18 +860,9 @@ For more details on what constites a project check `projectile' docs"
   (if (string= (projectile-project-name) "-")
       (message "Unable to find project root.")
     (cond
-     ((file-readable-p (concat (projectile-project-root) "LICENSE"))
-      (header3-license--get-license-name "LICENSE"))
-     ((file-readable-p (concat (projectile-project-root) "License"))
-      (header3-license--get-license-name "License"))
-     ((file-readable-p (concat (projectile-project-root) "LICENSE.md"))
-      (header3-license--get-license-name "LICENSE.md"))
-     ((file-readable-p (concat (projectile-project-root) "License.md"))
-      (header3-license--get-license-name "License.md"))
-     ((file-readable-p (concat (projectile-project-root) "LICENSE.txt"))
-      (header3-license--get-license-name "LICENSE.txt"))
-     ((file-readable-p (concat (projectile-project-root) "License.txt"))
-      (header3-license--get-license-name "License.txt"))
+     ((header3-license--get-license-name
+       (car (directory-files
+             (projectile-project-root) nil "[L|l][I|i][C|c][E|e][N|n][S|s][E|e]" t))))
      (t (message "LICENSE file not available.")))
     ))
 
@@ -750,7 +870,7 @@ For more details on what constites a project check `projectile' docs"
   "INTERNAL FUNCTION. Get license info from the license file.
 Argument LICENSE-FILE-NAME is the name of license file in the root directory of the project."
   (let (temp-list license-list)
-      (setq temp-list '())
+    (setq temp-list '())
     (with-temp-buffer
       (insert-file-contents (concat (projectile-project-root) license-file-name))
       (setq license-list (split-string (buffer-string) "\n")))
@@ -763,13 +883,11 @@ Argument LICENSE-FILE-NAME is the name of license file in the root directory of 
     (setq license-name (string-join temp-list " ")))
   )
 
-(defsubst header3-license--insert-file (file-name)
+(defsubst header3-license--insert-contents (resource-name)
   "INTERNAL FUNCTION. Inserts the contents of license from the resource."
   (let (temp-list) (with-temp-buffer
-    (insert-file-contents
-     (concat (header-fetch-resource-path "templates/")
-             file-name))
-    (setq temp-list (split-string (buffer-string) "\n")))
+                     (insert resource-name)
+                     (setq temp-list (split-string (buffer-string) "\n")))
        (while temp-list
          (insert header-prefix-string (car temp-list) "\n")
          (pop temp-list))
@@ -780,19 +898,19 @@ Argument LICENSE-FILE-NAME is the name of license file in the root directory of 
 Launches the \"insert-file\" function after comparing with the license name"
   (cond
    ((cl-search "mit" (downcase license-name))
-    (header3-license--insert-file "mit.txt"))
+    (header3-license--insert-contents header3-mit-license))
    ((cl-search "apache" (downcase license-name))
-    (header3-license--insert-file "apache.txt"))
+    (header3-license--insert-contents header3-apache-license))
    ((cl-search "mozilla" (downcase license-name))
-    (header3-license--insert-file  "mpl.txt"))
+    (header3-license--insert-contents header3-mozilla-license))
    ((cl-search "gnu affero" (downcase license-name))
-    (header3-license--insert-file "agpl3.txt"))
+    (header3-license--insert-contents header3-agnu-license))
    ((cl-search "gnu lesser general public license" (downcase license-name))
-    (header3-license--insert-file "lgpl.txt"))
+    (header3-license--insert-contents header3-lgpl-license))
    ((cl-search "gnu general public license version 2" (downcase license-name))
-    (header3-license--insert-file "gpl2.txt"))
+    (header3-license--insert-contents header3-gpl2-license))
    ((cl-search "gnu general public license version 3" (downcase license-name))
-    (header3-license--insert-file "gpl3.txt"))
+    (header3-license--insert-contents header3-gpl3-license))
    )
   (insert "\n"))
 
@@ -970,13 +1088,13 @@ This is normally overwritten with each file save."
   "Auto extract and insert \"URL: \" if you are working inside a git repository.
 This needs a package \"git-link\" available on MELPA"
   (if (require 'git-link  nil 'noerror)
-    (let* ((remote-url (git-link--remote-url "origin"))
-           (remote-info (when remote-url (git-link--parse-remote remote-url))))
-      (if remote-info
-          ;;TODO: shouldn't assume https, need service specific handler like others
-          (insert header-prefix-string "URL: " (format "https://%s/%s" (car remote-info) (cadr remote-info)))
-        (insert header-prefix-string "URL: Not available"))
-      (insert "\n"))
+      (let* ((remote-url (git-link--remote-url "origin"))
+             (remote-info (when remote-url (git-link--parse-remote remote-url))))
+        (if remote-info
+            ;;TODO: shouldn't assume https, need service specific handler like others
+            (insert header-prefix-string "URL: " (format "https://%s/%s" (car remote-info) (cadr remote-info)))
+          (insert header-prefix-string "URL: Not available"))
+        (insert "\n"))
     (insert header-prefix-string "URL: \n")))
 
 (defsubst header-doc-url ()
@@ -1113,28 +1231,28 @@ work even when the value has embedded spaces or other junk."
   "Return a mode-specific prefix string for use in headers.
 It is sensitive to language-dependent comment conventions."
   (cond
-    ;; E.g. Lisp.
-    ((and comment-start (= 1 (length comment-start)))
-     (concat comment-start comment-start " "))
+   ;; E.g. Lisp.
+   ((and comment-start (= 1 (length comment-start)))
+    (concat comment-start comment-start " "))
 
-    ;; E.g. C++ and ADA.
-    ;; Special case, three letter comment-start where the first and
-    ;; second letters are the same.
-    ((and comment-start (= 3 (length comment-start))
-          (equal (aref comment-start 1) (aref comment-start 0)))
-     comment-start)
+   ;; E.g. C++ and ADA.
+   ;; Special case, three letter comment-start where the first and
+   ;; second letters are the same.
+   ((and comment-start (= 3 (length comment-start))
+         (equal (aref comment-start 1) (aref comment-start 0)))
+    comment-start)
 
-    ;; E.g. C.
-    ;; Other three-letter comment-start -> grab the middle character
-    ((and comment-start (= 3 (length comment-start)))
-     (concat " " (list (aref comment-start 1)) " "))
+   ;; E.g. C.
+   ;; Other three-letter comment-start -> grab the middle character
+   ((and comment-start (= 3 (length comment-start)))
+    (concat " " (list (aref comment-start 1)) " "))
 
-    ((and comment-start  (not (nonempty-comment-end)))
+   ((and comment-start  (not (nonempty-comment-end)))
 
-     ;; Note: no comment end implies that the full comment-start must be
-     ;; used on each line.
-     comment-start)
-    (t ";; ")))       ; Use Lisp as default.
+    ;; Note: no comment end implies that the full comment-start must be
+    ;; used on each line.
+    comment-start)
+   (t ";; ")))       ; Use Lisp as default.
 
 ;; For autoloading functions
 ;;;###autoload
@@ -1393,8 +1511,8 @@ Return nil, for use on a hook."
 (defun update-write-count ()
   "This will update how many times the file has been saved."
   (let* ((str  (delete-and-forget-line))
-   (rem  (read-from-string str))
-   (num  (car rem)))
+         (rem  (read-from-string str))
+         (num  (car rem)))
     (if (numberp num)
         (insert (format "%s" (1+ num)) (substring str (cdr rem)))
       (insert str)
@@ -1473,3 +1591,4 @@ result of `update-lib-requires'."
 (provide 'header3)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; header3.el ends here
+
