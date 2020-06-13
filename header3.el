@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.8.0
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Wed 15 Jan 2020 14:17:29 IST
+;; Last-Updated: Fri  5 Jun 2020 14:32:49 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2196
+;;     Update #: 2197
 ;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
@@ -609,123 +609,125 @@ file `header3.el' to do this."
   :type 'string :group 'Automatic-File-Header)
 
 (defcustom header3-mit-license "
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the \"software\"), to deal
-  in the software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the software, and to permit persons to whom the software is
-  furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+\"software\"), to deal in the software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the software, and to permit
+persons to whom the software is furnished to do so, subject to the
+following conditions:
 
-  the above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the software.
+the above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the software.
 
-  the software is provided \"as is\", without warranty of any kind,
-  express or implied, including but not limited to the warranties of
-  merchantability, fitness for a particular purpose and noninfringement.
-  in no event shall the authors or copyright holders be liable for any claim,
-  damages or other liability, whether in an action of contract, tort or
-  otherwise, arising from, out of or in connection with the software or the use
-  or other dealings in the software. "
+the software is provided \"as is\", without warranty of any kind,
+express or implied, including but not limited to the warranties of
+merchantability, fitness for a particular purpose and noninfringement.
+in no event shall the authors or copyright holders be liable for any claim,
+damages or other liability, whether in an action of contract, tort or
+otherwise, arising from, out of or in connection with the software or the
+use or other dealings in the software."
 
   "*Mit license text"
   :group 'Automatic-File-Header
   :type 'string)
 
 (defcustom header3-apache-license "
-    Licensed under the Apache License, Version 2.0 (the \"License\");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the \"License\");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an \"AS IS\" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
-    or implied. See the License for the specific language governing
-    permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an \"AS IS\" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied. See the License for the specific language governing
+permissions and limitations under the License.
   "
   "*Apache license text"
   :group 'Automatic-File-Header
   :type 'string)
 
 (defcustom header3-mozilla-license "
-    This Source Code Form is subject to the terms of the
-    Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed
-    with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
-  "
+This Source Code Form is subject to the terms of the
+Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed
+with this file, You can obtain one at http://mozilla.org/MPL/2.0/. "
   "*Mozilla license text"
   :group 'Automatic-File-Header
   :type 'string)
 
 (defcustom header3-gnu-affero-license "
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  "
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"
   "*GNU Affero license text"
   :group 'Automatic-File-Header
   :type 'string)
 
 (defcustom header3-lgpl-license "
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA  "
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
+"
   "*Lower GPL license text"
   :group 'Automatic-File-Header
   :type 'string)
 
 (defcustom header3-gpl2-license "
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-  "
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+"
   "*GLP 2 license text"
   :group 'Automatic-File-Header
   :type 'string)
 
 (defcustom header3-gpl3-license "
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  "
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"
   "*GPL 3 license text"
   :group 'Automatic-File-Header
   :type 'string)
