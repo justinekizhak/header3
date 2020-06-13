@@ -7,15 +7,15 @@
 ;;         Lynn Slater
 ;; Maintainer: Justine Kizhakkinedath <justine@kizhak.com>
 ;; Copyright (C) 2018, Justine Thomas Kizhakkinedath, All rights reserved.
-;; Copyright (C) 1996-2018, Drew Adams.
+;; Copyright (C) 1996, Drew Adams.
 ;; Copyright (C) 1989 Free Software Foundation, Inc.
 ;; Copyright (C) 1988 Lynn Randolph Slater, Jr.
 ;; Created: Tue Aug  4 17:06:46 1987
-;; Version: 3.8.0
+;; Version: 3.8.1
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Fri  5 Jun 2020 14:32:49 IST
+;; Last-Updated: Sat 13 Jun 2020 15:17:22 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2197
+;;     Update #: 2200
 ;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
