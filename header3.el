@@ -13,9 +13,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 3.8.1
 ;; Package-Requires: ((projectile "0.14.0") (git-link "0.7.0") (cl-lib "1.0") (emacs "25.1"))
-;; Last-Updated: Sat 13 Jun 2020 15:17:22 IST
+;; Last-Updated: Sat 20 Jun 2020 21:32:13 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 2200
+;;     Update #: 2201
 ;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3
 ;; Keywords: automatic, header, creation, tools, docs
@@ -1281,7 +1281,7 @@ header function. The values can be 'mini-header', 'file-header',
          (make-package-header))
         ((string-equal header-type "readme")
          (make-readme-header))
-        (t (make-file-header))
+        (t (make-mini-header))
         )))
 
 ;;;###autoload
