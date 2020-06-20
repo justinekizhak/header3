@@ -8,9 +8,9 @@
 ;; All rights reserved
 ;; Created: Fri 29 Jun 2018 00:04:07 IST
 ;; Version: 3.8.0
-;; Last-Updated: Sat 11 Aug 2018 23:58:35 IST
+;; Last-Updated: Sat 20 Jun 2020 21:33:51 IST
 ;;           By: Justine Kizhakkinedath
-;;     Update #: 15
+;;     Update #: 16
 ;; URL: https://gitlab.com/justinekizhak/header3
 ;; Homepage: https://justine.kizhak.com/header3.html
 ;; Keywords:
@@ -51,14 +51,14 @@
 ;;;###autoload
 (eval-after-load 'header3 (progn
     (add-hook 'before-save-hook 'auto-update-file-header)
-    (add-hook 'c++-mode-hook        (lambda () (auto-make-header header-type-c++)))
-    (add-hook 'emacs-lisp-mode-hook (lambda () (auto-make-header header-type-emacs-lisp)))
-    (add-hook 'haskell-mode-hook    (lambda () (auto-make-header header-type-haskell)))
-    (add-hook 'python-mode-hook     (lambda () (auto-make-header header-type-python)))
-    (add-hook 'rust-mode-hook       (lambda () (auto-make-header header-type-rust)))
-    (add-hook 'ruby-mode-hook       (lambda () (auto-make-header header-type-ruby)))
-    (add-hook 'sh-mode-hook         (lambda () (auto-make-header header-type-shell-script)))
-    (add-hook 'markdown-mode-hook   'header-check-if-readme)
+    ;; (add-hook 'c++-mode-hook        (lambda () (auto-make-header header-type-c++)))
+    ;; (add-hook 'emacs-lisp-mode-hook (lambda () (auto-make-header header-type-emacs-lisp)))
+    ;; (add-hook 'haskell-mode-hook    (lambda () (auto-make-header header-type-haskell)))
+    ;; (add-hook 'python-mode-hook     (lambda () (auto-make-header header-type-python)))
+    ;; (add-hook 'rust-mode-hook       (lambda () (auto-make-header header-type-rust)))
+    ;; (add-hook 'ruby-mode-hook       (lambda () (auto-make-header header-type-ruby)))
+    ;; (add-hook 'sh-mode-hook         (lambda () (auto-make-header header-type-shell-script)))
+    ;; (add-hook 'markdown-mode-hook   'header-check-if-readme)
     ))
 
 ;;; header3-defaults.el ends here
